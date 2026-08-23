@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClassicalHeader from '../../components/ClassicalHeader.astro';
+import ClassicalFooter from '../../components/ClassicalFooter.astro';
+import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
+const posts = [
+  {
+    title: 'Discover How Closed-Cell Spray Foam Benefits Beaufort County’s Home!',
+    summary: 'A homeowner-focused look at closed-cell spray foam, moisture resistance, air sealing, and Lowcountry climate considerations.',
+    url: 'https://eastcoastfoamllc.com/discover-how-closed-cell-spray-foam-benefits-beaufort-countys-home/'
+  },
+  {
+    title: 'Why Spray Foam Roofing Insulation Is a Strong Choice for Your Roof',
+    summary: 'An introduction to spray foam roofing insulation and the role a continuous foam system can play in roof performance.',
+    url: 'https://eastcoastfoamllc.com/why-spray-foam-roofing-insulation-is-the-best-choice-for-your-roof-in-2024/'
+  },
+  {
+    title: 'Choosing the Right Polyurea Coating Contractor in Hilton Head, SC',
+    summary: 'What coastal property owners should consider when evaluating polyurea coating work and the contractor performing it.',
+    url: 'https://eastcoastfoamllc.com/choosing-the-right-polyurea-coating-contractor-in-hilton-head-sc/'
+  },
+  {
+    title: 'Open Up a World of Comfort: The Benefits of Open-Cell Spray Foam Insulation',
+    summary: 'A plain-language overview of open-cell spray foam and where homeowners may encounter it as an insulation option.',
+    url: 'https://eastcoastfoamllc.com/open-up-a-world-of-comfort-the-benefits-of-open-cell-spray-foam-insulation/'
+  }
+];
+---
+<BaseLayout title={`Blog | ${site.name}`} description="East Coast Foam LLC insulation articles and homeowner information." theme="classical" showDemoBanner={false}>
+  <div id="top" class="classical-site">
+    <ClassicalHeader />
+    <main>
+      <section class="classical-page-hero">
+        <img src={assets.serviceImages['spray-foam-roofing']} alt="" referrerpolicy="no-referrer" />
+        <div class="classical-page-hero__inner"><p class="classical-overline">East Coast Foam LLC</p><h1>Our Blog</h1></div>
+      </section>
+      <section class="classical-page-content">
+        <div>
+          <h2>Insulation information for Lowcountry property owners.</h2>
+          <p>Explore East Coast Foam articles covering spray foam insulation, roofing foam, protective coatings, and common questions about improving building comfort and performance.</p>
+          <div class="classical-blog-grid">
+            {posts.map((post) => (
+              <article>
+                <span>East Coast Foam</span>
+                <h3>{post.title}</h3>
+                <p>{post.summary}</p>
+                <a href={post.url} target="_blank" rel="noopener noreferrer">Read More ↗</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+    <ClassicalFooter />
+  </div>
+</BaseLayout>
