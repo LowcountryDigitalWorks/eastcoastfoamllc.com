@@ -6,7 +6,6 @@ html { scroll-behavior:smooth; }
 body { margin:0; color:#161a18; background:#fff; }
 a { color:inherit; text-decoration:none; }
 button,input,select,textarea { font:inherit; }
-.demo-banner { position:relative; z-index:100; padding:8px 16px; text-align:center; font-size:12px; font-weight:700; letter-spacing:.04em; color:#fff; background:#654600; }
 .eyebrow,.section-kicker,.classical-overline { text-transform:uppercase; letter-spacing:.13em; font-size:12px; font-weight:800; }
 
 /* chooser */
@@ -46,7 +45,7 @@ button,input,select,textarea { font:inherit; }
 .classical-header nav a:hover { color:#62bc70; }
 .classical-quote-button { padding:18px 28px; background:var(--green); font-weight:700; }
 .classical-hero { position:relative; display:grid; grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr); gap:54px; min-height:690px; padding:100px max(5vw,36px); background:linear-gradient(90deg,rgba(0,0,0,.83),rgba(0,0,0,.54)),radial-gradient(circle at 15% 20%,#52625a,#1b211d 48%,#0b0d0c); color:#fff; overflow:hidden; }
-.classical-hero:after { content:"PHOTO PLACEHOLDER · CURRENT OWNER ASSETS PENDING"; position:absolute; bottom:15px; left:5vw; font:600 10px Manrope,sans-serif; letter-spacing:.15em; color:rgba(255,255,255,.4); }
+.classical-hero:after { content:none; }
 .classical-hero__copy { max-width:850px; }
 .classical-overline { display:inline-block; color:#fff; font-style:italic; border-bottom:3px solid var(--green); padding-bottom:10px; }
 .classical-hero h1 { margin:20px 0; font-size:clamp(42px,5vw,70px); line-height:1.04; text-transform:uppercase; }
@@ -130,7 +129,6 @@ button,input,select,textarea { font:inherit; }
 .guided-form label { display:block; font-size:13px; font-weight:800; color:#365343; }
 .guided-form input,.guided-form select,.guided-form textarea { width:100%; margin-top:8px; padding:15px 16px; border:1px solid #ccd5cf; border-radius:11px; background:#fbfcfa; color:var(--ink); }
 .guided-form>label { margin-top:18px; }
-.upload-demo { padding:16px; border:1px dashed #aab9af; border-radius:12px; }
 .form-actions { display:flex; align-items:center; gap:18px; margin-top:20px; }
 .form-actions span { color:#738078; font-size:12px; }
 .future-button:disabled { opacity:.75; }
@@ -169,7 +167,6 @@ button,input,select,textarea { font:inherit; }
   .future-hero__visual { min-height:420px; }
 }
 @media (max-width:650px) {
-  .demo-banner { font-size:10px; }
   .chooser-grid,.service-grid,.project-grid,.process-grid,.guided-grid,.future-band { grid-template-columns:1fr; }
   .classical-topbar { align-items:flex-start; }
   .classical-topbar div { flex-direction:column; gap:5px; }

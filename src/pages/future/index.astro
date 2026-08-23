@@ -7,7 +7,7 @@ import ServiceGrid from '../../components/ServiceGrid.astro';
 import site from '../../data/site.json';
 import assets from '../../data/demo-assets.json';
 ---
-<BaseLayout title={`Future Concept | ${site.name}`} description="Modern East Coast Foam website and digital operations concept." theme="future">
+<BaseLayout title={`Future | ${site.name}`} description="A redesigned East Coast Foam website experience focused on clear services, local trust, and useful estimate intake." theme="future">
   <div id="top" class="future-site">
     <header class="future-nav-wrap">
       <nav class="future-nav" aria-label="Future navigation">
@@ -26,14 +26,14 @@ import assets from '../../data/demo-assets.json';
           <div class="future-actions"><a class="future-button" href="#estimate">Start an estimate</a><a class="future-call" href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a></div>
           <div class="trust-row"><span>Locally owned</span><span>Lowcountry service area</span><span>Clear estimate conversation</span></div>
         </div>
-        <div class="future-hero__visual" aria-label="East Coast Foam work photography concept">
+        <div class="future-hero__visual" aria-label="East Coast Foam service photography">
           <img class="future-hero__primary-photo" src={assets.hero} alt="" referrerpolicy="no-referrer" />
           <div class="foam-orbit foam-orbit--one"></div><div class="foam-orbit foam-orbit--two"></div>
           <div class="future-photo-stack" aria-hidden="true">
             <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" referrerpolicy="no-referrer" />
             <img src={assets.serviceImages['spray-foam-roofing']} alt="" referrerpolicy="no-referrer" />
           </div>
-          <div class="future-photo-card"><span>Recent work first</span><strong>Make Casey's actual jobs the visual identity.</strong><small>Current-site media is being used temporarily for this private concept.</small></div>
+          <div class="future-photo-card"><span>Recent work first</span><strong>Let East Coast Foam's workmanship lead the story.</strong></div>
         </div>
       </section>
 
@@ -45,11 +45,11 @@ import assets from '../../data/demo-assets.json';
       </section>
 
       <section class="future-section" id="services">
-        <div class="section-heading-row"><div><div class="section-kicker">What we do</div><h2>The right insulation system starts with the right conversation.</h2></div><p>Clear service explanations replace keyword-heavy copy while preserving the search intent and service coverage needed for migration.</p></div>
+        <div class="section-heading-row"><div><div class="section-kicker">What we do</div><h2>The right insulation system starts with the right conversation.</h2></div><p>Clear service explanations help property owners understand their options and choose the right next step.</p></div>
         <ServiceGrid />
       </section>
 
-      <section class="future-section future-compare" aria-label="Open-cell and closed-cell comparison concept">
+      <section class="future-section future-compare" aria-label="Open-cell and closed-cell comparison">
         <div class="future-compare__intro">
           <div class="section-kicker">Help customers choose</div>
           <h2>Open cell or closed cell?</h2>
@@ -75,9 +75,9 @@ import assets from '../../data/demo-assets.json';
       <div class="future-section"><GuidedEstimate /></div>
       <div class="future-section"><RecentWork /></div>
 
-      <section class="future-schedule" aria-label="Consultation scheduling concept">
-        <div><div class="section-kicker">Optional self-scheduling</div><h2>Let customers book the conversation—not the crew.</h2><p>A future free consultation/site-visit scheduler could respect Casey's calendar and travel windows while keeping actual installation scheduling under his control.</p></div>
-        <div class="future-schedule__action"><strong>Free consultation / site visit</strong><span>Future Cal.com or other validated scheduler integration. Installation dates stay owner-managed.</span><a class="future-button" href="#contact">Scheduling concept</a></div>
+      <section class="future-schedule" aria-label="Consultation scheduling">
+        <div><div class="section-kicker">Start with a conversation</div><h2>Talk through the property before scheduling the crew.</h2><p>East Coast Foam can review the space, goals, timing, and service area before recommending the right next step.</p></div>
+        <div class="future-schedule__action"><strong>Consultation / site visit</strong><span>Installation dates remain owner-managed so every project gets the right attention.</span><a class="future-button" href="#contact">Contact East Coast Foam</a></div>
       </section>
 
       <section class="future-section process-section" id="process">
@@ -95,6 +95,6 @@ import assets from '../../data/demo-assets.json';
         <div class="future-contact__links"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><a href={`mailto:${site.quoteEmail}`}>{site.quoteEmail}</a><span>{site.address}</span></div>
       </section>
     </main>
-    <footer class="future-footer"><BrandMark compact /><p>Future concept by Lowcountry Digital Works · current-site media is temporary pending owner approval.</p></footer>
+    <footer class="future-footer"><BrandMark compact /><p>A next-generation website direction for East Coast Foam.</p></footer>
   </div>
 </BaseLayout>
