@@ -1,0 +1,253 @@
+/* Classical mobile navigation and resilient supplier-logo presentation. */
+
+.sr-only {
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0, 0, 0, 0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
+.classical-menu-toggle,
+.classical-services-toggle,
+.classical-mobile-quote {
+  display:none;
+}
+
+.theme-classical .classical-primary-navigation a[aria-current="page"] {
+  color:#72cf7f;
+}
+
+/* Keep original artwork on a stable light field even when a browser forces dark rendering. */
+.theme-classical .classical-logo-grid > a,
+.theme-classical .classical-trust-strip__badge {
+  color-scheme:only light;
+  forced-color-adjust:none;
+  background-color:#fff !important;
+  background-image:none !important;
+  border-color:#d8ddd8;
+  isolation:isolate;
+}
+
+.theme-classical .classical-logo-grid img,
+.theme-classical .classical-trust-strip__badge img {
+  color-scheme:only light;
+  forced-color-adjust:none;
+  filter:none !important;
+  mix-blend-mode:normal !important;
+  opacity:1 !important;
+  background:#fff;
+}
+
+.theme-classical .classical-logo-grid > a:focus-visible {
+  outline:3px solid #2f963f;
+  outline-offset:3px;
+}
+
+@media (max-width:980px) {
+  body.classical-mobile-menu-open {
+    overflow:hidden;
+  }
+
+  .theme-classical .classical-header {
+    position:sticky;
+    top:0;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto auto;
+    gap:12px;
+    width:100%;
+    min-width:0;
+    z-index:5000;
+  }
+
+  .theme-classical .classical-header .brand-mark {
+    min-width:0;
+    margin-right:0;
+  }
+
+  .theme-classical .classical-header .brand-mark img {
+    max-width:100%;
+  }
+
+  .theme-classical .classical-menu-toggle {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-width:48px;
+    min-height:48px;
+    padding:10px 12px;
+    border:1px solid #4b4f4b;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+  }
+
+  .classical-menu-toggle__icon {
+    display:grid;
+    gap:4px;
+    width:20px;
+  }
+
+  .classical-menu-toggle__icon > span {
+    display:block;
+    width:20px;
+    height:2px;
+    background:currentColor;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+
+  .classical-menu-toggle__label {
+    font:800 11px Manrope,sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+
+  .classical-menu-toggle[aria-expanded="true"] .classical-menu-toggle__icon > span:first-child {
+    transform:translateY(6px) rotate(45deg);
+  }
+
+  .classical-menu-toggle[aria-expanded="true"] .classical-menu-toggle__icon > span:nth-child(2) {
+    opacity:0;
+  }
+
+  .classical-menu-toggle[aria-expanded="true"] .classical-menu-toggle__icon > span:last-child {
+    transform:translateY(-6px) rotate(-45deg);
+  }
+
+  .theme-classical .classical-header .classical-primary-navigation {
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    display:none;
+    width:100%;
+    max-height:calc(100vh - 78px);
+    margin:0;
+    padding:8px 18px 20px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    background:#080a08;
+    border-top:3px solid #2f963f;
+    box-shadow:0 20px 38px rgba(0,0,0,.34);
+    transform:none;
+  }
+
+  .theme-classical .classical-header[data-mobile-menu-open] .classical-primary-navigation {
+    display:grid;
+  }
+
+  .theme-classical .classical-primary-navigation > a,
+  .theme-classical .classical-nav-dropdown > a {
+    display:flex;
+    align-items:center;
+    min-height:50px;
+    padding:13px 4px;
+    border-bottom:1px solid #2c302c;
+    color:#fff;
+    font:700 14px/1.35 Manrope,sans-serif;
+    letter-spacing:.035em;
+  }
+
+  .theme-classical .classical-primary-navigation a:focus-visible,
+  .theme-classical .classical-menu-toggle:focus-visible,
+  .theme-classical .classical-services-toggle:focus-visible {
+    outline:3px solid #72cf7f;
+    outline-offset:2px;
+  }
+
+  .theme-classical .classical-nav-dropdown {
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 52px;
+    min-width:0;
+  }
+
+  .theme-classical .classical-nav-dropdown > a .classical-nav-caret {
+    display:none;
+  }
+
+  .theme-classical .classical-services-toggle {
+    display:grid;
+    place-items:center;
+    width:52px;
+    min-height:50px;
+    padding:0;
+    border:0;
+    border-bottom:1px solid #2c302c;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+  }
+
+  .classical-mobile-caret {
+    width:9px;
+    height:9px;
+    border-right:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    transform:translateY(-2px) rotate(45deg);
+    transition:transform .18s ease;
+  }
+
+  .classical-services-toggle[aria-expanded="true"] .classical-mobile-caret {
+    transform:translateY(2px) rotate(225deg);
+  }
+
+  .theme-classical .classical-nav-dropdown__menu {
+    position:static;
+    grid-column:1 / -1;
+    display:none;
+    width:auto;
+    padding:6px 0 8px 16px;
+    visibility:visible;
+    opacity:1;
+    transform:none;
+    background:#111;
+    border-top:0;
+    box-shadow:none;
+  }
+
+  .theme-classical .classical-nav-dropdown[data-mobile-open] .classical-nav-dropdown__menu {
+    display:grid;
+  }
+
+  .theme-classical .classical-nav-dropdown__menu a {
+    min-width:0;
+    padding:11px 12px !important;
+    border-left:2px solid #2f963f;
+    color:#e7ebe7;
+    white-space:normal;
+  }
+
+  .theme-classical .classical-primary-navigation .classical-mobile-quote {
+    display:block;
+    margin-top:14px;
+    padding:15px 18px;
+    border:0;
+    background:#217332;
+    color:#fff;
+    text-align:center;
+    font-weight:800;
+  }
+}
+
+@media (max-width:420px) {
+  .theme-classical .classical-header {
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+
+  .theme-classical .classical-header > .classical-quote-button {
+    display:none;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .classical-menu-toggle__icon > span,
+  .classical-mobile-caret {
+    transition:none;
+  }
+}

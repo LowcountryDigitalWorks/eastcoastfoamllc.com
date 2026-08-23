@@ -2,7 +2,7 @@
 import projects from '../data/projects.json';
 import assets from '../data/demo-assets.json';
 const serviceImages = assets.serviceImages as Record<string, string>;
-const demoImages = [
+const serviceExamples = [
   serviceImages['open-cell-spray-foam-insulation'],
   serviceImages['closed-cell-spray-foam-insulation'],
   serviceImages['silicone-roof-coating']
@@ -18,24 +18,20 @@ const demoImages = [
   </div>
   <div class="project-grid">
     {projects.map((project, index) => {
-      const image = project.image || demoImages[index % demoImages.length];
+      const image = project.image || serviceExamples[index % serviceExamples.length];
       return (
         <article class="project-card">
           <div class="project-image-placeholder">
             <img src={image} alt="" loading="lazy" referrerpolicy="no-referrer" />
-            <span>{project.demo ? 'Current-site demo media' : project.title}</span>
+            <span>{project.title}</span>
           </div>
           <div class="project-card__body">
             <span class="project-meta">{project.location} · {project.service}</span>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
-            {project.demo && <small>Project-specific photos/details will replace this demo content after Casey approves the media workflow.</small>}
           </div>
         </article>
       );
     })}
-  </div>
-  <div class="integration-note">
-    <strong>Future automation concept:</strong> Casey posts job photos once → LDW imports eligible Facebook content → Casey approves it → the website Recent Work library updates without a second upload.
   </div>
 </section>

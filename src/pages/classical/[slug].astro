@@ -125,7 +125,7 @@ const pages: Record<string, DetailPage> = {
       ['Can spray foam be applied to any roof?', 'No. The substrate, drainage, existing moisture, roof condition, details, and compatibility must be evaluated first.'],
       ['How long can a spray foam roof last?', 'Service life depends on design, installation, exposure, maintenance, coating condition, and timely repairs. Periodic inspection and recoating may be part of long-term care.'],
       ['Does a spray foam roof need a coating?', 'Yes. A compatible protective coating is a core part of the exposed roofing system and shields the foam from ultraviolet light and weather.'],
-      ['How do I schedule an evaluation?', `Call ${site.phoneDisplay} or use the non-transmitting demo quote form to discuss the roof and arrange the next step.`]
+      ['How do I schedule an evaluation?', `Call ${site.phoneDisplay} or use the quote form to discuss the roof and arrange the next step.`]
     ]
   },
   'silicone-roof-coating': {
@@ -149,7 +149,7 @@ const pages: Record<string, DetailPage> = {
 
 const detail = pages[service.slug];
 ---
-<BaseLayout title={`${service.title} | ${site.name}`} description={`${service.summary} Contact East Coast Foam LLC for a project evaluation in the Lowcountry.`} theme="classical" showDemoBanner={false}>
+<BaseLayout title={`${service.title} | ${site.name}`} description={`${service.summary} Contact East Coast Foam LLC for a project evaluation in the Lowcountry.`} theme="classical">
   <div id="top" class="classical-site">
     <ClassicalHeader />
     <main>

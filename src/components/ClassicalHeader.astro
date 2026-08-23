@@ -18,17 +18,104 @@ import services from '../data/services.json';
 </div>
 <header class="classical-header">
   <BrandMark href="/classical" />
-  <nav aria-label="East Coast Foam navigation">
+  <button
+    class="classical-menu-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="classical-primary-navigation"
+  >
+    <span class="classical-menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="classical-menu-toggle__label">Menu</span>
+  </button>
+  <nav id="classical-primary-navigation" class="classical-primary-navigation" aria-label="East Coast Foam navigation">
     <a href="/classical">Home</a>
     <a href="/classical/about-us">About Us</a>
     <div class="classical-nav-dropdown">
       <a href="/classical/services" aria-haspopup="true">Services <span class="classical-nav-caret" aria-hidden="true"></span></a>
-      <div class="classical-nav-dropdown__menu">
+      <button
+        class="classical-services-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="classical-services-navigation"
+      >
+        <span class="sr-only">Show service pages</span>
+        <span class="classical-mobile-caret" aria-hidden="true"></span>
+      </button>
+      <div id="classical-services-navigation" class="classical-nav-dropdown__menu">
         {services.map((service) => <a href={`/classical/${service.slug}`}>{service.title}</a>)}
       </div>
     </div>
     <a href="/classical/blog">Blog</a>
     <a href="/classical/contact-us">Contact Us</a>
+    <a class="classical-mobile-quote" href="/classical/get-a-quote">Get a Quote</a>
   </nav>
   <a class="classical-quote-button" href="/classical/get-a-quote">Get a Quote</a>
 </header>
+
+<script>
+  const setupClassicalNavigation = (header: Element) => {
+    if (header.hasAttribute('data-navigation-ready')) return;
+    header.setAttribute('data-navigation-ready', 'true');
+
+    const menuToggle = header.querySelector<HTMLButtonElement>('.classical-menu-toggle');
+    const navigation = header.querySelector<HTMLElement>('.classical-primary-navigation');
+    const servicesToggle = header.querySelector<HTMLButtonElement>('.classical-services-toggle');
+    const servicesDropdown = header.querySelector<HTMLElement>('.classical-nav-dropdown');
+    if (!menuToggle || !navigation || !servicesToggle || !servicesDropdown) return;
+
+    const setServicesOpen = (open: boolean) => {
+      servicesToggle.setAttribute('aria-expanded', String(open));
+      servicesDropdown.toggleAttribute('data-mobile-open', open);
+    };
+
+    const setMenuOpen = (open: boolean, restoreFocus = false) => {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      header.toggleAttribute('data-mobile-menu-open', open);
+      document.body.classList.toggle('classical-mobile-menu-open', open);
+      if (!open) setServicesOpen(false);
+      if (restoreFocus) menuToggle.focus();
+    };
+
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    servicesToggle.addEventListener('click', () => {
+      setServicesOpen(servicesToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a')) setMenuOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false, true);
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (menuToggle.getAttribute('aria-expanded') === 'true' && !header.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    });
+
+    const desktopQuery = window.matchMedia('(min-width: 981px)');
+    desktopQuery.addEventListener('change', (event) => {
+      if (event.matches) setMenuOpen(false);
+    });
+
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+    navigation.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+      const linkPath = new URL(link.href).pathname.replace(/\/$/, '') || '/';
+      if (linkPath === currentPath) link.setAttribute('aria-current', 'page');
+    });
+  };
+
+  const initializeClassicalNavigation = () => {
+    document.querySelectorAll('.classical-header').forEach(setupClassicalNavigation);
+  };
+
+  initializeClassicalNavigation();
+  document.addEventListener('astro:page-load', initializeClassicalNavigation);
+</script>

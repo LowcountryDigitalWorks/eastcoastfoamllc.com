@@ -3,24 +3,21 @@
     "title": "Attic transformation",
     "location": "Beaufort area",
     "service": "Open-Cell Spray Foam",
-    "description": "Demo project card reserved for approved East Coast Foam job photography.",
-    "image": "",
-    "demo": true
+    "description": "See how air sealing and insulation can improve comfort across attics and rooflines.",
+    "image": ""
   },
   {
     "title": "Crawlspace protection",
     "location": "Lowcountry",
     "service": "Closed-Cell Spray Foam",
-    "description": "Demo project card showing the future Recent Work publishing model.",
-    "image": "",
-    "demo": true
+    "description": "Explore dense closed-cell protection for suitable Lowcountry crawlspace assemblies.",
+    "image": ""
   },
   {
     "title": "Roof coating project",
     "location": "Service area",
     "service": "Silicone & Acrylic Coatings",
-    "description": "Demo content only; replace with an approved real project before production.",
-    "image": "",
-    "demo": true
+    "description": "Learn how compatible roof coatings can protect prepared commercial and residential surfaces.",
+    "image": ""
   }
 ]
