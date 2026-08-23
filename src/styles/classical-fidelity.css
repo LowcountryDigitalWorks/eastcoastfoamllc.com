@@ -1,0 +1,147 @@
+/* Classical fidelity pass 0.3 — visual matching against the current East Coast Foam site. */
+
+/* Header proportions and sticky behavior match the current desktop site more closely. */
+.theme-classical .classical-topbar { padding:8px max(4vw,24px); min-height:52px; }
+.theme-classical .classical-topbar__reviews img { width:108px; height:34px; }
+.theme-classical .classical-contact-icon { color:#2f963f; font-size:13px; }
+.theme-classical .classical-header { position:sticky; top:0; z-index:60; min-height:96px; padding:12px max(4vw,24px); gap:34px; }
+.theme-classical .classical-header .brand-mark img { width:150px; max-height:72px; }
+.theme-classical .classical-header nav { gap:38px; align-items:center; }
+.theme-classical .classical-header nav>a,.theme-classical .classical-nav-dropdown>a { padding:10px 0; }
+.theme-classical .classical-quote-button { padding:16px 27px; font-size:16px; }
+
+.classical-nav-dropdown { position:relative; }
+.classical-nav-dropdown>a { display:flex; align-items:center; gap:7px; }
+.classical-nav-dropdown>a span { font-size:16px; transform:translateY(-1px); }
+.classical-nav-dropdown__menu { position:absolute; z-index:80; top:calc(100% + 8px); left:-22px; width:310px; display:grid; gap:0 !important; padding:10px 0; visibility:hidden; opacity:0; transform:translateY(8px); background:#111; border-top:4px solid #2f963f; box-shadow:0 18px 40px rgba(0,0,0,.28); transition:.16s ease; }
+.classical-nav-dropdown__menu a { padding:11px 20px !important; font:600 12px/1.4 Manrope,sans-serif; text-transform:none; color:#f5f5f5; }
+.classical-nav-dropdown__menu a:hover { background:#1e1e1e; color:#72cf7f !important; }
+.classical-nav-dropdown:hover .classical-nav-dropdown__menu,.classical-nav-dropdown:focus-within .classical-nav-dropdown__menu { visibility:visible; opacity:1; transform:none; }
+
+/* Hero: retain the current layout but correct typography, overlay and form proportions. */
+.theme-classical .classical-hero { padding-top:128px; padding-bottom:92px; gap:54px; min-height:720px; }
+.theme-classical .classical-hero::before { background:linear-gradient(90deg,rgba(0,0,0,.50) 0%,rgba(0,0,0,.42) 55%,rgba(0,0,0,.29) 100%); }
+.theme-classical .classical-hero h1 { max-width:790px; margin:0 0 24px; font-size:clamp(40px,3.35vw,52px); line-height:1.12; letter-spacing:.005em; }
+.theme-classical .classical-hero .classical-overline { margin:0 0 17px; padding-bottom:7px; font-size:15px; letter-spacing:.02em; }
+.theme-classical .classical-hero__copy>p:not(.classical-overline) { max-width:820px; margin:0; font-size:17px; line-height:1.62; }
+.theme-classical .classical-actions { margin-top:24px; }
+.theme-classical .classical-actions a { padding:13px 20px; }
+.theme-classical .classical-form { background:rgba(28,27,25,.80); backdrop-filter:blur(5px); }
+.theme-classical .form-title { padding:20px 30px; margin:0 -34px 26px; font-size:30px; }
+.theme-classical .classical-form label { margin:13px 0; font-size:15px; }
+.theme-classical .classical-form input,.theme-classical .classical-form select,.theme-classical .classical-form textarea { margin-top:7px; padding:12px; }
+
+/* TrustIndex-like Google review carousel using the reviews already shown on the current site. */
+.google-review-carousel { margin-top:32px; }
+.google-review-carousel__bar { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:18px; }
+.google-review-carousel__summary { display:flex; align-items:center; gap:15px; }
+.google-review-carousel__summary>img { width:112px; height:auto; }
+.google-review-carousel__summary>div { display:grid; }
+.google-review-carousel__summary strong { font:800 24px/1 Montserrat,sans-serif; }
+.google-review-carousel__summary span { margin-top:4px; color:#6c756f; font:600 11px Manrope,sans-serif; text-transform:uppercase; letter-spacing:.07em; }
+.google-review-carousel__controls { display:flex; gap:8px; }
+.google-review-carousel__controls button { width:40px; height:40px; border:1px solid #d9ded9; border-radius:50%; background:#fff; color:#202420; font:500 27px/1 Arial,sans-serif; cursor:pointer; }
+.google-review-carousel__controls button:hover { border-color:#2f963f; color:#2f963f; }
+.google-review-carousel__viewport { overflow-x:auto; scrollbar-width:none; scroll-snap-type:x mandatory; outline:none; }
+.google-review-carousel__viewport::-webkit-scrollbar { display:none; }
+.google-review-carousel__track { display:flex; gap:14px; }
+.google-review-card { flex:0 0 calc((100% - 28px)/3); min-width:0; min-height:224px; padding:22px; scroll-snap-align:start; border:1px solid #e3e6e3; border-radius:4px; background:#fff; box-shadow:0 3px 13px rgba(0,0,0,.05); color:#252925; }
+.google-review-card__header { display:grid; grid-template-columns:48px 1fr 22px; gap:11px; align-items:center; }
+.google-review-card__avatar { width:48px; height:48px; border-radius:50%; object-fit:cover; background:#e8ece8; }
+.google-review-card__identity { min-width:0; display:grid; }
+.google-review-card__identity strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font:700 14px/1.25 Manrope,sans-serif; }
+.google-review-card__identity span { margin-top:3px; color:#8a918c; font:11px Manrope,sans-serif; }
+.google-review-card__platform { width:20px; height:20px; }
+.google-review-card__stars { margin-top:14px; color:#f7a900; font-size:16px; letter-spacing:2px; }
+.google-review-card p { margin:11px 0 0; color:#4f5651; font:14px/1.55 Manrope,sans-serif; }
+.google-review-carousel__link { display:inline-block; margin-top:18px; color:#217131; font:800 13px Manrope,sans-serif; }
+.google-review-carousel--compact { max-width:820px; margin-top:28px; }
+.google-review-carousel--compact .google-review-carousel__bar { display:none; }
+.google-review-carousel--compact .google-review-card { flex-basis:calc((100% - 12px)/2); min-height:188px; padding:17px; }
+.google-review-carousel--compact .google-review-carousel__track { gap:12px; }
+.google-review-carousel--compact .google-review-card__header { grid-template-columns:40px 1fr 18px; gap:9px; }
+.google-review-carousel--compact .google-review-card__avatar { width:40px; height:40px; }
+.google-review-carousel--compact .google-review-card__platform { width:18px; height:18px; }
+.google-review-carousel--compact .google-review-card p { font-size:12px; line-height:1.45; }
+
+/* Classical service grid mirrors the current open, image-forward 3-column layout. */
+.theme-classical .classical-services-section { background:#fff; }
+.theme-classical .classical-services-section>h2 { max-width:none; margin:0 0 48px; text-align:center; font-size:clamp(32px,3vw,44px); text-transform:none; }
+.theme-classical .service-grid--classical { grid-template-columns:repeat(3,1fr); gap:54px 44px; margin-top:0; }
+.theme-classical .service-grid--classical .service-card { min-height:0; padding:0; overflow:visible; border:0; box-shadow:none; background:transparent; text-align:center; }
+.theme-classical .service-grid--classical .service-card__image { aspect-ratio:1.37/1; margin:0 0 24px; border:0; }
+.theme-classical .service-grid--classical .service-card__image img { object-fit:cover; }
+.theme-classical .service-grid--classical .service-card__image::after { display:none; }
+.theme-classical .service-grid--classical .service-number { display:none; }
+.theme-classical .service-grid--classical .service-card h3 { margin:0 auto 18px; max-width:430px; font-size:22px; line-height:1.18; text-transform:uppercase; }
+.theme-classical .service-grid--classical .service-card p { margin:0 auto; max-width:440px; color:#303531; font:400 17px/1.55 Manrope,sans-serif; }
+.theme-classical .service-grid--classical .service-card a { margin-top:18px; padding-bottom:3px; border-bottom:2px solid #2f963f; font-size:12px; }
+.theme-classical .classical-services-section .classical-section-cta { text-align:center; margin-top:44px; }
+
+/* Real company/brand artwork instead of text placeholders. */
+.classical-logo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:38px; }
+.classical-logo-grid a { min-height:180px; display:flex; align-items:center; justify-content:center; padding:28px; border:1px solid #e1e4e1; background:#fff; transition:.18s ease; }
+.classical-logo-grid a:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(0,0,0,.07); }
+.classical-logo-grid img { width:auto; max-width:90%; max-height:112px; object-fit:contain; }
+.classical-logo-grid--brands img { max-height:100px; }
+.classical-partners>.classical-overline,.classical-brands>.classical-overline { display:block; width:max-content; margin:0 auto 8px; }
+
+.classical-appointment-band { padding:74px max(5vw,36px); text-align:center; background:#101210; color:#fff; }
+.classical-appointment-band span { display:block; color:#69ca76; font:800 12px Manrope,sans-serif; text-transform:uppercase; letter-spacing:.15em; }
+.classical-appointment-band h2 { margin:12px auto 28px; font-size:clamp(34px,4vw,56px); text-transform:uppercase; }
+.classical-appointment-band a { display:inline-block; padding:14px 25px; background:#2f963f; color:#fff; font-weight:800; }
+
+/* Bottom request-a-quote/contact block follows the current site's form + contact + map composition. */
+.classical-contact-panel { display:grid; grid-template-columns:.95fr 1.05fr; gap:0; background:#f3f3f1; }
+.classical-contact-panel__form { padding:70px max(4vw,36px); background:linear-gradient(135deg,#242422,#111); }
+.classical-contact-panel__form .classical-form { width:min(620px,100%); margin-left:auto; background:rgba(25,24,22,.95); }
+.classical-contact-panel__details { padding:70px max(4vw,36px); background:#f7f7f5; }
+.classical-contact-panel__details h2 { margin:10px 0 28px; font-size:clamp(34px,3.7vw,52px); line-height:1.08; text-transform:uppercase; }
+.classical-contact-list { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.classical-contact-list>div { min-height:104px; padding:18px; background:#fff; border-left:4px solid #2f963f; }
+.classical-contact-list span { display:block; margin-bottom:8px; color:#247332; font:800 11px Manrope,sans-serif; text-transform:uppercase; letter-spacing:.08em; }
+.classical-contact-list a,.classical-contact-list strong { font:700 14px/1.45 Manrope,sans-serif; }
+.classical-map-frame { margin-top:18px; height:290px; overflow:hidden; background:#e5e8e5; }
+.classical-map-frame iframe { width:100%; height:100%; border:0; }
+
+/* Slightly closer content-section rhythm. */
+.theme-classical .classical-section { padding-top:76px; padding-bottom:76px; }
+.theme-classical .classical-feature-grid { gap:18px; }
+.theme-classical .classical-trust-strip { padding-top:24px; padding-bottom:24px; }
+
+@media (max-width:1100px) {
+  .theme-classical .classical-header nav { gap:22px; }
+  .theme-classical .classical-header .brand-mark img { width:138px; }
+  .theme-classical .classical-hero { grid-template-columns:minmax(0,1fr) 390px; gap:34px; padding-top:100px; }
+  .google-review-card { flex-basis:calc((100% - 14px)/2); }
+  .classical-logo-grid { gap:18px; }
+}
+
+@media (max-width:900px) {
+  .theme-classical .classical-header { position:relative; }
+  .classical-nav-dropdown__menu { display:none; }
+  .theme-classical .classical-hero { grid-template-columns:1fr; padding-top:74px; }
+  .google-review-carousel--compact .google-review-card { flex-basis:calc((100% - 12px)/2); }
+  .theme-classical .service-grid--classical { grid-template-columns:1fr 1fr; gap:42px 28px; }
+  .classical-logo-grid { grid-template-columns:1fr 1fr; }
+  .classical-contact-panel { grid-template-columns:1fr; }
+}
+
+@media (max-width:680px) {
+  .theme-classical .classical-topbar { min-height:44px; padding:7px 16px; }
+  .theme-classical .classical-header { padding:13px 18px; }
+  .theme-classical .classical-header .brand-mark img { width:132px; }
+  .theme-classical .classical-hero { padding:56px 20px 64px; }
+  .theme-classical .classical-hero h1 { font-size:clamp(38px,11vw,50px); line-height:1.08; }
+  .theme-classical .classical-hero .classical-overline { font-size:12px; }
+  .google-review-carousel--compact .google-review-card,.google-review-card { flex-basis:88%; }
+  .google-review-carousel__summary>img { width:96px; }
+  .google-review-carousel__controls button { width:36px; height:36px; }
+  .theme-classical .service-grid--classical { grid-template-columns:1fr; gap:42px; }
+  .theme-classical .service-grid--classical .service-card__image { aspect-ratio:4/3; }
+  .classical-logo-grid { grid-template-columns:1fr; }
+  .classical-logo-grid a { min-height:140px; }
+  .classical-contact-list { grid-template-columns:1fr; }
+  .classical-contact-panel__form,.classical-contact-panel__details { padding:48px 20px; }
+  .classical-map-frame { height:240px; }
+}
