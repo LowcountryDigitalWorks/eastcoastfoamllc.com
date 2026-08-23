@@ -1,4 +1,6 @@
 ---
+import 'leaflet/dist/leaflet.css';
+
 const business = { name: 'East Coast Foam LLC', lat: 32.5931719, lng: -80.7520489 };
 const areas = [
   { name: 'Beaufort', lat: 32.4316, lng: -80.6698 },
@@ -14,7 +16,7 @@ const areas = [
 ];
 const coverageRadiusMeters = 100000;
 ---
-<section class="classical-service-map" aria-labelledby="service-area-map-title">
+<section id="service-area" class="classical-service-map" aria-labelledby="service-area-map-title">
   <div class="classical-service-map__intro">
     <p class="classical-overline">Areas We Serve</p>
     <h2 id="service-area-map-title">Serving Beaufort, Charleston, Savannah and surrounding Lowcountry communities.</h2>
@@ -36,7 +38,6 @@ const coverageRadiusMeters = 100000;
 </section>
 
 <style>
-  @import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
   .classical-service-map { position:relative; z-index:0; isolation:isolate; display:grid; grid-template-columns:.8fr 1.2fr; gap:44px; align-items:center; padding:78px max(5vw,36px); overflow:hidden; background:#f4f5f2; }
   .classical-service-map .classical-overline { color:#217332 !important; border-color:#2f963f !important; text-shadow:none !important; }
   .classical-service-map h2 { margin:10px 0 18px; color:#171a18; font-size:clamp(34px,4vw,54px); line-height:1.08; text-transform:uppercase; }
@@ -45,53 +46,33 @@ const coverageRadiusMeters = 100000;
   .classical-service-map__chips span { padding:8px 10px; border-left:4px solid #2f963f; background:#fff; color:#263029; font:700 11px Manrope,sans-serif; }
   .classical-service-map__canvas-wrap { position:relative; z-index:0; min-width:0; overflow:hidden; }
   .classical-service-map__canvas { position:relative; z-index:0; width:100%; height:480px; border:8px solid #fff; box-shadow:0 18px 44px rgba(0,0,0,.10); background:#dfe5df; }
-  .classical-service-map__canvas :global(.leaflet-container),
-  .classical-service-map__canvas :global(.leaflet-pane),
-  .classical-service-map__canvas :global(.leaflet-control) { z-index:auto; }
   .classical-service-map__note { margin:10px 0 0; color:#687069; font:12px/1.5 Manrope,sans-serif; }
   @media (max-width:900px) { .classical-service-map { grid-template-columns:1fr; } .classical-service-map__canvas { height:420px; } }
   @media (max-width:680px) { .classical-service-map { padding:52px 20px; } .classical-service-map__canvas { height:360px; border-width:5px; } }
 </style>
 
 <script>
-  type LeafletLike = any;
+  import L from 'leaflet';
+
   type ServiceArea = { name: string; lat: number; lng: number };
   type BusinessPoint = { name: string; lat: number; lng: number };
-  const browserWindow = window as typeof window & { L?: LeafletLike };
 
-  const loadLeaflet = (): Promise<LeafletLike> => new Promise((resolve, reject) => {
-    if (browserWindow.L) return resolve(browserWindow.L);
-    const existing = document.querySelector('script[data-leaflet-loader]');
-    if (existing) {
-      existing.addEventListener('load', () => resolve(browserWindow.L), { once: true });
-      existing.addEventListener('error', reject, { once: true });
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    script.crossOrigin = '';
-    script.dataset.leafletLoader = 'true';
-    script.onload = () => resolve(browserWindow.L);
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-
-  const initServiceMap = async () => {
+  const initServiceMap = () => {
     const node = document.getElementById('classical-service-map-canvas');
     if (!(node instanceof HTMLElement) || node.dataset.ready === 'true') return;
+
     try {
-      const L: LeafletLike = await loadLeaflet();
-      if (!L) return;
       const areas: ServiceArea[] = JSON.parse(node.dataset.areas || '[]');
       const business: BusinessPoint = JSON.parse(node.dataset.business || '{}');
       const radius = Number(node.dataset.radius || '100000');
       const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      const center: [number, number] = [business.lat, business.lng];
+      const center: L.LatLngExpression = [business.lat, business.lng];
       const serviceRadius = L.circle(center, {
         radius,
         color: '#258238',
@@ -103,7 +84,7 @@ const coverageRadiusMeters = 100000;
       }).addTo(map);
 
       areas.forEach((area) => {
-        const point: [number, number] = [area.lat, area.lng];
+        const point: L.LatLngExpression = [area.lat, area.lng];
         L.circleMarker(point, {
           radius: 6,
           color: '#135d24',
@@ -119,7 +100,7 @@ const coverageRadiusMeters = 100000;
         weight: 3,
         fillColor: '#2f963f',
         fillOpacity: 1
-      }).addTo(map).bindTooltip(`${business.name} — Seabrook`, { direction: 'top', permanent: false });
+      }).addTo(map).bindTooltip(`${business.name} — Seabrook`, { direction: 'top' });
 
       map.fitBounds(serviceRadius.getBounds(), { padding: [22, 22] });
       node.dataset.ready = 'true';
