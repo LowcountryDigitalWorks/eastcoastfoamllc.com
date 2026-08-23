@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Attic transformation",
+    "location": "Beaufort area",
+    "service": "Open-Cell Spray Foam",
+    "description": "Demo project card reserved for approved East Coast Foam job photography.",
+    "image": "",
+    "demo": true
+  },
+  {
+    "title": "Crawlspace protection",
+    "location": "Lowcountry",
+    "service": "Closed-Cell Spray Foam",
+    "description": "Demo project card showing the future Recent Work publishing model.",
+    "image": "",
+    "demo": true
+  },
+  {
+    "title": "Roof coating project",
+    "location": "Service area",
+    "service": "Silicone & Acrylic Coatings",
+    "description": "Demo content only; replace with an approved real project before production.",
+    "image": "",
+    "demo": true
+  }
+]

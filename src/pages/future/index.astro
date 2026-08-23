@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandMark from '../../components/BrandMark.astro';
+import GuidedEstimate from '../../components/GuidedEstimate.astro';
+import RecentWork from '../../components/RecentWork.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import site from '../../data/site.json';
+---
+<BaseLayout title={`Future Concept | ${site.name}`} description="Modern East Coast Foam website and digital operations concept." theme="future">
+  <div id="top" class="future-site">
+    <header class="future-nav-wrap">
+      <nav class="future-nav" aria-label="Future navigation">
+        <BrandMark />
+        <div class="future-nav__links"><a href="#services">Services</a><a href="#work">Recent Work</a><a href="#process">How it works</a><a href="#contact">Contact</a></div>
+        <a class="future-nav__cta" href="#estimate">Request an estimate</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="future-hero">
+        <div class="future-hero__copy">
+          <p class="eyebrow">Beaufort born · Lowcountry focused</p>
+          <h1>Comfort built to last.<br /><em>Foam done right.</em></h1>
+          <p class="future-lede">A modern East Coast Foam presence centered on clear choices, real project work, fast estimate intake, and an owner you can actually reach.</p>
+          <div class="future-actions"><a class="future-button" href="#estimate">Start an estimate</a><a class="future-call" href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a></div>
+          <div class="trust-row"><span>Locally owned</span><span>Lowcountry service</span><span>Free estimate conversation</span></div>
+        </div>
+        <div class="future-hero__visual" aria-label="Future project photography area">
+          <div class="foam-orbit foam-orbit--one"></div><div class="foam-orbit foam-orbit--two"></div>
+          <div class="future-photo-card"><span>Future hero photography</span><strong>Show the work, not stock photos.</strong></div>
+        </div>
+      </section>
+
+      <section class="future-section" id="services">
+        <div class="section-heading-row"><div><div class="section-kicker">What we do</div><h2>The right insulation system starts with the right conversation.</h2></div><p>Clear service explanations replace keyword-heavy copy while preserving the search intent we need for migration.</p></div>
+        <ServiceGrid />
+      </section>
+
+      <section class="future-band">
+        <div><span class="big-number">01</span><p>Tell us about the space.</p></div><div><span class="big-number">02</span><p>We assess the right approach.</p></div><div><span class="big-number">03</span><p>You get a clear estimate and next step.</p></div>
+      </section>
+
+      <div class="future-section"><GuidedEstimate /></div>
+      <div class="future-section"><RecentWork /></div>
+
+      <section class="future-section process-section" id="process">
+        <div class="section-kicker">Beyond the website</div>
+        <h2>A digital system that can grow with the business.</h2>
+        <div class="process-grid">
+          <article><span>Now</span><h3>Website + professional identity</h3><p>Fast hosting, domain email presentation, easy content editing, quote intake, analytics, monitoring, and customer-owned infrastructure.</p></article>
+          <article><span>Next</span><h3>Marketing that reuses the work Casey already does</h3><p>Facebook project-photo import, Recent Work publishing, better review requests, and source attribution without double entry.</p></article>
+          <article><span>Later, if useful</span><h3>Owner operations view</h3><p>QuickBooks-aware lead status, accepted-job scheduling, crew/truck visibility, completion follow-up, and exceptions that need Casey's attention.</p></article>
+        </div>
+      </section>
+
+      <section class="future-contact" id="contact">
+        <div><p class="eyebrow">Let's talk about the project</p><h2>One owner. One number. A much better digital front door.</h2></div>
+        <div class="future-contact__links"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><a href={`mailto:${site.quoteEmail}`}>{site.quoteEmail}</a><span>{site.address}</span></div>
+      </section>
+    </main>
+    <footer class="future-footer"><BrandMark compact /><p>Future concept by Lowcountry Digital Works · not production.</p></footer>
+  </div>
+</BaseLayout>

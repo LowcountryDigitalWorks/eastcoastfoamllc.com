@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  theme?: 'chooser' | 'classical' | 'future';
+}
+
+const { title, description, theme = 'chooser' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex,nofollow,noarchive,nosnippet" />
+    <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet" />
+    <meta name="theme-color" content={theme === 'classical' ? '#111111' : '#102a20'} />
+    <title>{title}</title>
+  </head>
+  <body class={`theme-${theme}`}>
+    <div class="demo-banner" role="status">
+      Private LDW concept demo · not indexed · forms do not submit
+    </div>
+    <slot />
+  </body>
+</html>

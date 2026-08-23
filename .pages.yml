@@ -1,0 +1,86 @@
+media:
+  input: public/uploads
+  output: /uploads
+  categories: [image]
+
+content:
+  - name: site
+    label: Business details
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - name: name
+        label: Business name
+        type: string
+        required: true
+      - name: shortName
+        label: Short name
+        type: string
+        required: true
+      - name: tagline
+        type: string
+      - name: phoneDisplay
+        label: Phone (display)
+        type: string
+      - name: phoneHref
+        label: Phone (international digits)
+        type: string
+      - name: publicEmail
+        label: Public email
+        type: string
+      - name: quoteEmail
+        label: Quote email
+        type: string
+      - name: address
+        type: string
+      - name: hours
+        type: string
+      - name: facebook
+        label: Facebook URL
+        type: string
+      - name: serviceAreas
+        label: Service areas
+        type: string
+        list: true
+
+  - name: services
+    label: Services
+    type: file
+    path: src/data/services.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: slug
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+      - name: summary
+        type: text
+      - name: featured
+        type: boolean
+
+  - name: recentWork
+    label: Recent work
+    type: file
+    path: src/data/projects.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        type: string
+        required: true
+      - name: location
+        type: string
+      - name: service
+        type: string
+      - name: description
+        type: text
+      - name: image
+        type: image
+      - name: demo
+        label: Demo content
+        type: boolean
