@@ -67,12 +67,14 @@ const coverageRadiusMeters = 100000;
       const radius = Number(node.dataset.radius || '100000');
       const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
 
+      const center: L.LatLngExpression = [business.lat, business.lng];
+      map.setView(center, 8);
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      const center: L.LatLngExpression = [business.lat, business.lng];
       const serviceRadius = L.circle(center, {
         radius,
         color: '#258238',

@@ -29,6 +29,42 @@
     "spray-foam-roofing": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/SPRAY-FOAM-ROOFING-2.webp",
     "silicone-roof-coating": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/PREMIER-SILICONE-ROOF-COATING-3.webp"
   },
+  "serviceDetailImages": {
+    "open-cell-spray-foam-insulation": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/open-cell-spray-Foam-1-1.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/open-cell-spray-Foam-2-1.webp"
+    ],
+    "closed-cell-spray-foam-insulation": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/closed-cell-spray-foam-1.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/closed-cell-spray-foam-2-1.webp"
+    ],
+    "polyurea-coatings": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/POLYUREA-ROOF-COATINGS-3.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/POLYUREA-ROOF-COATINGS-2.webp"
+    ],
+    "fiberglass-batt-insulation": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Fiberglass-insulation-1.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Fiberglass-insulation-2.webp"
+    ],
+    "insulation-removal-services": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/insulation-removal-3-1.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/insulation-removal-2-3-scaled.webp"
+    ],
+    "spray-foam-roofing": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/SPRAY-FOAM-ROOFING-3.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/SPRAY-FOAM-ROOFING-1.webp"
+    ],
+    "silicone-roof-coating": [
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/PREMIER-SILICONE-ROOF-COATING-2.webp",
+      "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/PREMIER-SILICONE-ROOF-COATING-1.webp"
+    ]
+  },
+  "blogImages": [
+    "https://eastcoastfoamllc.com/wp-content/uploads/2024/10/Discover-How-Closed-Cell-Spray-Foam-Benefits-Beaufort-Countys-Home-1024x768.jpg",
+    "https://eastcoastfoamllc.com/wp-content/uploads/2024/09/Spray-Foam-Roofing-Insulation-1024x512.webp",
+    "https://eastcoastfoamllc.com/wp-content/uploads/2024/08/East-Coast-Foam-LLC-1.webp",
+    "https://eastcoastfoamllc.com/wp-content/uploads/2024/06/The-Benefits-of-Open-Cell-Spray-Foam-Insulation-1024x601.webp"
+  ],
   "companyLogos": {
     "IDI Distributors": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/IDI-East-Coast-Foam-LLC.webp",
     "Huntsman Building Solutions": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Brands-East-Coast-Foam-LLC-1-1.webp",
