@@ -1,27 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandMark from '../components/BrandMark.astro';
 ---
 <BaseLayout title="East Coast Foam — LDW Demo" description="Private East Coast Foam website concepts by Lowcountry Digital Works.">
   <main class="chooser" id="top">
     <div class="chooser__inner">
+      <div class="chooser__brand"><BrandMark /></div>
       <p class="eyebrow">Lowcountry Digital Works · private concept environment</p>
       <h1>Two paths for East Coast Foam.</h1>
-      <p class="chooser__intro">The same business information powers both demos. Classical prioritizes a low-risk replacement of today's site. Future shows what the experience can become.</p>
+      <p class="chooser__intro">The same East Coast Foam business information powers both views. Classical closely follows today's website. Future explores a more modern customer experience.</p>
       <div class="chooser-grid">
-        <a class="chooser-card chooser-card--classical" href="/classical">
+        <a class="chooser-card chooser-card--classical" href="/classical" target="_blank" rel="noopener noreferrer">
           <span>01</span>
           <h2>Classical</h2>
-          <p>Familiar structure, familiar green/black identity, cleaner implementation, easier future cutover.</p>
-          <strong>Open Classical →</strong>
+          <p>East Coast Foam's current structure and identity rebuilt on the faster Cloudflare/Astro foundation.</p>
+          <strong>Open Classical in new tab →</strong>
         </a>
-        <a class="chooser-card chooser-card--future" href="/future">
+        <a class="chooser-card chooser-card--future" href="/future" target="_blank" rel="noopener noreferrer">
           <span>02</span>
           <h2>Modern / Future</h2>
-          <p>A new sales experience built around local trust, better estimate intake, recent work, and future automation.</p>
-          <strong>Open Future →</strong>
+          <p>A new sales experience built around local trust, estimate intake, recent work, and future automation.</p>
+          <strong>Open Future in new tab →</strong>
         </a>
       </div>
-      <p class="chooser-footnote">No changes have been made to the production GoDaddy/WordPress site or DNS.</p>
+      <p class="chooser-footnote">Each concept opens in a new tab so this selector remains available for side-by-side comparison.</p>
     </div>
   </main>
 </BaseLayout>
