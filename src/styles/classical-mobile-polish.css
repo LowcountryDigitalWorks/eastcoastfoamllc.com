@@ -73,10 +73,12 @@
     top:0;
     display:grid;
     grid-template-columns:minmax(0,1fr) auto auto;
-    gap:12px;
+    gap:8px;
     width:100%;
     min-width:0;
     z-index:5000;
+    min-height:72px;
+    padding:8px 12px;
   }
 
   .theme-classical .classical-header .brand-mark {
@@ -85,20 +87,27 @@
   }
 
   .theme-classical .classical-header .brand-mark img {
+    width:130px;
     max-width:100%;
+    max-height:54px;
   }
 
   .theme-classical .classical-menu-toggle {
     display:inline-flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:8px;
-    min-width:48px;
+    gap:3px;
+    width:52px;
+    min-width:44px;
     min-height:48px;
-    padding:10px 12px;
-    border:1px solid #4b4f4b;
+    padding:6px 3px;
+    border:0;
+    border-radius:3px;
     background:#111;
     color:#fff;
+    color-scheme:dark;
+    forced-color-adjust:none;
     cursor:pointer;
   }
 
@@ -117,9 +126,24 @@
   }
 
   .classical-menu-toggle__label {
-    font:800 11px Manrope,sans-serif;
+    font:800 9px/1 Manrope,sans-serif;
     text-transform:uppercase;
     letter-spacing:.08em;
+  }
+
+  .theme-classical .classical-header > .classical-quote-button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:76px;
+    min-height:44px;
+    padding:8px 10px;
+    border:0;
+    background:#217332;
+    color:#fff;
+    font:800 11px/1.1 Manrope,sans-serif;
+    text-align:center;
+    white-space:nowrap;
   }
 
   .classical-menu-toggle[aria-expanded="true"] .classical-menu-toggle__icon > span:first-child {
@@ -252,12 +276,23 @@
 
 @media (max-width:420px) {
   .theme-classical .classical-header {
-    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-columns:minmax(0,1fr) auto auto;
+    gap:5px;
+    padding-inline:9px;
+  }
+
+  .theme-classical .classical-header .brand-mark img {
+    width:118px;
+    max-height:50px;
   }
 
   .theme-classical .classical-header > .classical-quote-button {
-    display:none;
+    min-width:70px;
+    padding-inline:7px;
+    font-size:10px;
   }
+
+  .theme-classical .classical-menu-toggle { width:48px; }
 }
 
 @media (prefers-reduced-motion:reduce) {
