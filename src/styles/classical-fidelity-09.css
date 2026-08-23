@@ -1,0 +1,177 @@
+/* Classical fidelity pass 0.9 — screenshot-driven parity fixes. */
+
+/* Keep navigation above third-party map panes and match the live compact inline chevron. */
+.theme-classical .classical-topbar {
+  position: relative;
+  z-index: 5200;
+}
+
+.theme-classical .classical-header {
+  z-index: 5000;
+}
+
+.theme-classical .classical-nav-dropdown > a {
+  gap: 9px;
+}
+
+.theme-classical .classical-nav-dropdown > a .classical-nav-caret {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  font-size: 0;
+  line-height: 0;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+/* Homepage hero uses the exact current-site image; preserve Breakdance's cover/center behavior. */
+.theme-classical .classical-hero__background {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Dark quote panels must remain legible regardless of inherited theme colors. */
+.theme-classical #quote .classical-form,
+.theme-classical .classical-contact-panel__form .classical-form {
+  color: #fff;
+}
+
+.theme-classical #quote .classical-form .form-title,
+.theme-classical .classical-contact-panel__form .classical-form .form-title {
+  color: #fff !important;
+}
+
+.theme-classical #quote .classical-form label,
+.theme-classical .classical-contact-panel__form .classical-form label {
+  color: #fff !important;
+  text-shadow: none;
+}
+
+.theme-classical #quote .classical-form input,
+.theme-classical #quote .classical-form select,
+.theme-classical #quote .classical-form textarea,
+.theme-classical .classical-contact-panel__form .classical-form input,
+.theme-classical .classical-contact-panel__form .classical-form select,
+.theme-classical .classical-contact-panel__form .classical-form textarea {
+  color: #171a18;
+  background: #fff;
+}
+
+/* Interior routes on Casey's current site use a simple solid-green title band, not an image hero. */
+.theme-classical .classical-page-hero {
+  min-height: 345px;
+  display: grid;
+  place-items: center;
+  padding: 72px max(5vw, 36px);
+  background: #2f963f;
+  color: #fff;
+  text-align: center;
+}
+
+.theme-classical .classical-page-hero > img,
+.theme-classical .classical-page-hero::after {
+  display: none;
+}
+
+.theme-classical .classical-page-hero__inner {
+  width: min(1220px, 100%);
+  max-width: 1220px;
+}
+
+.theme-classical .classical-page-hero .classical-overline {
+  display: none;
+}
+
+.theme-classical .classical-page-hero h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(38px, 4vw, 54px);
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+/* Interior forms are light on the current Contact/Service pages. */
+.theme-classical .classical-contact-page__form .classical-form,
+.theme-classical .classical-service-detail aside .classical-form,
+.theme-classical .classical-quote-page .classical-form {
+  color: #222;
+  background: #fff;
+  box-shadow: 0 14px 36px rgba(0,0,0,.08);
+}
+
+.theme-classical .classical-contact-page__form .classical-form .form-title,
+.theme-classical .classical-service-detail aside .classical-form .form-title,
+.theme-classical .classical-quote-page .classical-form .form-title {
+  color: #222 !important;
+  background: #fff;
+  border-bottom: 5px solid #2f963f;
+}
+
+.theme-classical .classical-contact-page__form .classical-form label,
+.theme-classical .classical-service-detail aside .classical-form label,
+.theme-classical .classical-quote-page .classical-form label {
+  color: #222 !important;
+}
+
+.theme-classical .classical-contact-page__form .classical-form input,
+.theme-classical .classical-contact-page__form .classical-form select,
+.theme-classical .classical-contact-page__form .classical-form textarea,
+.theme-classical .classical-service-detail aside .classical-form input,
+.theme-classical .classical-service-detail aside .classical-form select,
+.theme-classical .classical-service-detail aside .classical-form textarea,
+.theme-classical .classical-quote-page .classical-form input,
+.theme-classical .classical-quote-page .classical-form select,
+.theme-classical .classical-quote-page .classical-form textarea {
+  color: #171a18;
+  background: #fff;
+  border: 1px solid #ccd3cd;
+}
+
+/* Light-background eyebrow text should never disappear. */
+.theme-classical .classical-section:not(.classical-section--dark) > .classical-overline,
+.theme-classical .classical-page-content .classical-overline,
+.theme-classical .classical-contact-page .classical-overline,
+.theme-classical .classical-service-detail .classical-overline,
+.theme-classical .classical-quote-page .classical-overline {
+  color: #217332;
+  border-color: #2f963f;
+  text-shadow: none;
+}
+
+/* Leaflet uses high pane z-indexes by default; strictly contain them below the sticky site header. */
+.theme-classical .classical-service-map,
+.theme-classical .classical-service-map__canvas-wrap,
+.theme-classical .classical-service-map__canvas {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.theme-classical .classical-service-map__canvas .leaflet-pane,
+.theme-classical .classical-service-map__canvas .leaflet-top,
+.theme-classical .classical-service-map__canvas .leaflet-bottom,
+.theme-classical .classical-service-map__canvas .leaflet-control {
+  z-index: 1 !important;
+}
+
+@media (max-width: 900px) {
+  .theme-classical .classical-page-hero {
+    min-height: 280px;
+    padding: 58px 24px;
+  }
+}
+
+@media (max-width: 680px) {
+  .theme-classical .classical-page-hero {
+    min-height: 230px;
+    padding: 48px 20px;
+  }
+
+  .theme-classical .classical-page-hero h1 {
+    font-size: clamp(30px, 9vw, 42px);
+  }
+}
