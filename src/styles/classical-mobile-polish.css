@@ -26,6 +26,10 @@
   overflow-x:clip;
 }
 
+html:has(body.theme-classical) {
+  overflow-x:clip;
+}
+
 /* Homepage metadata and the light contact panel meet WCAG AA contrast. */
 .theme-classical #reviews .google-review-carousel__summary span {
   color:#5d665f;
