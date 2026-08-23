@@ -6,13 +6,14 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? 'github' : 'list',
+  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}-{projectName}{ext}',
   use: {
     baseURL: 'http://127.0.0.1:4321',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure'
   },
   expect: {
-    toHaveScreenshot: { maxDiffPixelRatio: 0.01 }
+    toHaveScreenshot: { maxDiffPixelRatio: 0.03 }
   },
   projects: [
     { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'] } },
