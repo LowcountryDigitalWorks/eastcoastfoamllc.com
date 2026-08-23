@@ -1,4 +1,4 @@
-/* Classical fidelity pass 0.4–0.6 — post-deployment desktop alignment. */
+/* Classical fidelity pass 0.4–0.7 — post-deployment desktop alignment and contrast hardening. */
 
 @media (min-width:1101px) {
   .theme-classical .classical-header {
@@ -22,31 +22,136 @@
     transform:translateX(-40px);
   }
 
+  .theme-classical .classical-hero {
+    grid-template-columns:minmax(0,1.16fr) minmax(390px,.84fr);
+  }
+
   .theme-classical .classical-hero__copy {
     align-self:start;
-    margin-top:2px;
-    max-width:960px;
+    margin-top:24px;
+    width:100%;
+    max-width:900px;
+    min-width:0;
+    overflow:hidden;
   }
 
   .theme-classical .classical-hero h1 {
-    width:930px;
-    max-width:930px;
-    font-size:clamp(38px,2.85vw,46px);
+    width:auto;
+    max-width:830px;
+    font-size:clamp(38px,2.75vw,46px);
     line-height:1.16;
+  }
+
+  .theme-classical .classical-hero-title span {
+    display:block;
+    white-space:nowrap;
   }
 }
 
 .theme-classical .classical-hero::before {
-  background:linear-gradient(90deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.28) 55%,rgba(0,0,0,.20) 100%);
+  background:linear-gradient(90deg,rgba(0,0,0,.43) 0%,rgba(0,0,0,.36) 52%,rgba(0,0,0,.23) 100%);
 }
 
 .theme-classical .classical-topbar {
   min-height:48px;
 }
 
+/* Keep every hero word in the copy column and make the quote panel fully opaque enough to prevent bleed-through. */
+.theme-classical .classical-hero__copy,
+.theme-classical #quote {
+  min-width:0;
+}
+
+.theme-classical .classical-hero__copy {
+  isolation:isolate;
+}
+
+.theme-classical #quote {
+  position:relative;
+  z-index:6;
+  align-self:start;
+  background:#1c1b19;
+  box-shadow:0 20px 54px rgba(0,0,0,.28);
+}
+
+.theme-classical #quote .classical-form,
+.theme-classical .classical-contact-panel__form .classical-form {
+  background:#1c1b19;
+  backdrop-filter:none;
+}
+
+.theme-classical .classical-hero h1,
+.theme-classical .classical-hero .classical-overline,
+.theme-classical .classical-hero__copy>p:not(.classical-overline) {
+  position:relative;
+  z-index:2;
+  text-shadow:0 2px 9px rgba(0,0,0,.58);
+}
+
+.theme-classical .classical-hero__copy>p:not(.classical-overline) {
+  color:#fff;
+}
+
+/* Explicit contrast rules for image/dark/brand sections so later styling cannot wash text into backgrounds. */
+.theme-classical .classical-section--dark,
+.theme-classical .classical-section--dark h2,
+.theme-classical .classical-section--dark h3 {
+  color:#fff;
+}
+
+.theme-classical .classical-section--dark p {
+  color:#d4dad5;
+}
+
+.theme-classical .classical-contact-band,
+.theme-classical .classical-contact-band h2,
+.theme-classical .classical-contact-band p,
+.theme-classical .classical-appointment-band,
+.theme-classical .classical-appointment-band h2 {
+  color:#fff;
+}
+
+.theme-classical .classical-contact-band p:not(.classical-overline) {
+  color:#fff;
+}
+
+.theme-classical .classical-appointment-band span {
+  color:#91e09b;
+}
+
+.theme-classical .classical-about-grid>div:first-child,
+.theme-classical .classical-expect,
+.theme-classical .classical-services-section,
+.theme-classical .classical-partners,
+.theme-classical .classical-brands,
+.theme-classical #reviews {
+  color:#171a18;
+}
+
+.theme-classical .classical-about-grid>div:first-child>p:not(.classical-overline),
+.theme-classical .classical-expect p,
+.theme-classical .classical-services-section .service-card p {
+  color:#454d48;
+}
+
 @media (max-width:1100px) and (min-width:901px) {
   .theme-classical .classical-hero__copy {
     align-self:start;
     margin-top:10px;
+  }
+  .theme-classical .classical-hero-title span {
+    display:inline;
+    white-space:normal;
+  }
+}
+
+@media (max-width:900px) {
+  .theme-classical .classical-hero-title span {
+    display:inline;
+    white-space:normal;
+  }
+  .theme-classical #quote {
+    width:100%;
+    max-width:620px;
   }
 }
