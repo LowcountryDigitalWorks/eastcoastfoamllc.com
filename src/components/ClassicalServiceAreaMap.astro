@@ -1,0 +1,116 @@
+---
+import site from '../data/site.json';
+
+const areas = [
+  { name: 'Beaufort', lat: 32.4316, lng: -80.6698 },
+  { name: "Lady's Island", lat: 32.4269, lng: -80.6548 },
+  { name: 'Hilton Head', lat: 32.2163, lng: -80.7526 },
+  { name: 'Bluffton', lat: 32.2371, lng: -80.8604 },
+  { name: 'Savannah', lat: 32.0809, lng: -81.0912 },
+  { name: 'Edisto', lat: 32.4794, lng: -80.3357 },
+  { name: 'Hampton County', lat: 32.8779, lng: -81.1276 },
+  { name: 'Charleston', lat: 32.7765, lng: -79.9311 },
+  { name: 'North Charleston', lat: 32.8546, lng: -79.9748 },
+  { name: 'Mount Pleasant', lat: 32.8323, lng: -79.8284 }
+];
+---
+<section class="classical-service-map" aria-labelledby="service-area-map-title">
+  <div class="classical-service-map__intro">
+    <p class="classical-overline">Areas We Serve</p>
+    <h2 id="service-area-map-title">Serving Beaufort, Charleston and surrounding Lowcountry communities.</h2>
+    <p>East Coast Foam serves projects throughout the Lowcountry and nearby coastal communities. The map shows the named service areas currently listed on the site; exact project availability is confirmed during the estimate process.</p>
+    <div class="classical-service-map__chips">
+      {site.serviceAreas.map((area) => <span>{area}</span>)}
+    </div>
+  </div>
+  <div class="classical-service-map__canvas-wrap">
+    <div id="classical-service-map-canvas" class="classical-service-map__canvas" data-areas={JSON.stringify(areas)}></div>
+    <p class="classical-service-map__note">Representative coverage only — contact East Coast Foam to confirm availability for a specific address.</p>
+  </div>
+</section>
+
+<style>
+  @import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+  .classical-service-map { display:grid; grid-template-columns:.8fr 1.2fr; gap:44px; align-items:center; padding:78px max(5vw,36px); background:#f4f5f2; }
+  .classical-service-map h2 { margin:10px 0 18px; color:#171a18; font-size:clamp(34px,4vw,54px); line-height:1.08; text-transform:uppercase; }
+  .classical-service-map__intro>p:not(.classical-overline) { color:#4f5952; font:16px/1.75 Manrope,sans-serif; }
+  .classical-service-map__chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .classical-service-map__chips span { padding:8px 10px; border-left:4px solid #2f963f; background:#fff; color:#263029; font:700 11px Manrope,sans-serif; }
+  .classical-service-map__canvas-wrap { min-width:0; }
+  .classical-service-map__canvas { width:100%; height:480px; border:8px solid #fff; box-shadow:0 18px 44px rgba(0,0,0,.10); background:#dfe5df; }
+  .classical-service-map__note { margin:10px 0 0; color:#687069; font:12px/1.5 Manrope,sans-serif; }
+  @media (max-width:900px) { .classical-service-map { grid-template-columns:1fr; } .classical-service-map__canvas { height:420px; } }
+  @media (max-width:680px) { .classical-service-map { padding:52px 20px; } .classical-service-map__canvas { height:360px; border-width:5px; } }
+</style>
+
+<script>
+  const loadLeaflet = () => new Promise((resolve, reject) => {
+    if (window.L) return resolve(window.L);
+    const existing = document.querySelector('script[data-leaflet-loader]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.L), { once: true });
+      existing.addEventListener('error', reject, { once: true });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.crossOrigin = '';
+    script.dataset.leafletLoader = 'true';
+    script.onload = () => resolve(window.L);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  const initServiceMap = async () => {
+    const node = document.getElementById('classical-service-map-canvas');
+    if (!(node instanceof HTMLElement) || node.dataset.ready === 'true') return;
+    try {
+      const L = await loadLeaflet();
+      if (!L) return;
+      const areas = JSON.parse(node.dataset.areas || '[]');
+      const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      const bounds = [];
+      areas.forEach((area) => {
+        const point = [area.lat, area.lng];
+        bounds.push(point);
+        L.circleMarker(point, {
+          radius: 7,
+          color: '#176b2a',
+          weight: 2,
+          fillColor: '#2f963f',
+          fillOpacity: .92
+        }).addTo(map).bindTooltip(area.name, { direction: 'top' });
+      });
+
+      [
+        { point: [32.4316, -80.6698], radius: 56000, label: 'Beaufort / southern Lowcountry coverage' },
+        { point: [32.816, -79.92], radius: 43000, label: 'Charleston-area coverage' },
+        { point: [32.0809, -81.0912], radius: 30000, label: 'Savannah-area coverage' }
+      ].forEach((zone) => {
+        L.circle(zone.point, {
+          radius: zone.radius,
+          color: '#2f963f',
+          weight: 1.5,
+          opacity: .55,
+          fillColor: '#2f963f',
+          fillOpacity: .075,
+          interactive: false
+        }).addTo(map);
+      });
+
+      map.fitBounds(bounds, { padding: [28, 28] });
+      node.dataset.ready = 'true';
+    } catch (error) {
+      console.warn('Service-area map could not initialize.', error);
+      node.innerHTML = '<div style="padding:2rem;color:#253028;background:#eef2ee;height:100%;display:grid;place-items:center;text-align:center">Interactive service-area map unavailable. Areas served: Beaufort, Hilton Head, Lady\'s Island, Bluffton, Savannah, Edisto, Hampton County, Charleston, North Charleston and Mount Pleasant.</div>';
+    }
+  };
+
+  initServiceMap();
+  document.addEventListener('astro:page-load', initServiceMap);
+</script>
