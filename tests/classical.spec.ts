@@ -93,6 +93,38 @@ test('mobile navigation exposes all routes, service details, and quote CTA', asy
   await expect(page.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false');
 });
 
+test('mobile header keeps the logo, compact quote CTA, and visible hamburger at narrow widths', async ({ page }) => {
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto('/classical', { waitUntil: 'load' });
+
+    const header = page.locator('.classical-header');
+    await expect(header.locator('.brand-mark')).toHaveAttribute('href', '/classical');
+    await expect(header.locator('.brand-mark img')).toBeVisible();
+    await expect(header.locator('.classical-quote-button')).toBeVisible();
+    await expect(header.locator('.classical-quote-button')).toHaveText('Get Quote');
+
+    const menu = header.getByRole('button', { name: 'Menu' });
+    await expect(menu).toBeVisible();
+    await expect(menu).toHaveCSS('background-color', 'rgb(17, 17, 17)');
+    await expect(menu.locator('.classical-menu-toggle__icon > span')).toHaveCount(3);
+    for (const bar of await menu.locator('.classical-menu-toggle__icon > span').all()) {
+      await expect(bar).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+    }
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
+  }
+});
+
+test('mobile hamburger and quote CTA remain explicit under dark color scheme', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto('/classical', { waitUntil: 'load' });
+  await expect(page.locator('.classical-quote-button')).toHaveCSS('background-color', 'rgb(33, 115, 50)');
+  await expect(page.locator('.classical-menu-toggle__icon > span').first()).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+});
+
 test('supplier and certification artwork remains on explicit light surfaces', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/classical', { waitUntil: 'networkidle' });
