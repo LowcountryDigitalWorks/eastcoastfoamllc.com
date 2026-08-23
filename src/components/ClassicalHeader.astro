@@ -22,7 +22,7 @@ import services from '../data/services.json';
     <a href="/classical">Home</a>
     <a href="/classical/about-us">About Us</a>
     <div class="classical-nav-dropdown">
-      <a href="/classical/services" aria-haspopup="true">Services <span aria-hidden="true">⌄</span></a>
+      <a href="/classical/services" aria-haspopup="true">Services <span class="classical-nav-caret" aria-hidden="true"></span></a>
       <div class="classical-nav-dropdown__menu">
         {services.map((service) => <a href={`/classical/${service.slug}`}>{service.title}</a>)}
       </div>
