@@ -5,6 +5,7 @@ import GuidedEstimate from '../../components/GuidedEstimate.astro';
 import RecentWork from '../../components/RecentWork.astro';
 import ServiceGrid from '../../components/ServiceGrid.astro';
 import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
 ---
 <BaseLayout title={`Future Concept | ${site.name}`} description="Modern East Coast Foam website and digital operations concept." theme="future">
   <div id="top" class="future-site">
@@ -21,35 +22,71 @@ import site from '../../data/site.json';
         <div class="future-hero__copy">
           <p class="eyebrow">Beaufort born · Lowcountry focused</p>
           <h1>Comfort built to last.<br /><em>Foam done right.</em></h1>
-          <p class="future-lede">A modern East Coast Foam presence centered on clear choices, real project work, fast estimate intake, and an owner you can actually reach.</p>
+          <p class="future-lede">A modern East Coast Foam presence centered on clear choices, real project work, fast estimate intake, and an owner customers can actually reach.</p>
           <div class="future-actions"><a class="future-button" href="#estimate">Start an estimate</a><a class="future-call" href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a></div>
-          <div class="trust-row"><span>Locally owned</span><span>Lowcountry service</span><span>Free estimate conversation</span></div>
+          <div class="trust-row"><span>Locally owned</span><span>Lowcountry service area</span><span>Clear estimate conversation</span></div>
         </div>
-        <div class="future-hero__visual" aria-label="Future project photography area">
+        <div class="future-hero__visual" aria-label="East Coast Foam work photography concept">
+          <img class="future-hero__primary-photo" src={assets.hero} alt="" referrerpolicy="no-referrer" />
           <div class="foam-orbit foam-orbit--one"></div><div class="foam-orbit foam-orbit--two"></div>
-          <div class="future-photo-card"><span>Future hero photography</span><strong>Show the work, not stock photos.</strong></div>
+          <div class="future-photo-stack" aria-hidden="true">
+            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" referrerpolicy="no-referrer" />
+            <img src={assets.serviceImages['spray-foam-roofing']} alt="" referrerpolicy="no-referrer" />
+          </div>
+          <div class="future-photo-card"><span>Recent work first</span><strong>Make Casey's actual jobs the visual identity.</strong><small>Current-site media is being used temporarily for this private concept.</small></div>
         </div>
+      </section>
+
+      <section class="future-proofbar" aria-label="Future customer experience priorities">
+        <div><strong>One owner to reach</strong><span>Keep the personal small-business experience visible.</span></div>
+        <div><strong>Professional domain identity</strong><span>{site.publicEmail} on the site from day one.</span></div>
+        <div><strong>Real project storytelling</strong><span>Turn completed work into reusable website and social proof.</span></div>
+        <div><strong>Fast on every device</strong><span>Static-first Cloudflare delivery with minimal moving parts.</span></div>
       </section>
 
       <section class="future-section" id="services">
-        <div class="section-heading-row"><div><div class="section-kicker">What we do</div><h2>The right insulation system starts with the right conversation.</h2></div><p>Clear service explanations replace keyword-heavy copy while preserving the search intent we need for migration.</p></div>
+        <div class="section-heading-row"><div><div class="section-kicker">What we do</div><h2>The right insulation system starts with the right conversation.</h2></div><p>Clear service explanations replace keyword-heavy copy while preserving the search intent and service coverage needed for migration.</p></div>
         <ServiceGrid />
       </section>
 
+      <section class="future-section future-compare" aria-label="Open-cell and closed-cell comparison concept">
+        <div class="future-compare__intro">
+          <div class="section-kicker">Help customers choose</div>
+          <h2>Open cell or closed cell?</h2>
+          <p>The new site should answer the first obvious question without pretending every building has the same answer. Customers learn the difference, then Casey confirms what fits the project.</p>
+          <a class="future-button" href="#estimate">Tell us about the space</a>
+        </div>
+        <div class="future-compare__cards">
+          <article class="foam-choice">
+            <img src={assets.serviceImages['open-cell-spray-foam-insulation']} alt="" loading="lazy" referrerpolicy="no-referrer" />
+            <div class="foam-choice__body"><span>Option 01</span><h3>Open-cell spray foam</h3><p>A flexible air-sealing option often considered for conditioned attics, rooflines, walls, and other assemblies where its characteristics fit the design.</p><a href="#estimate">Ask if open cell fits →</a></div>
+          </article>
+          <article class="foam-choice">
+            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" loading="lazy" referrerpolicy="no-referrer" />
+            <div class="foam-choice__body"><span>Option 02</span><h3>Closed-cell spray foam</h3><p>A denser system with strong thermal performance and moisture resistance, useful when the assembly and project goals call for those properties.</p><a href="#estimate">Ask if closed cell fits →</a></div>
+          </article>
+        </div>
+      </section>
+
       <section class="future-band">
-        <div><span class="big-number">01</span><p>Tell us about the space.</p></div><div><span class="big-number">02</span><p>We assess the right approach.</p></div><div><span class="big-number">03</span><p>You get a clear estimate and next step.</p></div>
+        <div><span class="big-number">01</span><p>Tell us about the space.</p></div><div><span class="big-number">02</span><p>East Coast Foam assesses the right approach.</p></div><div><span class="big-number">03</span><p>You get a clear estimate and next step.</p></div>
       </section>
 
       <div class="future-section"><GuidedEstimate /></div>
       <div class="future-section"><RecentWork /></div>
 
+      <section class="future-schedule" aria-label="Consultation scheduling concept">
+        <div><div class="section-kicker">Optional self-scheduling</div><h2>Let customers book the conversation—not the crew.</h2><p>A future free consultation/site-visit scheduler could respect Casey's calendar and travel windows while keeping actual installation scheduling under his control.</p></div>
+        <div class="future-schedule__action"><strong>Free consultation / site visit</strong><span>Future Cal.com or other validated scheduler integration. Installation dates stay owner-managed.</span><a class="future-button" href="#contact">Scheduling concept</a></div>
+      </section>
+
       <section class="future-section process-section" id="process">
-        <div class="section-kicker">Beyond the website</div>
-        <h2>A digital system that can grow with the business.</h2>
+        <div class="section-kicker">And it can grow with the business</div>
+        <h2>The website becomes a better front door—not another system Casey has to babysit.</h2>
         <div class="process-grid">
           <article><span>Now</span><h3>Website + professional identity</h3><p>Fast hosting, domain email presentation, easy content editing, quote intake, analytics, monitoring, and customer-owned infrastructure.</p></article>
-          <article><span>Next</span><h3>Marketing that reuses the work Casey already does</h3><p>Facebook project-photo import, Recent Work publishing, better review requests, and source attribution without double entry.</p></article>
-          <article><span>Later, if useful</span><h3>Owner operations view</h3><p>QuickBooks-aware lead status, accepted-job scheduling, crew/truck visibility, completion follow-up, and exceptions that need Casey's attention.</p></article>
+          <article><span>Next</span><h3>Reuse the work Casey already does</h3><p>Facebook project-photo import, Recent Work publishing, better review requests, and lead-source visibility without double entry.</p></article>
+          <article><span>Only if useful</span><h3>Owner operations view</h3><p>QuickBooks-aware lead status, accepted-job scheduling, crew/truck visibility, completion follow-up, and exceptions that need Casey's attention.</p></article>
         </div>
       </section>
 
@@ -58,6 +95,6 @@ import site from '../../data/site.json';
         <div class="future-contact__links"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><a href={`mailto:${site.quoteEmail}`}>{site.quoteEmail}</a><span>{site.address}</span></div>
       </section>
     </main>
-    <footer class="future-footer"><BrandMark compact /><p>Future concept by Lowcountry Digital Works · not production.</p></footer>
+    <footer class="future-footer"><BrandMark compact /><p>Future concept by Lowcountry Digital Works · current-site media is temporary pending owner approval.</p></footer>
   </div>
 </BaseLayout>

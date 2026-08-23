@@ -1,0 +1,30 @@
+{
+  "sourceSite": "https://eastcoastfoamllc.com",
+  "note": "Temporary non-production references to media already published on East Coast Foam's current site. Confirm ownership/licensing and migrate approved assets into customer-owned storage before production cutover.",
+  "logo": "https://eastcoastfoamllc.com/wp-content/uploads/2024/04/Logo-East-Coast-Foam-LLC.png",
+  "googleReviewsBadge": "https://eastcoastfoamllc.com/wp-content/uploads/2024/04/Google-Reviews.webp",
+  "hero": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/open-cell-spray-Foam-5.webp",
+  "certifications": [
+    {
+      "name": "American Chemistry Council",
+      "image": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/American-Chemistry-Council.webp"
+    },
+    {
+      "name": "Spray Polyurethane Foam Alliance",
+      "image": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/Spray-Polyurethane-Foam-Alliance-1.webp"
+    },
+    {
+      "name": "Accredited organizations",
+      "image": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/Accredited-Organizations.webp"
+    }
+  ],
+  "serviceImages": {
+    "open-cell-spray-foam-insulation": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/open-cell-spray-Foam-5.webp",
+    "closed-cell-spray-foam-insulation": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/closed-cell-spray-foam-5.webp",
+    "polyurea-coatings": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/POLYUREA-ROOF-COATINGS-1.webp",
+    "fiberglass-batt-insulation": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/Fiberglass-Batt-Insulation.webp",
+    "insulation-removal-services": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/insulation-removal-4.webp",
+    "spray-foam-roofing": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/SPRAY-FOAM-ROOFING-2.webp",
+    "silicone-roof-coating": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/PREMIER-SILICONE-ROOF-COATING-3.webp"
+  }
+}

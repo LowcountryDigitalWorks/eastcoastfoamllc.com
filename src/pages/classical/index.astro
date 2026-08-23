@@ -1,18 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BrandMark from '../../components/BrandMark.astro';
+import LegacyLogo from '../../components/LegacyLogo.astro';
 import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
 import ServiceGrid from '../../components/ServiceGrid.astro';
 import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
 ---
 <BaseLayout title={`Classical Demo | ${site.name}`} description="Classical East Coast Foam website migration concept." theme="classical">
   <div id="top" class="classical-site">
     <div class="classical-topbar">
-      <div><a href={`tel:${site.phoneHref}`}>☎ {site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>✉ {site.publicEmail}</a></div>
-      <div><span>Google Reviews ★★★★★</span><a href={site.facebook} rel="noreferrer">Facebook</a></div>
+      <div>
+        <a href={`tel:${site.phoneHref}`}>☎ {site.phoneDisplay}</a>
+        <a href={`mailto:${site.publicEmail}`}>✉ {site.publicEmail}</a>
+      </div>
+      <div class="classical-topbar__reviews">
+        <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
+        <a class="classical-topbar__facebook" href={site.facebook} rel="noreferrer" aria-label="East Coast Foam on Facebook">f</a>
+      </div>
     </div>
     <header class="classical-header">
-      <BrandMark />
+      <LegacyLogo />
       <nav aria-label="Classical navigation">
         <a href="#top">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#work">Blog</a><a href="#contact">Contact Us</a>
       </nav>
@@ -21,6 +28,7 @@ import site from '../../data/site.json';
 
     <main>
       <section class="classical-hero">
+        <img class="classical-hero__background" src={assets.hero} alt="" referrerpolicy="no-referrer" />
         <div class="classical-hero__copy">
           <p class="classical-overline">{site.tagline}</p>
           <h1>Your trusted spray foam insulation contractor in Beaufort County</h1>
@@ -30,14 +38,33 @@ import site from '../../data/site.json';
         <div id="quote"><ClassicalEstimateForm /></div>
       </section>
 
+      <section class="classical-trust-strip" aria-label="Current site trust marks">
+        <div class="classical-trust-strip__copy">
+          <span>Familiar trust signals</span>
+          <strong>Preserved for the low-risk migration concept.</strong>
+        </div>
+        {assets.certifications.map((certification) => (
+          <div class="classical-trust-strip__badge">
+            <img src={certification.image} alt={certification.name} loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+        ))}
+      </section>
+
       <section class="classical-section" id="about">
-        <p class="classical-overline">Locally owned and operated</p>
-        <h2>Beaufort-area insulation expertise, rebuilt on a simpler foundation.</h2>
-        <p>This demo intentionally keeps the current site's familiar structure while removing WordPress/plugin dependency. Final copy, claims, certifications, logos, reviews, and photography will be validated with Casey before production.</p>
-        <div class="classical-values">
-          <article><h3>Quality-minded work</h3><p>Solutions matched to the building, climate, and project requirements.</p></article>
-          <article><h3>Clear communication</h3><p>A direct line from quote request through project completion.</p></article>
-          <article><h3>Local service</h3><p>Focused on Beaufort County, the Lowcountry, and surrounding service areas.</p></article>
+        <div class="classical-about-grid">
+          <div>
+            <p class="classical-overline">Locally owned and operated</p>
+            <h2>Beaufort-area insulation expertise with a simpler website underneath.</h2>
+            <p>This version intentionally keeps the existing site's familiar green/black identity, quote-first layout, service structure, and local-business feel while removing the WordPress/plugin dependency.</p>
+            <div class="classical-values">
+              <article><h3>Quality-minded work</h3><p>Solutions matched to the building, climate, and project requirements.</p></article>
+              <article><h3>Direct communication</h3><p>Customers can reach the owner, request a quote, and get a clear next step.</p></article>
+              <article><h3>Lowcountry service</h3><p>Built around Beaufort County and the surrounding communities East Coast Foam already serves.</p></article>
+            </div>
+          </div>
+          <div class="classical-about-photo">
+            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
         </div>
       </section>
 
@@ -47,11 +74,29 @@ import site from '../../data/site.json';
         <ServiceGrid variant="classical" />
       </section>
 
+      <section class="classical-section" id="work">
+        <p class="classical-overline">From the blog</p>
+        <h2>Helpful answers for homeowners and builders.</h2>
+        <p>The production migration can preserve useful search topics from the existing blog while rewriting outdated or repetitive copy into clearer customer guidance.</p>
+        <div class="classical-values">
+          <article><h3>Open cell vs. closed cell</h3><p>Explain the practical differences and why the right choice depends on the building assembly and project goals.</p></article>
+          <article><h3>When old insulation should come out</h3><p>Help customers understand when removal may be part of preparing for a cleaner, better-performing installation.</p></article>
+          <article><h3>Roof foam and coating options</h3><p>Introduce roofing and coating services in plain language, then move the customer toward a real project conversation.</p></article>
+        </div>
+      </section>
+
+      <section class="classical-service-areas">
+        <div class="classical-service-areas__inner">
+          <div><p class="classical-overline">Areas we serve</p><h2>Local coverage, clearly presented.</h2></div>
+          <div class="classical-area-list">{site.serviceAreas.map((area) => <span>{area}</span>)}</div>
+        </div>
+      </section>
+
       <section class="classical-contact" id="contact">
-        <div><p class="classical-overline">Get in touch</p><h2>Ready to talk about your project?</h2><p>This concept uses the future professional domain identity while the existing Outlook account can remain part of the transition plan.</p></div>
+        <div><p class="classical-overline">Get in touch</p><h2>Ready to talk about your project?</h2><p>The demo shows the future professional domain identity while the existing Outlook account can remain part of a controlled email transition.</p></div>
         <div class="contact-stack"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><span>{site.address}</span><span>{site.hours}</span></div>
       </section>
     </main>
-    <footer class="classical-footer"><BrandMark compact /><p>Classical migration concept · assets and copy subject to owner approval.</p></footer>
+    <footer class="classical-footer"><LegacyLogo compact /><p>Classical migration concept · current-site media is temporary pending owner approval.</p></footer>
   </div>
 </BaseLayout>

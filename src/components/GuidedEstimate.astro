@@ -4,7 +4,7 @@ import services from '../data/services.json';
 <section class="guided-estimate" id="estimate">
   <div class="section-kicker">A better first conversation</div>
   <h2>Tell us enough to make the first call useful.</h2>
-  <p class="section-intro">The Future concept asks for the details Casey actually needs without turning a quote request into homework.</p>
+  <p class="section-intro">The Future concept asks for the details Casey is likely to need without turning a quote request into homework. The exact fields will be refined after we learn his real estimating workflow.</p>
   <form class="guided-form" onsubmit="return false">
     <div class="guided-grid">
       <label>What can we help with?
@@ -23,6 +23,12 @@ import services from '../data/services.json';
         </select>
       </label>
       <label>Project location<input name="location" placeholder="City or ZIP" /></label>
+      <label>Timing
+        <select name="timing"><option>Just researching</option><option>Within a few weeks</option><option>Within 1–3 months</option><option>Project is already underway</option></select>
+      </label>
+      <label>Your name<input name="name" autocomplete="name" placeholder="Full name" /></label>
+      <label>Phone<input name="phone" type="tel" autocomplete="tel" placeholder="Best number to reach you" /></label>
+      <label>Email<input name="email" type="email" autocomplete="email" placeholder="you@example.com" /></label>
       <label>Best way to reach you
         <select name="contactPreference"><option>Call</option><option>Text</option><option>Email</option></select>
       </label>

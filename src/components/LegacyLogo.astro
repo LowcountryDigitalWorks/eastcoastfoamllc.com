@@ -1,0 +1,8 @@
+---
+import assets from '../data/demo-assets.json';
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<a class={`legacy-logo ${compact ? 'legacy-logo--compact' : ''}`} href="#top" aria-label="East Coast Foam home">
+  <img src={assets.logo} alt="East Coast Foam Insulation" referrerpolicy="no-referrer" />
+</a>
