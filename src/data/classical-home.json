@@ -1,0 +1,103 @@
+{
+  "intro": "East Coast Foam LLC helps homeowners, builders, and property owners improve comfort and energy performance with spray foam insulation, fiberglass, insulation removal, roofing foam, and protective coating services throughout the Lowcountry.",
+  "about": "East Coast Foam LLC is locally owned and operated, serving Beaufort County, Charleston County, and surrounding Lowcountry communities. The team works with homeowners and builders to match insulation and coating solutions to the building, project goals, and coastal climate.",
+  "whyChoose": [
+    {
+      "title": "Experienced professionals",
+      "text": "A knowledgeable insulation team focused on proper preparation, application, and project-specific recommendations."
+    },
+    {
+      "title": "Commitment to quality",
+      "text": "East Coast Foam uses professional-grade materials from established manufacturers and focuses on durable, consistent installation."
+    },
+    {
+      "title": "Comprehensive services",
+      "text": "From consultation and insulation removal through spray foam, fiberglass, roof foam, and protective coatings, customers can keep related work with one contractor."
+    },
+    {
+      "title": "Customer-focused approach",
+      "text": "The team explains options, answers questions, and keeps communication direct from the first call through project completion."
+    },
+    {
+      "title": "Competitive value",
+      "text": "Recommendations are built around the project rather than a one-size-fits-all product, with clear estimates before work begins."
+    }
+  ],
+  "whatToExpect": [
+    {
+      "step": "01",
+      "title": "Free consultation",
+      "text": "Start with a conversation about the property, the problem you are trying to solve, and the scope of work."
+    },
+    {
+      "step": "02",
+      "title": "Site inspection",
+      "text": "East Coast Foam reviews the space and identifies conditions that may need attention before insulation or coating work begins."
+    },
+    {
+      "step": "03",
+      "title": "Professional installation",
+      "text": "The selected system is installed with attention to coverage, preparation, cleanliness, and the requirements of the building assembly."
+    },
+    {
+      "step": "04",
+      "title": "Completion review",
+      "text": "The finished work is reviewed with the customer and any important next steps, care information, or follow-up needs are discussed."
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Jeffrey Bosley",
+      "date": "May 21, 2024",
+      "quote": "Casey did a top notch job. Excellent job and would highly recommend."
+    },
+    {
+      "name": "Raymond Driggers",
+      "date": "May 20, 2024",
+      "quote": "Awesome job and great pricing! Made a world of difference in my shop!"
+    },
+    {
+      "name": "Tanner Brant",
+      "date": "May 20, 2024",
+      "quote": "Perfection from start to finish. 10/10 recommend."
+    },
+    {
+      "name": "Mark Howard",
+      "date": "May 20, 2024",
+      "quote": "100% satisfied with their service, prices, timeliness, and professionalism."
+    },
+    {
+      "name": "Clay Fawcett",
+      "date": "May 20, 2024",
+      "quote": "The owner and employees are incredibly knowledgeable about all aspects of construction."
+    }
+  ],
+  "companies": [
+    {
+      "name": "IDI Distributors",
+      "url": "https://www.idi-insulation.com/"
+    },
+    {
+      "name": "Huntsman Building Solutions",
+      "url": "https://huntsmanbuildingsolutions.com/en-US/"
+    },
+    {
+      "name": "Service Partners",
+      "url": "https://www.service-partners.com/"
+    }
+  ],
+  "brands": [
+    {
+      "name": "Natural Polymers",
+      "url": "https://www.naturalpolymersllc.com/"
+    },
+    {
+      "name": "Huntsman Building Solutions",
+      "url": "https://huntsmanbuildingsolutions.com/en-US/"
+    },
+    {
+      "name": "BASF Spray Foam",
+      "url": "https://spf.basf.com/"
+    }
+  ]
+}
