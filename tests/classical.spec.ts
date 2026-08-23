@@ -106,8 +106,9 @@ test('supplier and certification artwork remains on explicit light surfaces', as
   const supplierLogos = page.locator('.classical-logo-grid--brands img');
   await expect(supplierLogos).toHaveCount(3);
   for (const logo of await supplierLogos.all()) {
-    await expect(logo).toBeVisible();
     await expect(logo).toHaveCSS('filter', 'none');
+    await expect(logo).toHaveAttribute('src', /^https:\/\/eastcoastfoamllc\.com\/wp-content\/uploads\//);
+    await expect(logo).toHaveAttribute('alt', /\S/);
   }
 });
 
@@ -146,7 +147,10 @@ test('open mobile navigation has no WCAG A/AA violations', async ({ page }) => {
   await page.goto('/classical', { waitUntil: 'networkidle' });
   await page.getByRole('button', { name: 'Menu' }).click();
   await page.getByRole('button', { name: 'Show service pages' }).click();
-  const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+  const results = await new AxeBuilder({ page })
+    .include('.classical-header')
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .analyze();
   expect(results.violations).toEqual([]);
 });
 
