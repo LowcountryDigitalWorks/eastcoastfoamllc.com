@@ -1,13 +1,11 @@
 ---
+import assets from '../data/demo-assets.json';
 interface Props {
   compact?: boolean;
+  href?: string;
 }
-const { compact = false } = Astro.props;
+const { compact = false, href = '#top' } = Astro.props;
 ---
-<a class={`brand-mark ${compact ? 'brand-mark--compact' : ''}`} href="#top" aria-label="East Coast Foam home">
-  <span class="brand-mark__roof" aria-hidden="true">⌂</span>
-  <span>
-    <strong>East Coast Foam</strong>
-    <small>Insulation</small>
-  </span>
+<a class={`brand-mark ${compact ? 'brand-mark--compact' : ''}`} href={href} aria-label="East Coast Foam home">
+  <img src={assets.logo} alt="East Coast Foam Insulation" referrerpolicy="no-referrer" />
 </a>

@@ -26,13 +26,19 @@ content:
       - name: phoneHref
         label: Phone (international digits)
         type: string
+      - name: currentEmail
+        label: Current business email
+        type: string
       - name: publicEmail
-        label: Public email
+        label: Future public email
         type: string
       - name: quoteEmail
-        label: Quote email
+        label: Future quote email
         type: string
       - name: address
+        type: string
+      - name: mapsUrl
+        label: Google Maps URL
         type: string
       - name: hours
         type: string

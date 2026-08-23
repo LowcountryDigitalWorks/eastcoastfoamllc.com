@@ -1,47 +1,55 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import LegacyLogo from '../../components/LegacyLogo.astro';
+import ClassicalHeader from '../../components/ClassicalHeader.astro';
+import ClassicalFooter from '../../components/ClassicalFooter.astro';
 import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
 import ServiceGrid from '../../components/ServiceGrid.astro';
 import site from '../../data/site.json';
 import assets from '../../data/demo-assets.json';
+import home from '../../data/classical-home.json';
 ---
-<BaseLayout title={`Classical Demo | ${site.name}`} description="Classical East Coast Foam website migration concept." theme="classical">
+<BaseLayout
+  title={`East Coast Foam LLC | Spray Foam Insulation Contractor`}
+  description="East Coast Foam LLC provides spray foam insulation, fiberglass insulation, insulation removal, roofing foam, and protective coatings throughout Beaufort County, Charleston County, and the Lowcountry."
+  theme="classical"
+  showDemoBanner={false}
+>
   <div id="top" class="classical-site">
-    <div class="classical-topbar">
-      <div>
-        <a href={`tel:${site.phoneHref}`}>☎ {site.phoneDisplay}</a>
-        <a href={`mailto:${site.publicEmail}`}>✉ {site.publicEmail}</a>
-      </div>
-      <div class="classical-topbar__reviews">
-        <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
-        <a class="classical-topbar__facebook" href={site.facebook} rel="noreferrer" aria-label="East Coast Foam on Facebook">f</a>
-      </div>
-    </div>
-    <header class="classical-header">
-      <LegacyLogo />
-      <nav aria-label="Classical navigation">
-        <a href="#top">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#work">Blog</a><a href="#contact">Contact Us</a>
-      </nav>
-      <a class="classical-quote-button" href="#quote">Get a Quote</a>
-    </header>
+    <ClassicalHeader />
 
     <main>
       <section class="classical-hero">
         <img class="classical-hero__background" src={assets.hero} alt="" referrerpolicy="no-referrer" />
         <div class="classical-hero__copy">
-          <p class="classical-overline">{site.tagline}</p>
           <h1>Your trusted spray foam insulation contractor in Beaufort County</h1>
-          <p>East Coast Foam helps Lowcountry homeowners and builders improve comfort, efficiency, and protection with practical insulation and coating solutions.</p>
-          <div class="classical-actions"><a href="#contact">Contact Us</a><a href="#services">Check Our Services</a></div>
+          <p class="classical-overline">{site.tagline}</p>
+          <p>{home.intro}</p>
+          <div class="classical-actions">
+            <a href="/classical/contact-us">Contact Us</a>
+            <a href="#services">Check Our Services</a>
+          </div>
         </div>
         <div id="quote"><ClassicalEstimateForm /></div>
       </section>
 
-      <section class="classical-trust-strip" aria-label="Current site trust marks">
+      <section class="classical-review-ribbon" aria-label="Customer reviews">
+        <div class="classical-review-ribbon__score">
+          <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
+          <strong>5.0</strong><span>Google rating</span>
+        </div>
+        {home.reviews.slice(0, 3).map((review) => (
+          <blockquote>
+            <div class="review-stars" aria-label="5 stars">★★★★★</div>
+            <p>“{review.quote}”</p>
+            <cite>{review.name}</cite>
+          </blockquote>
+        ))}
+      </section>
+
+      <section class="classical-trust-strip" aria-label="Industry affiliations">
         <div class="classical-trust-strip__copy">
-          <span>Familiar trust signals</span>
-          <strong>Preserved for the low-risk migration concept.</strong>
+          <span>Industry affiliations</span>
+          <strong>Professional insulation knowledge backed by established industry organizations.</strong>
         </div>
         {assets.certifications.map((certification) => (
           <div class="classical-trust-strip__badge">
@@ -53,50 +61,110 @@ import assets from '../../data/demo-assets.json';
       <section class="classical-section" id="about">
         <div class="classical-about-grid">
           <div>
-            <p class="classical-overline">Locally owned and operated</p>
-            <h2>Beaufort-area insulation expertise with a simpler website underneath.</h2>
-            <p>This version intentionally keeps the existing site's familiar green/black identity, quote-first layout, service structure, and local-business feel while removing the WordPress/plugin dependency.</p>
-            <div class="classical-values">
-              <article><h3>Quality-minded work</h3><p>Solutions matched to the building, climate, and project requirements.</p></article>
-              <article><h3>Direct communication</h3><p>Customers can reach the owner, request a quote, and get a clear next step.</p></article>
-              <article><h3>Lowcountry service</h3><p>Built around Beaufort County and the surrounding communities East Coast Foam already serves.</p></article>
-            </div>
+            <p class="classical-overline">About East Coast Foam LLC</p>
+            <h2>Your Beaufort County area spray foam insulation experts.</h2>
+            <p>{home.about}</p>
+            <a class="classical-inline-link" href="/classical/about-us">More About East Coast Foam →</a>
           </div>
           <div class="classical-about-photo">
-            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" loading="lazy" referrerpolicy="no-referrer" />
+            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="Spray foam insulation installed in a building assembly" loading="lazy" referrerpolicy="no-referrer" />
           </div>
+        </div>
+      </section>
+
+      <section class="classical-section classical-section--dark classical-why">
+        <p class="classical-overline">Why Choose East Coast Foam LLC?</p>
+        <h2>A local contractor focused on quality, communication, and the right solution for the project.</h2>
+        <div class="classical-feature-grid">
+          {home.whyChoose.map((item, index) => (
+            <article>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="classical-section classical-expect">
+        <p class="classical-overline">What To Expect</p>
+        <h2>From the first conversation through project completion.</h2>
+        <div class="classical-steps">
+          {home.whatToExpect.map((item) => (
+            <article>
+              <span>{item.step}</span>
+              <div><h3>{item.title}</h3><p>{item.text}</p></div>
+            </article>
+          ))}
         </div>
       </section>
 
       <section class="classical-section classical-section--alt" id="services">
-        <p class="classical-overline">Our services</p>
+        <p class="classical-overline">Our Spray Foam Insulation Services</p>
         <h2>Insulation, removal, roofing foam, and protective coatings.</h2>
         <ServiceGrid variant="classical" />
+        <div class="classical-section-cta"><a href="/classical/services">View All Services →</a></div>
       </section>
 
-      <section class="classical-section" id="work">
-        <p class="classical-overline">From the blog</p>
-        <h2>Helpful answers for homeowners and builders.</h2>
-        <p>The production migration can preserve useful search topics from the existing blog while rewriting outdated or repetitive copy into clearer customer guidance.</p>
-        <div class="classical-values">
-          <article><h3>Open cell vs. closed cell</h3><p>Explain the practical differences and why the right choice depends on the building assembly and project goals.</p></article>
-          <article><h3>When old insulation should come out</h3><p>Help customers understand when removal may be part of preparing for a cleaner, better-performing installation.</p></article>
-          <article><h3>Roof foam and coating options</h3><p>Introduce roofing and coating services in plain language, then move the customer toward a real project conversation.</p></article>
+      <section class="classical-contact-band">
+        <div>
+          <p class="classical-overline">Get In Touch With East Coast Foam LLC Today</p>
+          <h2>Ready to talk about your insulation project?</h2>
+          <p>Call East Coast Foam to discuss the property, your goals, and the next step toward a quote.</p>
+        </div>
+        <div class="classical-contact-band__actions">
+          <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+          <a href="/classical/get-a-quote">Get a Quote</a>
         </div>
       </section>
 
-      <section class="classical-service-areas">
-        <div class="classical-service-areas__inner">
-          <div><p class="classical-overline">Areas we serve</p><h2>Local coverage, clearly presented.</h2></div>
-          <div class="classical-area-list">{site.serviceAreas.map((area) => <span>{area}</span>)}</div>
+      <section class="classical-section classical-partners">
+        <p class="classical-overline">Companies We Work With</p>
+        <h2>Established insulation suppliers and building-product companies.</h2>
+        <div class="classical-name-grid">
+          {home.companies.map((company) => (
+            <a href={company.url} target="_blank" rel="noopener noreferrer">{company.name}<span>↗</span></a>
+          ))}
         </div>
       </section>
 
-      <section class="classical-contact" id="contact">
-        <div><p class="classical-overline">Get in touch</p><h2>Ready to talk about your project?</h2><p>The demo shows the future professional domain identity while the existing Outlook account can remain part of a controlled email transition.</p></div>
-        <div class="contact-stack"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><span>{site.address}</span><span>{site.hours}</span></div>
+      <section class="classical-section classical-section--alt" id="reviews">
+        <p class="classical-overline">What Our Customers Say About Us</p>
+        <h2>Local feedback from East Coast Foam customers.</h2>
+        <div class="classical-review-grid">
+          {home.reviews.map((review) => (
+            <blockquote>
+              <div class="review-stars" aria-label="5 stars">★★★★★</div>
+              <p>“{review.quote}”</p>
+              <footer><strong>{review.name}</strong><span>{review.date}</span></footer>
+            </blockquote>
+          ))}
+        </div>
+        <a class="classical-google-link" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">View East Coast Foam on Google →</a>
+      </section>
+
+      <section class="classical-section classical-brands">
+        <p class="classical-overline">Brands We Offer</p>
+        <h2>Professional products selected around the needs of the job.</h2>
+        <div class="classical-name-grid">
+          {home.brands.map((brand) => (
+            <a href={brand.url} target="_blank" rel="noopener noreferrer">{brand.name}<span>↗</span></a>
+          ))}
+        </div>
+      </section>
+
+      <section class="classical-section classical-blog-preview" id="work">
+        <p class="classical-overline">Our Blog</p>
+        <h2>Insulation information for Lowcountry homeowners and builders.</h2>
+        <div class="classical-blog-grid">
+          <article><span>Closed-cell spray foam</span><h3>Discover How Closed-Cell Spray Foam Benefits Beaufort County’s Home!</h3><a href="/classical/blog">Read More →</a></article>
+          <article><span>Roofing foam</span><h3>Why Spray Foam Roofing Insulation Is a Strong Choice for Your Roof</h3><a href="/classical/blog">Read More →</a></article>
+          <article><span>Polyurea coatings</span><h3>Choosing the Right Polyurea Coating Contractor in Hilton Head, SC</h3><a href="/classical/blog">Read More →</a></article>
+          <article><span>Open-cell spray foam</span><h3>Open Up a World of Comfort: The Benefits of Open-Cell Spray Foam Insulation</h3><a href="/classical/blog">Read More →</a></article>
+        </div>
       </section>
     </main>
-    <footer class="classical-footer"><LegacyLogo compact /><p>Classical migration concept · current-site media is temporary pending owner approval.</p></footer>
+
+    <ClassicalFooter />
   </div>
 </BaseLayout>

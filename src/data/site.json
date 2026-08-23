@@ -4,19 +4,23 @@
   "tagline": "Where quality and energy efficiency collide",
   "phoneDisplay": "(843) 263-4933",
   "phoneHref": "+18432634933",
+  "currentEmail": "ecfoam@outlook.com",
   "publicEmail": "hello@eastcoastfoamllc.com",
   "quoteEmail": "quotes@eastcoastfoamllc.com",
-  "address": "3 Broad River Blvd, Beaufort, SC 29906",
+  "address": "1352 Trask Pkwy, Seabrook, SC 29940",
+  "mapsUrl": "https://www.google.com/maps/search/?api=1&query=East+Coast+Foam+LLC+1352+Trask+Pkwy+Seabrook+SC+29940",
   "hours": "Mon–Fri: 8am–5pm · Sat–Sun: Closed",
   "facebook": "https://www.facebook.com/foamit247",
   "serviceAreas": [
     "Beaufort",
-    "Bluffton",
     "Hilton Head",
     "Lady's Island",
+    "Bluffton",
+    "Savannah",
     "Edisto",
     "Hampton County",
-    "Mount Pleasant",
-    "Savannah"
+    "Charleston",
+    "North Charleston",
+    "Mount Pleasant"
   ]
 }

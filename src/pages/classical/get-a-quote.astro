@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClassicalHeader from '../../components/ClassicalHeader.astro';
+import ClassicalFooter from '../../components/ClassicalFooter.astro';
+import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
+import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
+---
+<BaseLayout title={`Get a Quote | ${site.name}`} description="Request a quote from East Coast Foam LLC for insulation, removal, roofing foam, and protective coating services." theme="classical" showDemoBanner={false}>
+  <div id="top" class="classical-site">
+    <ClassicalHeader />
+    <main>
+      <section class="classical-page-hero classical-page-hero--quote">
+        <img src={assets.hero} alt="" referrerpolicy="no-referrer" />
+        <div class="classical-page-hero__inner"><p class="classical-overline">East Coast Foam LLC</p><h1>Get a Quote</h1></div>
+      </section>
+      <section class="classical-quote-page">
+        <div><ClassicalEstimateForm /></div>
+        <aside>
+          <p class="classical-overline">Prefer to talk first?</p>
+          <h2>Call East Coast Foam.</h2>
+          <p>For questions about an attic, crawlspace, new construction, roof system, insulation removal, or another project, call directly and discuss what you need.</p>
+          <a class="classical-quote-phone" href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+          <a href={`mailto:${site.currentEmail}`}>{site.currentEmail}</a>
+          <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">{site.address}</a>
+        </aside>
+      </section>
+    </main>
+    <ClassicalFooter />
+  </div>
+</BaseLayout>

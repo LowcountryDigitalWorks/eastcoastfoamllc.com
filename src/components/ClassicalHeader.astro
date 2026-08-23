@@ -1,0 +1,28 @@
+---
+import BrandMark from './BrandMark.astro';
+import site from '../data/site.json';
+import assets from '../data/demo-assets.json';
+---
+<div class="classical-topbar">
+  <div>
+    <a href={`tel:${site.phoneHref}`}>☎ {site.phoneDisplay}</a>
+    <a href={`mailto:${site.currentEmail}`}>✉ {site.currentEmail}</a>
+  </div>
+  <div class="classical-topbar__reviews">
+    <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="East Coast Foam on Google Maps">
+      <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
+    </a>
+    <a class="classical-topbar__facebook" href={site.facebook} target="_blank" rel="noopener noreferrer" aria-label="East Coast Foam on Facebook">f</a>
+  </div>
+</div>
+<header class="classical-header">
+  <BrandMark href="/classical" />
+  <nav aria-label="East Coast Foam navigation">
+    <a href="/classical">Home</a>
+    <a href="/classical/about-us">About Us</a>
+    <a href="/classical/services">Services</a>
+    <a href="/classical/blog">Blog</a>
+    <a href="/classical/contact-us">Contact Us</a>
+  </nav>
+  <a class="classical-quote-button" href="/classical/get-a-quote">Get a Quote</a>
+</header>

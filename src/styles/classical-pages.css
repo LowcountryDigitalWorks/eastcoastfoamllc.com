@@ -1,0 +1,35 @@
+/* Interior Classical routes. */
+.classical-contact-page { display:grid; grid-template-columns:minmax(360px,.82fr) minmax(0,1.18fr); gap:60px; padding:78px max(5vw,36px); background:#f5f6f4; }
+.classical-contact-page__form .classical-form,.classical-quote-page .classical-form { position:sticky; top:28px; }
+.classical-contact-page__details { padding:20px 0; }
+.classical-contact-page__details h2,.classical-quote-page aside h2,.classical-service-detail h2 { margin:12px 0 24px; font-size:clamp(34px,4vw,52px); line-height:1.08; text-transform:uppercase; }
+.classical-contact-page__details dl { margin:28px 0 34px; }
+.classical-contact-page__details dl>div { padding:18px 0; border-top:1px solid #d7ddd8; }
+.classical-contact-page__details dt { color:#2b8038; font:800 11px Manrope,sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+.classical-contact-page__details dd { margin:6px 0 0; color:#222; font:700 17px/1.45 Manrope,sans-serif; white-space:pre-line; }
+.classical-contact-page__details h3 { margin:34px 0 14px; text-transform:uppercase; }
+
+.classical-quote-page { display:grid; grid-template-columns:minmax(360px,.9fr) minmax(0,1.1fr); gap:64px; padding:78px max(6vw,44px); background:#f4f4f1; }
+.classical-quote-page aside { padding:48px; align-self:start; background:#fff; border-top:6px solid #2f963f; }
+.classical-quote-page aside>p:not(.classical-overline) { color:#5b625e; font:16px/1.7 Manrope,sans-serif; }
+.classical-quote-page aside>a { display:block; margin-top:14px; color:#217131; font-weight:800; }
+.classical-quote-page .classical-quote-phone { margin-top:28px; font:800 28px Montserrat,sans-serif; color:#111; }
+
+.classical-service-detail { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr); gap:64px; padding:78px max(5vw,36px); background:#fff; }
+.classical-service-detail>article { max-width:900px; }
+.classical-service-detail>article>p:not(.classical-overline) { color:#555f59; font:17px/1.75 Manrope,sans-serif; }
+.classical-service-detail ul { margin:28px 0 0; padding:0; list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.classical-service-detail li { padding:16px 18px; background:#f4f6f3; border-left:4px solid #2f963f; color:#4d5650; font:700 14px/1.5 Manrope,sans-serif; }
+.classical-service-detail aside .classical-form { position:sticky; top:28px; }
+.classical-page-hero--quote { min-height:330px; }
+
+@media (max-width:900px) {
+  .classical-contact-page,.classical-quote-page,.classical-service-detail { grid-template-columns:1fr; }
+  .classical-contact-page__form .classical-form,.classical-quote-page .classical-form,.classical-service-detail aside .classical-form { position:static; }
+}
+
+@media (max-width:680px) {
+  .classical-contact-page,.classical-quote-page,.classical-service-detail { padding-left:20px; padding-right:20px; gap:34px; }
+  .classical-quote-page aside { padding:28px; }
+  .classical-service-detail ul { grid-template-columns:1fr; }
+}

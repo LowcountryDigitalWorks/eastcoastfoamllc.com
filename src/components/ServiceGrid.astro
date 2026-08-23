@@ -14,8 +14,8 @@ const serviceImages = assets.serviceImages as Record<string, string>;
       <span class="service-number">{String(index + 1).padStart(2, '0')}</span>
       <h3>{service.title}</h3>
       <p>{service.summary}</p>
-      <a href={variant === 'classical' ? '#quote' : '#estimate'}>
-        {variant === 'classical' ? 'Ask about this service' : 'Talk about this project'} <span aria-hidden="true">→</span>
+      <a href={variant === 'classical' ? `/classical/${service.slug}` : '#estimate'}>
+        {variant === 'classical' ? 'Learn More' : 'Talk about this project'} <span aria-hidden="true">→</span>
       </a>
     </article>
   ))}

@@ -1,0 +1,144 @@
+/* Classical parity pass 0.2. Loaded after earlier visual styles. */
+
+/* East Coast Foam's actual logo is the shared brand mark in every concept. */
+.brand-mark { display:inline-flex; align-items:center; flex:0 0 auto; }
+.brand-mark img { display:block; width:190px; height:auto; max-height:78px; object-fit:contain; }
+.brand-mark--compact img { width:150px; max-height:62px; }
+.future-nav .brand-mark img { width:154px; max-height:62px; }
+.chooser__brand { margin-bottom:32px; }
+.chooser__brand .brand-mark { padding:16px 18px; border-radius:16px; background:#fff; }
+.chooser__brand .brand-mark img { width:210px; }
+
+/* Classical is meant to read like a real East Coast Foam site, not a presentation board. */
+.theme-classical .classical-hero::after { content:none; }
+.theme-classical .classical-form button:disabled { opacity:1; cursor:not-allowed; }
+.theme-classical .classical-form { border:0; }
+.theme-classical .classical-topbar a { transition:color .18s ease; }
+.theme-classical .classical-topbar a:hover { color:#2f963f; }
+.classical-header .brand-mark { margin-right:auto; }
+.classical-header .brand-mark img { width:205px; max-height:86px; }
+.classical-header nav a { white-space:nowrap; }
+
+.classical-hero__copy { align-self:center; }
+.classical-hero h1 { margin:0 0 24px; }
+.classical-hero .classical-overline { margin:0 0 22px; }
+.classical-inline-link,.classical-section-cta a,.classical-google-link { display:inline-block; margin-top:20px; color:#217131; font-weight:800; }
+
+/* Customer review strip immediately after the quote-first hero, reflecting the current site. */
+.classical-review-ribbon { display:grid; grid-template-columns:.72fr repeat(3,1fr); gap:0; background:#f7f7f5; border-bottom:1px solid #e5e7e4; }
+.classical-review-ribbon>* { min-width:0; padding:26px 28px; border-right:1px solid #e1e4e0; }
+.classical-review-ribbon>*:last-child { border-right:0; }
+.classical-review-ribbon__score { display:grid; align-content:center; justify-items:start; }
+.classical-review-ribbon__score img { width:126px; height:auto; }
+.classical-review-ribbon__score strong { margin-top:8px; font:800 28px Montserrat,sans-serif; color:#222; }
+.classical-review-ribbon__score span { color:#67706a; font:600 12px Manrope,sans-serif; text-transform:uppercase; letter-spacing:.08em; }
+.classical-review-ribbon blockquote { margin:0; }
+.classical-review-ribbon blockquote p { margin:8px 0 10px; font:500 14px/1.55 Manrope,sans-serif; color:#4e5751; }
+.classical-review-ribbon cite { font:700 12px Manrope,sans-serif; color:#1f2521; font-style:normal; }
+.review-stars { color:#f3a600; letter-spacing:.08em; font-size:13px; }
+
+/* Current-homepage information sections. */
+.classical-section--dark { background:#101210; color:#fff; }
+.classical-section--dark .classical-overline { color:#72cb7c; }
+.classical-section--dark>h2 { color:#fff; }
+.classical-feature-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:38px; }
+.classical-feature-grid article { min-height:250px; padding:25px; border-top:5px solid #2f963f; background:#1a1e1a; }
+.classical-feature-grid article>span { display:block; color:#6dcf79; font:800 11px Manrope,sans-serif; letter-spacing:.12em; }
+.classical-feature-grid h3 { margin:26px 0 10px; font-size:20px; line-height:1.25; text-transform:uppercase; }
+.classical-feature-grid p { margin:0; color:#cbd0cc; font:14px/1.65 Manrope,sans-serif; }
+
+.classical-expect { background:#fff; }
+.classical-steps { display:grid; grid-template-columns:1fr 1fr; gap:14px 24px; margin-top:36px; }
+.classical-steps article { display:grid; grid-template-columns:70px 1fr; gap:20px; padding:24px 0; border-top:1px solid #dfe3df; }
+.classical-steps article>span { color:#2f963f; font:800 34px/1 Montserrat,sans-serif; }
+.classical-steps h3 { margin:0 0 7px; font-size:21px; text-transform:uppercase; }
+.classical-steps p { margin:0; color:#626a65; font:15px/1.65 Manrope,sans-serif; }
+
+.classical-contact-band { display:grid; grid-template-columns:1.25fr .75fr; gap:50px; align-items:center; padding:72px max(5vw,36px); background:#2f963f; color:#fff; }
+.classical-contact-band .classical-overline { color:#fff; border-color:#fff; }
+.classical-contact-band h2 { max-width:830px; margin:14px 0; font-size:clamp(34px,4vw,58px); line-height:1.05; text-transform:uppercase; }
+.classical-contact-band p:not(.classical-overline) { max-width:800px; font:16px/1.7 Manrope,sans-serif; }
+.classical-contact-band__actions { display:grid; gap:12px; }
+.classical-contact-band__actions a { display:block; padding:16px 20px; text-align:center; border:2px solid #fff; font-weight:800; }
+.classical-contact-band__actions a:last-child { background:#fff; color:#23742f; }
+
+.classical-name-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:34px; }
+.classical-name-grid a { min-height:118px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px; border:1px solid #dfe3df; background:#fff; font:800 18px/1.35 Montserrat,sans-serif; text-transform:uppercase; }
+.classical-name-grid a:hover { border-color:#2f963f; box-shadow:0 12px 30px rgba(0,0,0,.07); }
+.classical-name-grid a span { color:#2f963f; font-size:22px; }
+
+.classical-review-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:34px; }
+.classical-review-grid blockquote { margin:0; min-height:230px; display:flex; flex-direction:column; padding:28px; background:#fff; border-top:5px solid #2f963f; box-shadow:0 8px 28px rgba(0,0,0,.06); }
+.classical-review-grid blockquote p { margin:16px 0 24px; color:#4f5852; font:500 16px/1.65 Manrope,sans-serif; }
+.classical-review-grid footer { margin-top:auto; display:flex; flex-direction:column; gap:3px; }
+.classical-review-grid footer strong { font-size:14px; }
+.classical-review-grid footer span { color:#7a827d; font-size:12px; }
+
+.classical-blog-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:34px; }
+.classical-blog-grid article { padding:28px; background:#f5f6f4; border-left:5px solid #2f963f; }
+.classical-blog-grid article>span { color:#287737; font:800 11px Manrope,sans-serif; text-transform:uppercase; letter-spacing:.1em; }
+.classical-blog-grid h3 { margin:11px 0 22px; font-size:22px; line-height:1.35; }
+.classical-blog-grid a { font-weight:800; color:#217131; }
+
+/* Footer mirrors the current site's four information groups, with the corrected Google address. */
+.classical-site-footer { background:#080a08; color:#d1d5d2; }
+.classical-site-footer__grid { display:grid; grid-template-columns:1.25fr 1fr 1fr 1.15fr; gap:44px; padding:64px max(5vw,36px); }
+.classical-site-footer .brand-mark { display:inline-flex; padding:10px 12px; background:#fff; }
+.classical-site-footer section>p { max-width:420px; color:#aeb5b0; font:14px/1.7 Manrope,sans-serif; }
+.classical-site-footer h2 { margin:0 0 20px; color:#fff; font-size:16px; text-transform:uppercase; letter-spacing:.06em; }
+.classical-site-footer ul { list-style:none; margin:0; padding:0; }
+.classical-site-footer li { margin:0 0 10px; color:#bfc5c1; font:13px/1.5 Manrope,sans-serif; }
+.classical-site-footer a:hover { color:#74ce80; }
+.classical-footer-facebook { display:inline-block; margin-top:8px; color:#70cb7c; font-weight:800; }
+.classical-footer-contact li:last-child { white-space:pre-line; }
+.classical-footer-areas { display:flex; flex-wrap:wrap; gap:7px; }
+.classical-footer-areas span { padding:7px 9px; border:1px solid #303630; color:#cbd0cc; font:700 11px Manrope,sans-serif; }
+.classical-site-footer__bottom { display:flex; justify-content:space-between; gap:20px; padding:20px max(5vw,36px); border-top:1px solid #252925; color:#858d87; font:12px Manrope,sans-serif; }
+
+/* Simple interior-page framework used by the Classical route set. */
+.classical-page-hero { position:relative; min-height:390px; display:grid; align-items:end; padding:90px max(5vw,36px) 62px; overflow:hidden; background:#111; color:#fff; }
+.classical-page-hero>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.44; }
+.classical-page-hero::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.76),rgba(0,0,0,.28)); }
+.classical-page-hero__inner { position:relative; z-index:1; max-width:980px; }
+.classical-page-hero h1 { margin:10px 0 0; font-size:clamp(40px,5vw,72px); line-height:1.02; text-transform:uppercase; }
+.classical-page-content { padding:78px max(5vw,36px); }
+.classical-page-content>div { width:min(1050px,100%); }
+.classical-page-content h2 { margin:0 0 20px; font-size:clamp(30px,4vw,48px); line-height:1.12; text-transform:uppercase; }
+.classical-page-content p,.classical-page-content li { color:#555f59; font:16px/1.75 Manrope,sans-serif; }
+.classical-page-content ul { padding-left:22px; }
+.classical-page-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:30px; }
+.classical-page-card { padding:26px; background:#f5f6f4; border-left:5px solid #2f963f; }
+.classical-page-card h3 { margin:0 0 8px; font-size:20px; }
+.classical-page-card p { margin:0; }
+.classical-page-photo { margin-top:34px; width:100%; max-height:520px; object-fit:cover; }
+.classical-page-cta { margin-top:34px; display:flex; flex-wrap:wrap; gap:12px; }
+.classical-page-cta a { padding:14px 18px; background:#2f963f; color:#fff; font-weight:800; }
+.classical-page-cta a+ a { background:#111; }
+
+@media (max-width:1180px) {
+  .classical-feature-grid { grid-template-columns:repeat(3,1fr); }
+  .classical-review-grid { grid-template-columns:repeat(2,1fr); }
+  .classical-site-footer__grid { grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:900px) {
+  .classical-review-ribbon { grid-template-columns:1fr 1fr; }
+  .classical-review-ribbon>* { border-bottom:1px solid #e1e4e0; }
+  .classical-review-ribbon>*:nth-child(2n) { border-right:0; }
+  .classical-feature-grid { grid-template-columns:1fr 1fr; }
+  .classical-contact-band { grid-template-columns:1fr; }
+  .classical-name-grid { grid-template-columns:1fr; }
+  .classical-blog-grid { grid-template-columns:1fr; }
+}
+
+@media (max-width:680px) {
+  .brand-mark img { width:150px; }
+  .classical-header .brand-mark img { width:146px; }
+  .chooser__brand .brand-mark img { width:180px; }
+  .classical-review-ribbon,.classical-feature-grid,.classical-steps,.classical-review-grid,.classical-site-footer__grid,.classical-page-grid { grid-template-columns:1fr; }
+  .classical-review-ribbon>* { border-right:0; }
+  .classical-feature-grid article { min-height:0; }
+  .classical-site-footer__grid { gap:34px; padding-left:20px; padding-right:20px; }
+  .classical-site-footer__bottom { flex-direction:column; padding-left:20px; padding-right:20px; }
+  .classical-contact-band,.classical-page-content,.classical-page-hero { padding-left:20px; padding-right:20px; }
+}
