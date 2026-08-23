@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClassicalHeader from '../../components/ClassicalHeader.astro';
+import ClassicalFooter from '../../components/ClassicalFooter.astro';
+import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
+import services from '../../data/services.json';
+import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const serviceImages = assets.serviceImages as Record<string, string>;
+const details: Record<string, { intro: string; points: string[] }> = {
+  'open-cell-spray-foam-insulation': {
+    intro: 'Open-cell spray foam expands to fill gaps and create an effective air seal. It is commonly considered for rooflines, attics, walls, and other assemblies where its softer, vapor-permeable characteristics fit the design.',
+    points: ['Air sealing around irregular framing and penetrations', 'Thermal insulation for suitable wall and roof assemblies', 'Useful for many conditioned attic applications', 'Project-specific evaluation before installation']
+  },
+  'closed-cell-spray-foam-insulation': {
+    intro: 'Closed-cell spray foam is a dense insulation system that combines thermal performance, air sealing, and strong resistance to moisture movement. It can be useful in demanding assemblies where those properties are important.',
+    points: ['Dense, high-performance insulation layer', 'Strong air-sealing characteristics', 'Moisture-resistant closed-cell structure', 'Suitable for selected attics, crawlspaces, walls, and other assemblies']
+  },
+  'polyurea-coatings': {
+    intro: 'Polyurea coatings create a durable protective surface for applications that need resistance to water, weather, abrasion, or heavy use. The right preparation and system depend on the substrate and exposure.',
+    points: ['Fast-curing protective coating systems', 'Waterproofing and weather-exposure applications', 'Durable finish for demanding surfaces', 'Surface preparation matched to the project']
+  },
+  'fiberglass-batt-insulation': {
+    intro: 'Fiberglass batt insulation remains a practical choice for many conventional wall, floor, and ceiling assemblies. East Coast Foam can evaluate where fiberglass is the right fit instead of defaulting every project to spray foam.',
+    points: ['Traditional insulation option for standard framing', 'Useful where spray foam is not required', 'Straightforward installation in accessible assemblies', 'Can be combined with broader insulation upgrades']
+  },
+  'insulation-removal-services': {
+    intro: 'Existing insulation sometimes needs to be removed before a new system can be installed correctly. East Coast Foam can clear old material and prepare the space for the next phase of work.',
+    points: ['Removal of existing attic or accessible insulation', 'Cleaner preparation for replacement systems', 'Opportunity to inspect the exposed assembly', 'Coordinated transition into new insulation work']
+  },
+  'spray-foam-roofing': {
+    intro: 'Spray polyurethane foam roofing can create a continuous insulated roof surface when the existing roof and project conditions are appropriate. The system is evaluated as part of the roof assembly, not as a generic coating.',
+    points: ['Continuous spray-applied foam surface', 'Insulation and roof-system performance in one assembly', 'Conforms to many existing roof shapes', 'Protective coating options available for suitable systems']
+  },
+  'silicone-roof-coating': {
+    intro: 'Silicone and acrylic roof coatings can protect suitable roof surfaces from weather exposure and extend the useful life of a properly prepared system. East Coast Foam evaluates the roof condition before recommending a coating approach.',
+    points: ['Weather-resistant protective finish', 'Silicone or acrylic options based on project needs', 'Preparation and repair before coating as required', 'Useful for selected commercial and residential roof systems']
+  }
+};
+const detail = details[service.slug] ?? { intro: service.summary, points: [] };
+---
+<BaseLayout title={`${service.title} | ${site.name}`} description={`${service.summary} Contact East Coast Foam LLC for a project evaluation in the Lowcountry.`} theme="classical" showDemoBanner={false}>
+  <div id="top" class="classical-site">
+    <ClassicalHeader />
+    <main>
+      <section class="classical-page-hero">
+        <img src={serviceImages[service.slug]} alt="" referrerpolicy="no-referrer" />
+        <div class="classical-page-hero__inner"><p class="classical-overline">Our Services</p><h1>{service.title}</h1></div>
+      </section>
+      <section class="classical-service-detail">
+        <article>
+          <p class="classical-overline">East Coast Foam LLC</p>
+          <h2>{service.title}</h2>
+          <p>{detail.intro}</p>
+          <ul>{detail.points.map((point) => <li>{point}</li>)}</ul>
+          <img class="classical-page-photo" src={serviceImages[service.slug]} alt={`${service.title} project example`} loading="lazy" referrerpolicy="no-referrer" />
+          <div class="classical-page-cta"><a href="/classical/get-a-quote">Get a Quote</a><a href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a></div>
+        </article>
+        <aside><ClassicalEstimateForm /></aside>
+      </section>
+    </main>
+    <ClassicalFooter />
+  </div>
+</BaseLayout>
