@@ -1,0 +1,7 @@
+---
+import site from '../data/site.json';
+---
+<section class="future-v1__estimate" id="estimate" aria-labelledby="future-estimate-title">
+  <div><p class="future-v1__kicker">Request an estimate</p><h2 id="future-estimate-title">Ready to talk through the project?</h2><p>Call or email East Coast Foam to start the estimate conversation.</p></div>
+  <div class="future-v1__estimate-actions"><a class="future-v1__estimate-button" href={`mailto:${site.publicEmail}?subject=Estimate%20request`}>Email East Coast Foam <span aria-hidden="true">→</span></a><a href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a><small>{site.publicEmail}</small></div>
+</section>

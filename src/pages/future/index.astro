@@ -1,100 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BrandMark from '../../components/BrandMark.astro';
-import GuidedEstimate from '../../components/GuidedEstimate.astro';
-import RecentWork from '../../components/RecentWork.astro';
-import ServiceGrid from '../../components/ServiceGrid.astro';
+import FutureAbout from '../../components/FutureAbout.astro';
+import FutureEstimate from '../../components/FutureEstimate.astro';
+import FutureFoamTeaser from '../../components/FutureFoamTeaser.astro';
+import FutureFooter from '../../components/FutureFooter.astro';
+import FutureHeader from '../../components/FutureHeader.astro';
+import FutureHero from '../../components/FutureHero.astro';
+import FutureMobileActions from '../../components/FutureMobileActions.astro';
+import FutureProcess from '../../components/FutureProcess.astro';
+import FutureProjectPaths from '../../components/FutureProjectPaths.astro';
+import FutureProjects from '../../components/FutureProjects.astro';
+import FutureProofStrip from '../../components/FutureProofStrip.astro';
+import FutureResources from '../../components/FutureResources.astro';
+import FutureServiceArea from '../../components/FutureServiceArea.astro';
+import FutureServices from '../../components/FutureServices.astro';
+import GoogleReviewsCarousel from '../../components/GoogleReviewsCarousel.astro';
 import site from '../../data/site.json';
-import assets from '../../data/demo-assets.json';
 ---
-<BaseLayout title={`Future | ${site.name}`} description="A redesigned East Coast Foam website experience focused on clear services, local trust, and useful estimate intake." theme="future">
-  <div id="top" class="future-site">
-    <header class="future-nav-wrap">
-      <nav class="future-nav" aria-label="Future navigation">
-        <BrandMark />
-        <div class="future-nav__links"><a href="#services">Services</a><a href="#work">Recent Work</a><a href="#process">How it works</a><a href="#contact">Contact</a></div>
-        <a class="future-nav__cta" href="#estimate">Request an estimate</a>
-      </nav>
-    </header>
-
+<BaseLayout title={`Future | ${site.name}`} description="East Coast Foam spray foam, insulation, roofing, and coating services for the South Carolina Lowcountry and Coastal Georgia." theme="future">
+  <div id="top" class="future-v1">
+    <FutureHeader />
     <main>
-      <section class="future-hero">
-        <div class="future-hero__copy">
-          <p class="eyebrow">Beaufort born · Lowcountry focused</p>
-          <h1>Comfort built to last.<br /><em>Foam done right.</em></h1>
-          <p class="future-lede">A modern East Coast Foam presence centered on clear choices, real project work, fast estimate intake, and an owner customers can actually reach.</p>
-          <div class="future-actions"><a class="future-button" href="#estimate">Start an estimate</a><a class="future-call" href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a></div>
-          <div class="trust-row"><span>Locally owned</span><span>Lowcountry service area</span><span>Clear estimate conversation</span></div>
-        </div>
-        <div class="future-hero__visual" aria-label="East Coast Foam service photography">
-          <img class="future-hero__primary-photo" src={assets.hero} alt="" referrerpolicy="no-referrer" />
-          <div class="foam-orbit foam-orbit--one"></div><div class="foam-orbit foam-orbit--two"></div>
-          <div class="future-photo-stack" aria-hidden="true">
-            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" referrerpolicy="no-referrer" />
-            <img src={assets.serviceImages['spray-foam-roofing']} alt="" referrerpolicy="no-referrer" />
-          </div>
-          <div class="future-photo-card"><span>Recent work first</span><strong>Let East Coast Foam's workmanship lead the story.</strong></div>
-        </div>
+      <FutureHero />
+      <FutureProofStrip />
+      <FutureProjectPaths />
+      <FutureServices />
+      <FutureFoamTeaser />
+      <FutureProjects />
+      <FutureAbout />
+      <section class="future-v1__section future-v1__reviews" id="reviews" aria-labelledby="future-reviews-title">
+        <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Customer reviews</p><h2 id="future-reviews-title">Hear from East Coast Foam customers.</h2></div><p>Read the customer feedback already shared on Google.</p></div>
+        <GoogleReviewsCarousel />
       </section>
-
-      <section class="future-proofbar" aria-label="Future customer experience priorities">
-        <div><strong>One owner to reach</strong><span>Keep the personal small-business experience visible.</span></div>
-        <div><strong>Professional domain identity</strong><span>{site.publicEmail} on the site from day one.</span></div>
-        <div><strong>Real project storytelling</strong><span>Turn completed work into reusable website and social proof.</span></div>
-        <div><strong>Fast on every device</strong><span>Static-first Cloudflare delivery with minimal moving parts.</span></div>
-      </section>
-
-      <section class="future-section" id="services">
-        <div class="section-heading-row"><div><div class="section-kicker">What we do</div><h2>The right insulation system starts with the right conversation.</h2></div><p>Clear service explanations help property owners understand their options and choose the right next step.</p></div>
-        <ServiceGrid />
-      </section>
-
-      <section class="future-section future-compare" aria-label="Open-cell and closed-cell comparison">
-        <div class="future-compare__intro">
-          <div class="section-kicker">Help customers choose</div>
-          <h2>Open cell or closed cell?</h2>
-          <p>The new site should answer the first obvious question without pretending every building has the same answer. Customers learn the difference, then Casey confirms what fits the project.</p>
-          <a class="future-button" href="#estimate">Tell us about the space</a>
-        </div>
-        <div class="future-compare__cards">
-          <article class="foam-choice">
-            <img src={assets.serviceImages['open-cell-spray-foam-insulation']} alt="" loading="lazy" referrerpolicy="no-referrer" />
-            <div class="foam-choice__body"><span>Option 01</span><h3>Open-cell spray foam</h3><p>A flexible air-sealing option often considered for conditioned attics, rooflines, walls, and other assemblies where its characteristics fit the design.</p><a href="#estimate">Ask if open cell fits →</a></div>
-          </article>
-          <article class="foam-choice">
-            <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" loading="lazy" referrerpolicy="no-referrer" />
-            <div class="foam-choice__body"><span>Option 02</span><h3>Closed-cell spray foam</h3><p>A denser system with strong thermal performance and moisture resistance, useful when the assembly and project goals call for those properties.</p><a href="#estimate">Ask if closed cell fits →</a></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="future-band">
-        <div><span class="big-number">01</span><p>Tell us about the space.</p></div><div><span class="big-number">02</span><p>East Coast Foam assesses the right approach.</p></div><div><span class="big-number">03</span><p>You get a clear estimate and next step.</p></div>
-      </section>
-
-      <div class="future-section"><GuidedEstimate /></div>
-      <div class="future-section"><RecentWork /></div>
-
-      <section class="future-schedule" aria-label="Consultation scheduling">
-        <div><div class="section-kicker">Start with a conversation</div><h2>Talk through the property before scheduling the crew.</h2><p>East Coast Foam can review the space, goals, timing, and service area before recommending the right next step.</p></div>
-        <div class="future-schedule__action"><strong>Consultation / site visit</strong><span>Installation dates remain owner-managed so every project gets the right attention.</span><a class="future-button" href="#contact">Contact East Coast Foam</a></div>
-      </section>
-
-      <section class="future-section process-section" id="process">
-        <div class="section-kicker">And it can grow with the business</div>
-        <h2>The website becomes a better front door—not another system Casey has to babysit.</h2>
-        <div class="process-grid">
-          <article><span>Now</span><h3>Website + professional identity</h3><p>Fast hosting, domain email presentation, easy content editing, quote intake, analytics, monitoring, and customer-owned infrastructure.</p></article>
-          <article><span>Next</span><h3>Reuse the work Casey already does</h3><p>Facebook project-photo import, Recent Work publishing, better review requests, and lead-source visibility without double entry.</p></article>
-          <article><span>Only if useful</span><h3>Owner operations view</h3><p>QuickBooks-aware lead status, accepted-job scheduling, crew/truck visibility, completion follow-up, and exceptions that need Casey's attention.</p></article>
-        </div>
-      </section>
-
-      <section class="future-contact" id="contact">
-        <div><p class="eyebrow">Let's talk about the project</p><h2>One owner. One number. A much better digital front door.</h2></div>
-        <div class="future-contact__links"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><a href={`mailto:${site.quoteEmail}`}>{site.quoteEmail}</a><span>{site.address}</span></div>
-      </section>
+      <FutureProcess />
+      <FutureServiceArea />
+      <FutureResources />
+      <FutureEstimate />
     </main>
-    <footer class="future-footer"><BrandMark compact /><p>A next-generation website direction for East Coast Foam.</p></footer>
+    <FutureFooter />
+    <FutureMobileActions />
   </div>
 </BaseLayout>

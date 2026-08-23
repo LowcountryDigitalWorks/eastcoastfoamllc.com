@@ -1,0 +1,10 @@
+---
+const steps = ['Tell us about the project', 'Site evaluation', 'Estimate', 'Schedule', 'Installation', 'Follow-up'];
+---
+<section class="future-v1__section future-v1__process" aria-labelledby="future-process-title">
+  <div class="future-v1__section-heading">
+    <div><p class="future-v1__kicker">What to expect</p><h2 id="future-process-title">A clearer path from first question to finished work.</h2></div>
+    <p>Every project is different. This is the conversation East Coast Foam uses to establish the right next step.</p>
+  </div>
+  <ol>{steps.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{step}</strong></li>)}</ol>
+</section>

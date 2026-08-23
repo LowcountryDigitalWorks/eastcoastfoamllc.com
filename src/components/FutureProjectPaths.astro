@@ -1,0 +1,12 @@
+---
+const paths = ['New Construction', 'Existing Home', 'Attic', 'Crawlspace', 'Shop / Garage', 'Roof', 'Commercial Property', 'Not Sure'];
+---
+<section class="future-v1__section future-v1__paths" aria-labelledby="project-path-title">
+  <div class="future-v1__section-heading">
+    <div><p class="future-v1__kicker">Start with the project</p><h2 id="project-path-title">What are you working on?</h2></div>
+    <p>Begin with the space or property type. East Coast Foam can help identify the useful next conversation.</p>
+  </div>
+  <div class="future-v1__path-grid">
+    {paths.map((path, index) => <a href="#estimate"><span>{String(index + 1).padStart(2, '0')}</span>{path}<b aria-hidden="true">↗</b></a>)}
+  </div>
+</section>

@@ -1,0 +1,7 @@
+---
+import site from '../data/site.json';
+---
+<section class="future-v1__area" id="service-area" aria-labelledby="future-area-title">
+  <div><p class="future-v1__kicker">Service area</p><h2 id="future-area-title">South Carolina Lowcountry <em>&amp; Coastal Georgia</em></h2></div>
+  <div class="future-v1__area-cities">{site.serviceAreas.map((area) => <span>{area}</span>)}</div>
+</section>
