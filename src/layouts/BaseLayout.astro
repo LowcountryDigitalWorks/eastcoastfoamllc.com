@@ -1,14 +1,16 @@
 ---
 import '../styles/global.css';
 import '../styles/visual-pass.css';
+import '../styles/classical-parity.css';
 
 interface Props {
   title: string;
   description: string;
   theme?: 'chooser' | 'classical' | 'future';
+  showDemoBanner?: boolean;
 }
 
-const { title, description, theme = 'chooser' } = Astro.props;
+const { title, description, theme = 'chooser', showDemoBanner = true } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -22,9 +24,11 @@ const { title, description, theme = 'chooser' } = Astro.props;
     <title>{title}</title>
   </head>
   <body class={`theme-${theme}`}>
-    <div class="demo-banner" role="status">
-      Private LDW concept demo · not indexed · forms do not submit
-    </div>
+    {showDemoBanner && (
+      <div class="demo-banner" role="status">
+        Private LDW concept demo · not indexed · forms do not submit
+      </div>
+    )}
     <slot />
   </body>
 </html>
