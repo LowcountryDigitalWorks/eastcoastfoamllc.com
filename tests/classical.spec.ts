@@ -147,10 +147,7 @@ test('open mobile navigation has no WCAG A/AA violations', async ({ page }) => {
   await page.goto('/classical', { waitUntil: 'networkidle' });
   await page.getByRole('button', { name: 'Menu' }).click();
   await page.getByRole('button', { name: 'Show service pages' }).click();
-  const results = await new AxeBuilder({ page })
-    .include('.classical-header')
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-    .analyze();
+  const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
   expect(results.violations).toEqual([]);
 });
 

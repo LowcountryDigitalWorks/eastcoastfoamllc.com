@@ -22,6 +22,21 @@
   color:#72cf7f;
 }
 
+/* Homepage metadata and the light contact panel meet WCAG AA contrast. */
+.theme-classical #reviews .google-review-carousel__summary span {
+  color:#5d665f;
+}
+
+.theme-classical #reviews .google-review-card__identity span {
+  color:#626a65;
+}
+
+.theme-classical .classical-contact-panel__details > .classical-overline {
+  color:#217332;
+  border-color:#2f963f;
+  text-shadow:none;
+}
+
 /* Keep original artwork on a stable light field even when a browser forces dark rendering. */
 .theme-classical .classical-logo-grid > a,
 .theme-classical .classical-trust-strip__badge {
