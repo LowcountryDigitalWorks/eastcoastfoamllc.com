@@ -1,0 +1,31 @@
+---
+import services from '../data/services.json';
+import assets from '../data/demo-assets.json';
+
+const bySlug = new Map(services.map((service) => [service.slug, service]));
+const serviceImages = assets.serviceImages as Record<string, string>;
+const groups = [
+  { label: 'Insulate & air seal', slugs: ['open-cell-spray-foam-insulation', 'closed-cell-spray-foam-insulation', 'fiberglass-batt-insulation'] },
+  { label: 'Restore & upgrade', slugs: ['insulation-removal-services'] },
+  { label: 'Protect', slugs: ['polyurea-coatings', 'spray-foam-roofing', 'silicone-roof-coating'] }
+];
+---
+<section class="future-v1__section future-v1__services" id="services" aria-labelledby="future-services-title">
+  <div class="future-v1__section-heading">
+    <div><p class="future-v1__kicker">Services</p><h2 id="future-services-title">Built around the work your property needs.</h2></div>
+    <p>Explore the service categories, then use the detailed pages to learn more before talking through your specific project.</p>
+  </div>
+  <div class="future-v1__service-groups">
+    {groups.map((group) => (
+      <section class="future-v1__service-group" aria-label={group.label}>
+        <p>{group.label}</p>
+        <div>
+          {group.slugs.map((slug) => {
+            const service = bySlug.get(slug)!;
+            return <a href={`/classical/${service.slug}`}><img src={serviceImages[service.slug]} alt="" loading="lazy" referrerpolicy="no-referrer" /><span><strong>{service.title}</strong><small>{service.summary}</small></span><b aria-hidden="true">→</b></a>;
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
+</section>

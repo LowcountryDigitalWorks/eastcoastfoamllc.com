@@ -1,0 +1,19 @@
+---
+import assets from '../data/demo-assets.json';
+
+const work = [
+  { title: 'Open-Cell Spray Foam', image: assets.serviceImages['open-cell-spray-foam-insulation'], href: '/classical/open-cell-spray-foam-insulation' },
+  { title: 'Closed-Cell Spray Foam', image: assets.serviceImages['closed-cell-spray-foam-insulation'], href: '/classical/closed-cell-spray-foam-insulation' },
+  { title: 'Roof Coatings', image: assets.serviceImages['silicone-roof-coating'], href: '/classical/silicone-roof-coating' }
+];
+---
+<section class="future-v1__section future-v1__projects" id="projects" aria-labelledby="future-projects-title">
+  <div class="future-v1__section-heading">
+    <div><p class="future-v1__kicker">Recent work</p><h2 id="future-projects-title">The work should be easy to see.</h2></div>
+    <p>East Coast Foam service photography brings the materials, application, and finished work closer to the customer.</p>
+  </div>
+  <div class="future-v1__project-grid">
+    {work.map((project, index) => <a class={`future-v1__project future-v1__project--${index + 1}`} href={project.href}><img src={project.image} alt={`${project.title} work by East Coast Foam`} loading="lazy" referrerpolicy="no-referrer" /><span><small>East Coast Foam service work</small><strong>{project.title}</strong><b>View service <i aria-hidden="true">→</i></b></span></a>)}
+  </div>
+  <a class="future-v1__facebook-link" href="https://www.facebook.com/foamit247" target="_blank" rel="noopener noreferrer">See more from East Coast Foam on Facebook <span aria-hidden="true">↗</span></a>
+</section>

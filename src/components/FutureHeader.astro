@@ -1,0 +1,94 @@
+---
+import BrandMark from './BrandMark.astro';
+import services from '../data/services.json';
+
+const serviceLinks = services.map((service) => ({ title: service.title, href: `/classical/${service.slug}` }));
+---
+<header class="future-v1__header">
+  <nav class="future-v1__nav" aria-label="Future navigation">
+    <BrandMark href="#top" />
+    <div class="future-v1__desktop-links">
+      <details class="future-v1__services-menu">
+        <summary>Services</summary>
+        <div class="future-v1__services-panel">
+          <a class="future-v1__services-all" href="#services">Explore all services <span aria-hidden="true">→</span></a>
+          <div>
+            {serviceLinks.map((service) => <a href={service.href}>{service.title}</a>)}
+          </div>
+        </div>
+      </details>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#service-area">Service Area</a>
+      <a href="#resources">Resources</a>
+    </div>
+    <a class="future-v1__estimate-button future-v1__estimate-button--header" href="#estimate">Request an Estimate</a>
+    <button class="future-v1__menu-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="future-mobile-navigation">
+      <span></span><span></span><span></span>
+      <span class="sr-only">Open menu</span>
+    </button>
+  </nav>
+
+  <div class="future-v1__mobile-menu" id="future-mobile-navigation" hidden>
+    <nav aria-label="Future mobile navigation">
+      <a href="#services">Services</a>
+      <button type="button" class="future-v1__mobile-services-toggle" aria-expanded="false" aria-controls="future-mobile-service-links">Show service pages <span aria-hidden="true">+</span></button>
+      <div class="future-v1__mobile-service-links" id="future-mobile-service-links" hidden>
+        {serviceLinks.map((service) => <a href={service.href}>{service.title}</a>)}
+      </div>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#service-area">Service Area</a>
+      <a href="#resources">Resources</a>
+      <a class="future-v1__estimate-button" href="#estimate">Request an Estimate</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const initializeFutureMenu = () => {
+    const header = document.querySelector('.future-v1__header');
+    if (!(header instanceof HTMLElement) || header.dataset.menuReady === 'true') return;
+    const button = header.querySelector('.future-v1__menu-button');
+    const menu = header.querySelector('#future-mobile-navigation');
+    const servicesToggle = header.querySelector('.future-v1__mobile-services-toggle');
+    const serviceLinks = header.querySelector('#future-mobile-service-links');
+    if (!(button instanceof HTMLButtonElement) || !(menu instanceof HTMLElement)) return;
+
+    header.dataset.menuReady = 'true';
+    const close = (restoreFocus = false) => {
+      menu.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('future-menu-open');
+      if (restoreFocus) button.focus();
+    };
+    const open = () => {
+      menu.hidden = false;
+      button.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('future-menu-open');
+      menu.querySelector('a, button') instanceof HTMLElement && (menu.querySelector('a, button') as HTMLElement).focus();
+    };
+
+    button.addEventListener('click', () => (menu.hidden ? open() : close()));
+    servicesToggle?.addEventListener('click', () => {
+      if (!(servicesToggle instanceof HTMLButtonElement) || !(serviceLinks instanceof HTMLElement)) return;
+      const isOpen = servicesToggle.getAttribute('aria-expanded') === 'true';
+      servicesToggle.setAttribute('aria-expanded', String(!isOpen));
+      serviceLinks.hidden = isOpen;
+    });
+    menu.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLAnchorElement) close();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !menu.hidden) close(true);
+    });
+    document.addEventListener('click', (event) => {
+      if (!menu.hidden && event.target instanceof Node && !header.contains(event.target)) close();
+    });
+  };
+
+  initializeFutureMenu();
+  document.addEventListener('astro:page-load', initializeFutureMenu);
+</script>
