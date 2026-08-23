@@ -44,11 +44,15 @@ const areas = [
 </style>
 
 <script>
-  const loadLeaflet = () => new Promise((resolve, reject) => {
-    if (window.L) return resolve(window.L);
+  type LeafletLike = any;
+  type ServiceArea = { name: string; lat: number; lng: number };
+  const browserWindow = window as typeof window & { L?: LeafletLike };
+
+  const loadLeaflet = (): Promise<LeafletLike> => new Promise((resolve, reject) => {
+    if (browserWindow.L) return resolve(browserWindow.L);
     const existing = document.querySelector('script[data-leaflet-loader]');
     if (existing) {
-      existing.addEventListener('load', () => resolve(window.L), { once: true });
+      existing.addEventListener('load', () => resolve(browserWindow.L), { once: true });
       existing.addEventListener('error', reject, { once: true });
       return;
     }
@@ -56,7 +60,7 @@ const areas = [
     script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
     script.crossOrigin = '';
     script.dataset.leafletLoader = 'true';
-    script.onload = () => resolve(window.L);
+    script.onload = () => resolve(browserWindow.L);
     script.onerror = reject;
     document.head.appendChild(script);
   });
@@ -65,18 +69,18 @@ const areas = [
     const node = document.getElementById('classical-service-map-canvas');
     if (!(node instanceof HTMLElement) || node.dataset.ready === 'true') return;
     try {
-      const L = await loadLeaflet();
+      const L: LeafletLike = await loadLeaflet();
       if (!L) return;
-      const areas = JSON.parse(node.dataset.areas || '[]');
+      const areas: ServiceArea[] = JSON.parse(node.dataset.areas || '[]');
       const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      const bounds = [];
+      const bounds: Array<[number, number]> = [];
       areas.forEach((area) => {
-        const point = [area.lat, area.lng];
+        const point: [number, number] = [area.lat, area.lng];
         bounds.push(point);
         L.circleMarker(point, {
           radius: 7,
@@ -88,9 +92,9 @@ const areas = [
       });
 
       [
-        { point: [32.4316, -80.6698], radius: 56000, label: 'Beaufort / southern Lowcountry coverage' },
-        { point: [32.816, -79.92], radius: 43000, label: 'Charleston-area coverage' },
-        { point: [32.0809, -81.0912], radius: 30000, label: 'Savannah-area coverage' }
+        { point: [32.4316, -80.6698], radius: 56000 },
+        { point: [32.816, -79.92], radius: 43000 },
+        { point: [32.0809, -81.0912], radius: 30000 }
       ].forEach((zone) => {
         L.circle(zone.point, {
           radius: zone.radius,
