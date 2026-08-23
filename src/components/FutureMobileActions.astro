@@ -5,3 +5,15 @@ import site from '../data/site.json';
   <a href={`tel:${site.phoneHref}`}><span aria-hidden="true">☎</span> Call</a>
   <a href="#estimate"><span aria-hidden="true">→</span> Request Estimate</a>
 </div>
+
+<script>
+  const actions = document.querySelector<HTMLElement>('.future-v1__mobile-actions');
+  const estimate = document.querySelector('#estimate');
+
+  if (actions && estimate && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      actions.toggleAttribute('data-hidden', entry.isIntersecting);
+    }, { threshold: 0.12 });
+    observer.observe(estimate);
+  }
+</script>
