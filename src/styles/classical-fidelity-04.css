@@ -1,4 +1,4 @@
-/* Classical fidelity pass 0.4/0.5 — post-deployment desktop alignment. */
+/* Classical fidelity pass 0.4–0.6 — post-deployment desktop alignment. */
 
 @media (min-width:1101px) {
   .theme-classical .classical-header {
@@ -19,17 +19,18 @@
   .theme-classical .classical-header nav {
     justify-content:center;
     margin:0;
-    transform:translateX(-55px);
+    transform:translateX(-40px);
   }
 
   .theme-classical .classical-hero__copy {
     align-self:start;
-    margin-top:-20px;
+    margin-top:2px;
     max-width:960px;
   }
 
   .theme-classical .classical-hero h1 {
-    max-width:960px;
+    width:930px;
+    max-width:930px;
     font-size:clamp(38px,2.85vw,46px);
     line-height:1.16;
   }
