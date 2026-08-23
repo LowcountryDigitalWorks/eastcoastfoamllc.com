@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClassicalHeader from '../../components/ClassicalHeader.astro';
+import ClassicalFooter from '../../components/ClassicalFooter.astro';
+import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
+import home from '../../data/classical-home.json';
+---
+<BaseLayout title={`About Us | ${site.name}`} description="Learn about East Coast Foam LLC, a locally owned insulation contractor serving Beaufort County, Charleston County, and the Lowcountry." theme="classical" showDemoBanner={false}>
+  <div id="top" class="classical-site">
+    <ClassicalHeader />
+    <main>
+      <section class="classical-page-hero">
+        <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" referrerpolicy="no-referrer" />
+        <div class="classical-page-hero__inner"><p class="classical-overline">East Coast Foam LLC</p><h1>About Us</h1></div>
+      </section>
+
+      <section class="classical-page-content">
+        <div>
+          <h2>Your trusted insulation experts in the Lowcountry.</h2>
+          <p>East Coast Foam LLC is a locally owned and operated insulation contractor focused on helping customers create more comfortable, efficient, and durable buildings. Spray foam is a core specialty, supported by fiberglass insulation, insulation removal, roofing foam, and protective coating services.</p>
+          <p>The company serves Beaufort County, Charleston County, and surrounding communities, with a direct, practical approach to evaluating each property and recommending the right system for the project.</p>
+          <div class="classical-page-grid">
+            <article class="classical-page-card"><h3>Quality first</h3><p>Professional-grade materials, careful preparation, and attention to consistent installation.</p></article>
+            <article class="classical-page-card"><h3>Experienced team</h3><p>Insulation knowledge grounded in real projects and continued attention to industry practices.</p></article>
+            <article class="classical-page-card"><h3>Customer-focused</h3><p>Clear communication, straightforward answers, and direct contact throughout the project.</p></article>
+            <article class="classical-page-card"><h3>Integrity</h3><p>Recommendations centered on the building and the customer's goals rather than a one-size-fits-all product.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="classical-section classical-section--alt">
+        <p class="classical-overline">Commitment to quality and customer satisfaction</p>
+        <h2>A clear process from consultation through completion.</h2>
+        <div class="classical-steps">
+          {home.whatToExpect.map((item) => <article><span>{item.step}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}
+        </div>
+      </section>
+
+      <section class="classical-contact-band">
+        <div><p class="classical-overline">What are you waiting for?</p><h2>Schedule a conversation about your project.</h2><p>Call East Coast Foam or send a quote request and the team can discuss the property, the scope, and the next step.</p></div>
+        <div class="classical-contact-band__actions"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href="/classical/get-a-quote">Request a Quote</a></div>
+      </section>
+    </main>
+    <ClassicalFooter />
+  </div>
+</BaseLayout>
