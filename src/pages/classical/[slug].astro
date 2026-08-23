@@ -11,58 +11,208 @@ export function getStaticPaths() {
   return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
 
+type DetailPage = {
+  hero: string;
+  introHeading: string;
+  intro: string;
+  benefits: string[];
+  sections: { heading: string; paragraphs: string[] }[];
+  faqs: [string, string][];
+};
+
 const { service } = Astro.props;
-const serviceImages = assets.serviceImages as Record<string, string>;
-const details: Record<string, { intro: string; points: string[] }> = {
+const detailImages = assets.serviceDetailImages as Record<string, string[]>;
+const pageImages = detailImages[service.slug] ?? [assets.serviceImages[service.slug as keyof typeof assets.serviceImages]];
+const otherServices = services.filter((item) => item.slug !== service.slug);
+
+const pages: Record<string, DetailPage> = {
   'open-cell-spray-foam-insulation': {
-    intro: 'Open-cell spray foam expands to fill gaps and create an effective air seal. It is commonly considered for rooflines, attics, walls, and other assemblies where its softer, vapor-permeable characteristics fit the design.',
-    points: ['Air sealing around irregular framing and penetrations', 'Thermal insulation for suitable wall and roof assemblies', 'Useful for many conditioned attic applications', 'Project-specific evaluation before installation']
+    hero: "Upgrade Your Charleston County Home's Comfort and Efficiency with Open-Cell Spray Foam Insulation",
+    introHeading: 'Understanding Open-Cell Spray Foam Insulation',
+    intro: 'Open-cell spray foam expands into framing cavities and around irregular penetrations, helping create a continuous air seal. Its lighter, vapor-permeable structure can suit selected rooflines, attics, walls, and sound-control applications when the building assembly is evaluated first.',
+    benefits: ['Air sealing around gaps and penetrations', 'Thermal insulation for suitable wall and roof assemblies', 'Sound-dampening characteristics', 'Efficient coverage of irregular framing', 'Project-specific thickness and moisture planning'],
+    sections: [
+      { heading: 'Advantages of Open-Cell Foam Insulation for Lowcountry Homes', paragraphs: ['A properly designed open-cell system can reduce uncontrolled air movement and make indoor temperatures feel more consistent. Because the material expands after application, it can reach spaces that are difficult to address with rigid insulation.', 'Material choice still depends on the roof, wall, or attic assembly. East Coast Foam evaluates the project conditions before recommending open-cell foam instead of treating it as a one-size-fits-all answer.'] },
+      { heading: 'Open-Cell R-Value and Choosing the Right Insulation', paragraphs: ['R-value measures resistance to heat flow, but whole-building performance also depends on air leakage, installation quality, moisture behavior, and the surrounding assembly. Open-cell foam generally provides less R-value per inch than closed-cell foam while offering a different density and drying profile.', 'The appropriate system and installed thickness should be based on the property, local requirements, and the intended use of the space.'] },
+      { heading: 'Professional Open-Cell Spray Foam Installation', paragraphs: ['The installation process includes evaluating the work area, protecting adjacent surfaces, preparing the substrate, applying the foam consistently, and inspecting the finished coverage. Occupancy, ventilation, and re-entry requirements are discussed as part of project planning.', 'East Coast Foam serves Beaufort County, Charleston County, Savannah, and nearby Lowcountry communities from its Seabrook location.'] }
+    ],
+    faqs: [
+      ['Is open-cell spray foam suitable for every insulation project?', 'No. It can be a strong option for selected attics, rooflines, walls, and sound-control applications, but the building assembly and moisture strategy should be evaluated first.'],
+      ['How long can open-cell spray foam last?', 'Service life depends on the installation, substrate, exposure, and later building changes. Properly installed foam is intended to remain in place as part of the assembly for many years.'],
+      ['Does open-cell spray foam create an air barrier?', 'At the manufacturer-specified thickness, many open-cell products can function as an air-impermeable insulation. Product data and project requirements determine the final specification.'],
+      ['What happens before installation?', 'The team reviews the space, discusses project goals, identifies preparation needs, and provides a scope and estimate before scheduling work.']
+    ]
   },
   'closed-cell-spray-foam-insulation': {
-    intro: 'Closed-cell spray foam is a dense insulation system that combines thermal performance, air sealing, and strong resistance to moisture movement. It can be useful in demanding assemblies where those properties are important.',
-    points: ['Dense, high-performance insulation layer', 'Strong air-sealing characteristics', 'Moisture-resistant closed-cell structure', 'Suitable for selected attics, crawlspaces, walls, and other assemblies']
+    hero: 'Achieve Peak Performance with Closed-Cell Spray Foam Insulation Services',
+    introHeading: 'Closed-Cell Spray Foam for Demanding Assemblies',
+    intro: 'Closed-cell spray foam is a dense insulation system that combines high thermal resistance per inch with air-sealing and moisture-resistant characteristics. It can be considered for selected attics, crawl spaces, walls, metal buildings, and other assemblies where those properties are useful.',
+    benefits: ['High R-value per inch', 'Strong air-sealing characteristics', 'Low-permeance closed-cell structure', 'Added rigidity in selected assemblies', 'Continuous coverage around irregular details'],
+    sections: [
+      { heading: 'Closed-Cell Spray Foam R-Value', paragraphs: ['Closed-cell foam typically delivers more thermal resistance per inch than open-cell foam or many conventional insulation products. That can be valuable where cavity depth is limited, but R-value is only one part of a correct design.', 'Substrate condition, climate, moisture movement, ignition or thermal barriers, and required thickness all factor into the final recommendation.'] },
+      { heading: 'Air Sealing and Moisture Resistance', paragraphs: ['The dense cell structure can limit air movement and resist water-vapor transmission more strongly than open-cell foam. These characteristics can help in coastal conditions when the entire assembly is designed correctly.', 'Foam should not be used to conceal an active leak or unresolved moisture problem. The source condition needs to be addressed before installation.'] },
+      { heading: 'Finding the Right Closed-Cell Installation Approach', paragraphs: ['Professional installation starts with an assessment of the surface and surrounding construction. The crew protects adjacent areas, follows the selected product requirements, applies controlled lifts, and inspects the completed coverage.', 'East Coast Foam discusses ventilation, access, timing, and re-entry expectations before work begins.'] }
+    ],
+    faqs: [
+      ['What is closed-cell spray foam?', 'It is a dense spray-applied polyurethane insulation that can provide thermal insulation, air sealing, and low vapor permeance at appropriate installed thicknesses.'],
+      ['Why use a professional installer?', 'Product selection, substrate preparation, application conditions, lift thickness, ventilation, and safety controls all affect the finished system.'],
+      ['Is closed-cell foam right for every attic or crawl space?', 'No. The existing assembly, moisture conditions, code requirements, and project goals should be evaluated before choosing it.'],
+      ['How is a project scoped?', 'East Coast Foam inspects the accessible work area, discusses the intended outcome, and prepares an estimate describing the planned application.']
+    ]
   },
   'polyurea-coatings': {
-    intro: 'Polyurea coatings create a durable protective surface for applications that need resistance to water, weather, abrasion, or heavy use. The right preparation and system depend on the substrate and exposure.',
-    points: ['Fast-curing protective coating systems', 'Waterproofing and weather-exposure applications', 'Durable finish for demanding surfaces', 'Surface preparation matched to the project']
+    hero: 'High Quality Polyurea Coatings for Long-Lasting Performance',
+    introHeading: 'Durable Polyurea Coating Systems',
+    intro: 'Polyurea is a fast-curing protective coating used on suitable substrates that need resistance to water, abrasion, weather, or heavy use. The finished performance depends on surface preparation, compatible primers, application thickness, and the selected coating system.',
+    benefits: ['Fast-curing coating options', 'Seamless protective surface', 'Abrasion and impact resistance', 'Waterproofing applications on suitable substrates', 'Systems selected for the exposure and project'],
+    sections: [
+      { heading: 'Polyurea Roof and Surface Coatings', paragraphs: ['Polyurea systems can be considered for selected roof details, decks, containment areas, concrete, and other demanding surfaces. Each application begins with an evaluation of the substrate, existing coatings, drainage, movement, and exposure.', 'A coating is only as reliable as the surface beneath it. Cleaning, repairs, profiling, and priming are planned before the finish coat is applied.'] },
+      { heading: 'Waterproofing and Coastal Exposure', paragraphs: ['Lowcountry properties face intense sun, humidity, wind-driven rain, and salt exposure. A compatible polyurea system can provide a continuous protective layer, but product chemistry and detailing must match those conditions.', 'East Coast Foam avoids promising that one coating fits every roof, basement, dock, or commercial surface. The project is assessed before a system is recommended.'] },
+      { heading: 'A Controlled Application Process', paragraphs: ['The work area is prepared and protected, damaged or incompatible material is addressed, and the coating is applied at the specified coverage. Cure timing and return-to-service expectations vary by product and site conditions.', 'The estimate identifies the intended surface, preparation, and coating scope so the customer understands the proposed work.'] }
+    ],
+    faqs: [
+      ['What are polyurea coatings used for?', 'They are used as protective or waterproofing layers on compatible concrete, roof, deck, containment, and industrial surfaces.'],
+      ['Why is surface preparation important?', 'Contamination, moisture, loose material, or incompatible coatings can prevent proper adhesion. Preparation is a core part of the system.'],
+      ['Can polyurea be applied over an existing surface?', 'Sometimes, after inspection and any required cleaning, repair, profiling, or priming. Compatibility must be confirmed first.'],
+      ['How quickly can the surface return to use?', 'Polyurea products can cure quickly, but actual return-to-service timing depends on the system, weather, substrate, and project requirements.']
+    ]
   },
   'fiberglass-batt-insulation': {
-    intro: 'Fiberglass batt insulation remains a practical choice for many conventional wall, floor, and ceiling assemblies. East Coast Foam can evaluate where fiberglass is the right fit instead of defaulting every project to spray foam.',
-    points: ['Traditional insulation option for standard framing', 'Useful where spray foam is not required', 'Straightforward installation in accessible assemblies', 'Can be combined with broader insulation upgrades']
+    hero: 'Your Trusted Partner for Fiberglass Batt Insulation in Beaufort County',
+    introHeading: 'A Practical Insulation Option for Standard Framing',
+    intro: 'Fiberglass batt insulation remains a practical choice for accessible walls, floors, ceilings, and other conventionally framed assemblies. Correct sizing, placement, and fit matter: compressed, gapped, or misaligned batts cannot perform as intended.',
+    benefits: ['Familiar solution for standard framing', 'Multiple thickness and R-value options', 'Useful where spray foam is not required', 'Can support sound control between rooms', 'Straightforward inspection in accessible cavities'],
+    sections: [
+      { heading: 'Benefits of Fiberglass Batt Insulation', paragraphs: ['Fiberglass batts can provide useful thermal and acoustic performance at a competitive project cost. They are available in common framing widths and can be installed without converting every assembly to spray foam.', 'Performance depends on full contact with the intended air barrier and careful fitting around wires, pipes, boxes, and framing.'] },
+      { heading: 'Careful Batt Installation', paragraphs: ['The crew reviews the cavity depth and framing, selects an appropriate product, cuts and fits the batts around obstructions, and avoids unnecessary compression. Existing air leaks or moisture concerns may need separate attention.', 'East Coast Foam can also coordinate removal of unsuitable existing insulation before a new installation begins.'] },
+      { heading: 'Choosing Fiberglass or Spray Foam', paragraphs: ['The best material depends on the assembly, accessibility, performance goals, budget, and moisture strategy. Fiberglass can be the right answer for one part of a building while spray foam is more appropriate elsewhere.', 'A project consultation helps define the scope instead of defaulting the whole property to a single product.'] }
+    ],
+    faqs: [
+      ['How does R-value affect energy performance?', 'R-value describes resistance to heat flow. Actual results also depend on coverage, air leakage, moisture, HVAC operation, and installation quality.'],
+      ['Can batts be installed in an older building?', 'Often, if the cavities are accessible and existing moisture, electrical, pest, or structural concerns are addressed first.'],
+      ['What should I look for in batt installation?', 'Batts should fit the cavity without major gaps, voids, or compression and should be detailed around penetrations and obstructions.'],
+      ['Can East Coast Foam remove old insulation first?', 'Yes. Removal can be included when existing material needs to be cleared before the new insulation is installed.']
+    ]
   },
   'insulation-removal-services': {
-    intro: 'Existing insulation sometimes needs to be removed before a new system can be installed correctly. East Coast Foam can clear old material and prepare the space for the next phase of work.',
-    points: ['Removal of existing attic or accessible insulation', 'Cleaner preparation for replacement systems', 'Opportunity to inspect the exposed assembly', 'Coordinated transition into new insulation work']
+    hero: 'Your Reliable Partner for Insulation Removal Services in Beaufort County',
+    introHeading: 'A Clean Starting Point for an Insulation Upgrade',
+    intro: 'Existing attic or accessible insulation may need to be removed after contamination, moisture damage, pest activity, renovation, or a change in the planned insulation system. Removal exposes the assembly so it can be reviewed and prepared for the next phase of work.',
+    benefits: ['Removal of accessible loose-fill or batt insulation', 'Preparation for replacement insulation', 'Better visibility of the underlying assembly', 'Orderly containment and cleanup planning', 'Coordinated transition to a new system'],
+    sections: [
+      { heading: 'When Insulation Removal Makes Sense', paragraphs: ['Age alone does not always require removal. The condition of the material, evidence of moisture or pests, access needs, and the design of the replacement assembly are more useful decision points.', 'East Coast Foam evaluates the accessible space and explains whether full removal, selective removal, or leaving sound material in place is the practical approach.'] },
+      { heading: 'Professional Batt and Loose-Fill Removal', paragraphs: ['The work area is isolated as practical, access routes are protected, and the existing material is collected using methods suited to the insulation type and site. Disposal needs are considered in the project scope.', 'Once the material is removed, visible concerns in the exposed assembly can be documented. Specialized remediation or repair may require the appropriate trade before new insulation is installed.'] },
+      { heading: 'Preparing for Replacement Insulation', paragraphs: ['Removal creates an opportunity to address accessible air leaks, inspect wiring and penetrations, and choose a replacement system based on the actual assembly.', 'East Coast Foam can discuss fiberglass, open-cell foam, or closed-cell foam options when planning the next step.'] }
+    ],
+    faqs: [
+      ['Does old insulation always need to be removed?', 'No. Removal depends on its condition, contamination, moisture, pests, renovation plans, access, and the replacement system.'],
+      ['How long does removal take?', 'Timing varies with the area, access, material type, depth, contamination, and disposal requirements. The estimate provides a project-specific scope.'],
+      ['What happens after the insulation is removed?', 'The accessible assembly can be reviewed, needed repairs or remediation can be identified, and the replacement insulation can be planned.'],
+      ['How is old insulation disposed of?', 'Disposal is planned around the material and local requirements. Any suspected hazardous material requires appropriate identification and handling before routine removal.']
+    ]
   },
   'spray-foam-roofing': {
-    intro: 'Spray polyurethane foam roofing can create a continuous insulated roof surface when the existing roof and project conditions are appropriate. The system is evaluated as part of the roof assembly, not as a generic coating.',
-    points: ['Continuous spray-applied foam surface', 'Insulation and roof-system performance in one assembly', 'Conforms to many existing roof shapes', 'Protective coating options available for suitable systems']
+    hero: 'Unveiling the Power of Spray Foam Roofing Insulation In Beaufort County',
+    introHeading: 'A Continuous Spray-Applied Roofing System',
+    intro: 'Spray polyurethane foam roofing can create a continuous insulated surface over a suitable roof assembly. The system combines foam with a protective coating and detailed flashing work, and it should be evaluated as a complete roof system rather than as insulation alone.',
+    benefits: ['Continuous spray-applied surface', 'Insulation and air sealing in one system', 'Conforms to many roof shapes and penetrations', 'Can be applied over selected prepared substrates', 'Protective topcoat options for weather exposure'],
+    sections: [
+      { heading: 'Why Choose Spray Foam for a Roof?', paragraphs: ['The foam expands in place, allowing the installer to create a continuous layer and shape transitions around roof details. Its low weight and thermal performance can make it an option for selected existing roofs.', 'Roof condition, drainage, wet materials, structural movement, and substrate compatibility must be reviewed before a system is proposed.'] },
+      { heading: 'Local Roof Insulation Installation', paragraphs: ['Installation includes cleaning and preparing the roof, addressing identified defects, applying the foam to the planned thickness and slope, and installing a compatible protective coating.', 'Weather conditions affect application. Scheduling and cure windows are coordinated around the selected materials and forecast.'] },
+      { heading: 'Protecting the Foam with a Roof Coating', paragraphs: ['Spray polyurethane foam needs a compatible coating to protect it from ultraviolet exposure and weather. Silicone or acrylic systems may be considered based on drainage, exposure, maintenance, and budget.', 'Ongoing inspection and timely maintenance help preserve the roof system. East Coast Foam can explain the anticipated care during the project consultation.'] }
+    ],
+    faqs: [
+      ['Can spray foam be applied to any roof?', 'No. The substrate, drainage, existing moisture, roof condition, details, and compatibility must be evaluated first.'],
+      ['How long can a spray foam roof last?', 'Service life depends on design, installation, exposure, maintenance, coating condition, and timely repairs. Periodic inspection and recoating may be part of long-term care.'],
+      ['Does a spray foam roof need a coating?', 'Yes. A compatible protective coating is a core part of the exposed roofing system and shields the foam from ultraviolet light and weather.'],
+      ['How do I schedule an evaluation?', `Call ${site.phoneDisplay} or use the non-transmitting demo quote form to discuss the roof and arrange the next step.`]
+    ]
   },
   'silicone-roof-coating': {
-    intro: 'Silicone and acrylic roof coatings can protect suitable roof surfaces from weather exposure and extend the useful life of a properly prepared system. East Coast Foam evaluates the roof condition before recommending a coating approach.',
-    points: ['Weather-resistant protective finish', 'Silicone or acrylic options based on project needs', 'Preparation and repair before coating as required', 'Useful for selected commercial and residential roof systems']
+    hero: 'Premier Silicone Roof Coating Solutions in Beaufort County',
+    introHeading: 'Protective Silicone and Acrylic Roof Coatings',
+    intro: 'Silicone and acrylic roof coatings can protect compatible roof surfaces and extend the service life of a properly prepared system. The existing roof must be evaluated for moisture, adhesion, drainage, damage, and compatibility before coating work begins.',
+    benefits: ['Seamless weather-exposed finish', 'Reflective coating options', 'Silicone systems for selected ponding-water conditions', 'Acrylic options for compatible, well-drained roofs', 'Repair and preparation before coating'],
+    sections: [
+      { heading: 'Residential Silicone Roof Coating', paragraphs: ['Silicone coatings form a flexible, weather-resistant layer over compatible roof surfaces. They are often considered where ultraviolet exposure, rain, and areas of standing water are important design factors.', 'The roof is cleaned, repaired where required, and primed when the selected system calls for it. Coverage rate and dry-film thickness are controlled during application.'] },
+      { heading: 'Commercial Coating Options', paragraphs: ['Low-slope commercial roofs may benefit from a restoration coating when the existing assembly is dry, sound, and compatible. Penetrations, seams, drainage, traffic areas, and prior repairs are reviewed before work starts.', 'A coating is not a substitute for correcting saturated insulation, failed structure, or unresolved drainage problems.'] },
+      { heading: 'Silicone or Acrylic?', paragraphs: ['Silicone is often selected for strong weather and ponding-water resistance. Acrylic coatings can offer a reflective, cost-conscious option on suitable roofs with positive drainage.', 'East Coast Foam evaluates the roof and discusses the tradeoffs before recommending either system. The proposal identifies preparation and product scope for the specific project.'] }
+    ],
+    faqs: [
+      ['How does acrylic coating compare with silicone?', 'Acrylic can be reflective and cost-effective on compatible, well-drained roofs; silicone generally provides stronger resistance to persistent water exposure.'],
+      ['Can silicone be applied to every roof type?', 'No. Existing materials, moisture, adhesion, repairs, drainage, and manufacturer compatibility must be checked first.'],
+      ['What does the application process include?', 'Typical work includes inspection, cleaning, repairs, detailing, primer when required, coating application, and a final review.'],
+      ['Will a coating fix an active roof leak?', 'The source of a leak must be identified and repaired. Coating may be part of the solution only when the underlying roof is suitable.']
+    ]
   }
 };
-const detail = details[service.slug] ?? { intro: service.summary, points: [] };
+
+const detail = pages[service.slug];
 ---
 <BaseLayout title={`${service.title} | ${site.name}`} description={`${service.summary} Contact East Coast Foam LLC for a project evaluation in the Lowcountry.`} theme="classical" showDemoBanner={false}>
   <div id="top" class="classical-site">
     <ClassicalHeader />
     <main>
       <section class="classical-page-hero">
-        <img src={serviceImages[service.slug]} alt="" referrerpolicy="no-referrer" />
-        <div class="classical-page-hero__inner"><p class="classical-overline">Our Services</p><h1>{service.title}</h1></div>
+        <div class="classical-page-hero__inner"><h1>{detail.hero}</h1></div>
       </section>
+
       <section class="classical-service-detail">
         <article>
+          <img class="classical-service-detail__lead-image" src={pageImages[0]} alt={`${service.title} installation example`} referrerpolicy="no-referrer" />
           <p class="classical-overline">East Coast Foam LLC</p>
-          <h2>{service.title}</h2>
+          <h2>{detail.introHeading}</h2>
           <p>{detail.intro}</p>
-          <ul>{detail.points.map((point) => <li>{point}</li>)}</ul>
-          <img class="classical-page-photo" src={serviceImages[service.slug]} alt={`${service.title} project example`} loading="lazy" referrerpolicy="no-referrer" />
+          <ul class="classical-service-benefits">{detail.benefits.map((point) => <li>{point}</li>)}</ul>
+
+          {detail.sections.map((section, index) => (
+            <>
+              {index === 1 && pageImages[1] && <img class="classical-page-photo" src={pageImages[1]} alt={`${service.title} completed work`} loading="lazy" referrerpolicy="no-referrer" />}
+              <section class="classical-service-copy-section">
+                <h2>{section.heading}</h2>
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+            </>
+          ))}
+
           <div class="classical-page-cta"><a href="/classical/get-a-quote">Get a Quote</a><a href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a></div>
         </article>
-        <aside><ClassicalEstimateForm /></aside>
+
+        <aside>
+          <ClassicalEstimateForm />
+          <div class="classical-service-aside-card">
+            <h2>Talk with East Coast Foam</h2>
+            <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>
+            <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+            <span>{site.address}</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="classical-service-faq" aria-labelledby="service-faq-title">
+        <p class="classical-overline">Frequently Asked Questions</p>
+        <h2 id="service-faq-title">Questions about {service.title.toLowerCase()}</h2>
+        <div>
+          {detail.faqs.map(([question, answer]) => (
+            <details>
+              <summary>{question}</summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="classical-service-explore" aria-labelledby="other-services-title">
+        <p class="classical-overline">Other Services</p>
+        <h2 id="other-services-title">Explore more East Coast Foam services.</h2>
+        <div class="classical-name-grid">
+          {otherServices.map((item) => <a href={`/classical/${item.slug}`}>{item.title}<span aria-hidden="true">→</span></a>)}
+        </div>
+      </section>
+
+      <section class="classical-contact-band">
+        <div><p class="classical-overline">Serving the Lowcountry</p><h2>Discuss the building before choosing the product.</h2><p>East Coast Foam serves Beaufort, Lady's Island, Hilton Head, Bluffton, Edisto, Hampton County, Charleston, North Charleston, Mount Pleasant, Savannah, and surrounding communities.</p></div>
+        <div class="classical-contact-band__actions"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href="/classical/contact-us">Contact Us</a></div>
       </section>
     </main>
     <ClassicalFooter />

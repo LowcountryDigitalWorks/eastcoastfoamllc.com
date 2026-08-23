@@ -4,42 +4,116 @@ import ClassicalHeader from '../../components/ClassicalHeader.astro';
 import ClassicalFooter from '../../components/ClassicalFooter.astro';
 import site from '../../data/site.json';
 import assets from '../../data/demo-assets.json';
-import home from '../../data/classical-home.json';
+
+const values = [
+  ['Quality First', 'Use quality insulation materials and careful installation practices appropriate to the project.'],
+  ['Expertise You Can Trust', 'Keep the team focused on spray-foam installation knowledge, current industry practices, and consistent workmanship.'],
+  ['Customer-Centric Approach', 'Keep communication clear from the initial conversation through completion of the work.'],
+  ['Integrity in Every Interaction', 'Provide straightforward recommendations and transparent project communication.'],
+  ['Innovation at the Forefront', 'Continue evaluating insulation materials, application techniques, and building-performance practices.']
+];
+
+const qualitySteps = [
+  ['Free Consultations', 'Discuss the property, project goals, and insulation questions before deciding on the next step.'],
+  ['Thorough Project Planning', 'Assess the building and select an insulation approach suited to the assembly and project requirements.'],
+  ['Detailed Estimates', 'Provide a clear estimate that describes the anticipated scope and project cost.'],
+  ['Meticulous Installation', 'Apply the selected insulation system carefully and consistently in the designated areas.'],
+  ['Clean Work Environment', 'Protect the work area and keep the project as orderly as practical during installation.'],
+  ['Final Inspection and Walkthrough', 'Review the completed work and address final questions before project closeout.']
+];
+
+const approach = [
+  ['Open Communication', 'Maintain direct communication throughout the project so questions and concerns can be addressed promptly.'],
+  ['Customization', 'Evaluate the building rather than treating every home or project as if it needs the same insulation system.'],
+  ['Respect for Your Home', 'Use practical protective measures and work carefully around the property while installation is underway.']
+];
+
+const projectSteps = [
+  ['01', 'Free Consultation', 'Discuss the project, evaluate the home’s needs, and identify an appropriate insulation direction.'],
+  ['02', 'Thorough Inspection', 'Inspect the attic, crawl space, wall assembly, roof, or other work area before installation begins.'],
+  ['03', 'Professional Installation', 'Install the selected insulation system with attention to coverage, air sealing, and the surrounding work area.'],
+  ['04', 'Completion and Inspection', 'Review the finished installation and complete a final walkthrough of the work.']
+];
 ---
-<BaseLayout title={`About Us | ${site.name}`} description="Learn about East Coast Foam LLC, a locally owned insulation contractor serving Beaufort County, Charleston County, and the Lowcountry." theme="classical" showDemoBanner={false}>
+<BaseLayout title={`About Us | ${site.name}`} description="Learn about East Coast Foam LLC, a locally owned insulation contractor serving Beaufort County, Charleston County, Savannah, and surrounding Lowcountry communities." theme="classical" showDemoBanner={false}>
   <div id="top" class="classical-site">
     <ClassicalHeader />
     <main>
       <section class="classical-page-hero">
         <img src={assets.serviceImages['closed-cell-spray-foam-insulation']} alt="" referrerpolicy="no-referrer" />
-        <div class="classical-page-hero__inner"><p class="classical-overline">East Coast Foam LLC</p><h1>About Us</h1></div>
+        <div class="classical-page-hero__inner">
+          <h1>About Us: East Coast Foam LLC — Your Trusted Insulation Experts in Beaufort County</h1>
+        </div>
       </section>
 
-      <section class="classical-page-content">
+      <section class="classical-page-content classical-about-page-intro">
         <div>
-          <h2>Your trusted insulation experts in the Lowcountry.</h2>
-          <p>East Coast Foam LLC is a locally owned and operated insulation contractor focused on helping customers create more comfortable, efficient, and durable buildings. Spray foam is a core specialty, supported by fiberglass insulation, insulation removal, roofing foam, and protective coating services.</p>
-          <p>The company serves Beaufort County, Charleston County, and surrounding communities, with a direct, practical approach to evaluating each property and recommending the right system for the project.</p>
-          <div class="classical-page-grid">
-            <article class="classical-page-card"><h3>Quality first</h3><p>Professional-grade materials, careful preparation, and attention to consistent installation.</p></article>
-            <article class="classical-page-card"><h3>Experienced team</h3><p>Insulation knowledge grounded in real projects and continued attention to industry practices.</p></article>
-            <article class="classical-page-card"><h3>Customer-focused</h3><p>Clear communication, straightforward answers, and direct contact throughout the project.</p></article>
-            <article class="classical-page-card"><h3>Integrity</h3><p>Recommendations centered on the building and the customer's goals rather than a one-size-fits-all product.</p></article>
+          <p>East Coast Foam LLC is a locally owned and operated insulation contractor serving Charleston County, Beaufort County, Savannah, and surrounding Lowcountry communities. Spray foam insulation is a core specialty, supported by fiberglass insulation, insulation removal, roofing foam, and protective coating services.</p>
+          <p>The team focuses on creating more comfortable and energy-efficient buildings while keeping recommendations tied to the actual property, project goals, and coastal climate.</p>
+          <div class="classical-page-grid classical-page-grid--values">
+            {values.map(([title, text]) => (
+              <article class="classical-page-card"><h3>{title}</h3><p>{text}</p></article>
+            ))}
           </div>
         </div>
       </section>
 
       <section class="classical-section classical-section--alt">
-        <p class="classical-overline">Commitment to quality and customer satisfaction</p>
-        <h2>A clear process from consultation through completion.</h2>
+        <p class="classical-overline">About Our Commitment to Quality and Customer Satisfaction</p>
+        <h2>A clear process from the first conversation through completion.</h2>
+        <div class="classical-page-grid classical-page-grid--quality">
+          {qualitySteps.map(([title, text]) => (
+            <article class="classical-page-card"><h3>{title}</h3><p>{text}</p></article>
+          ))}
+        </div>
+      </section>
+
+      <section class="classical-appointment-band">
+        <span>What are you waiting for?</span>
+        <h2>Schedule an Appointment Today!</h2>
+        <a href="/classical/contact-us">Contact Us</a>
+      </section>
+
+      <section class="classical-page-content classical-about-approach">
+        <div>
+          <div class="classical-about-grid">
+            <div>
+              <p class="classical-overline">Our Approach</p>
+              <h2>A collaborative process for your insulation needs.</h2>
+              <p>East Coast Foam works directly with customers to understand the building and the desired outcome before recommending an insulation approach.</p>
+              <div class="classical-page-grid classical-page-grid--approach">
+                {approach.map(([title, text]) => (
+                  <article class="classical-page-card"><h3>{title}</h3><p>{text}</p></article>
+                ))}
+              </div>
+            </div>
+            <div class="classical-about-photo">
+              <img src={assets.serviceImages['open-cell-spray-foam-insulation']} alt="Spray foam insulation installed between framing members" loading="lazy" referrerpolicy="no-referrer" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="classical-section classical-section--alt classical-expect">
+        <p class="classical-overline">What to Expect</p>
+        <h2>When you choose East Coast Foam LLC for your spray foam insulation project.</h2>
         <div class="classical-steps">
-          {home.whatToExpect.map((item) => <article><span>{item.step}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></article>)}
+          {projectSteps.map(([step, title, text]) => (
+            <article><span>{step}</span><div><h3>{title}</h3><p>{text}</p></div></article>
+          ))}
         </div>
       </section>
 
       <section class="classical-contact-band">
-        <div><p class="classical-overline">What are you waiting for?</p><h2>Schedule a conversation about your project.</h2><p>Call East Coast Foam or send a quote request and the team can discuss the property, the scope, and the next step.</p></div>
-        <div class="classical-contact-band__actions"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href="/classical/get-a-quote">Request a Quote</a></div>
+        <div>
+          <p class="classical-overline">Get in Touch with East Coast Foam LLC Today!</p>
+          <h2>Ready to discuss your insulation project?</h2>
+          <p>East Coast Foam serves Beaufort County, Charleston County, Savannah, and surrounding communities. Call or send a quote request to discuss the property and next step.</p>
+        </div>
+        <div class="classical-contact-band__actions">
+          <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+          <a href="/classical/contact-us">Contact Us</a>
+        </div>
       </section>
     </main>
     <ClassicalFooter />

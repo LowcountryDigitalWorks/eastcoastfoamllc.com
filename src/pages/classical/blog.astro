@@ -8,21 +8,25 @@ const posts = [
   {
     title: 'Discover How Closed-Cell Spray Foam Benefits Beaufort County’s Home!',
     summary: 'A homeowner-focused look at closed-cell spray foam, moisture resistance, air sealing, and Lowcountry climate considerations.',
+    image: assets.blogImages[0],
     url: 'https://eastcoastfoamllc.com/discover-how-closed-cell-spray-foam-benefits-beaufort-countys-home/'
   },
   {
     title: 'Why Spray Foam Roofing Insulation Is a Strong Choice for Your Roof',
     summary: 'An introduction to spray foam roofing insulation and the role a continuous foam system can play in roof performance.',
+    image: assets.blogImages[1],
     url: 'https://eastcoastfoamllc.com/why-spray-foam-roofing-insulation-is-the-best-choice-for-your-roof-in-2024/'
   },
   {
     title: 'Choosing the Right Polyurea Coating Contractor in Hilton Head, SC',
     summary: 'What coastal property owners should consider when evaluating polyurea coating work and the contractor performing it.',
+    image: assets.blogImages[2],
     url: 'https://eastcoastfoamllc.com/choosing-the-right-polyurea-coating-contractor-in-hilton-head-sc/'
   },
   {
     title: 'Open Up a World of Comfort: The Benefits of Open-Cell Spray Foam Insulation',
     summary: 'A plain-language overview of open-cell spray foam and where homeowners may encounter it as an insulation option.',
+    image: assets.blogImages[3],
     url: 'https://eastcoastfoamllc.com/open-up-a-world-of-comfort-the-benefits-of-open-cell-spray-foam-insulation/'
   }
 ];
@@ -35,20 +39,21 @@ const posts = [
         <img src={assets.serviceImages['spray-foam-roofing']} alt="" referrerpolicy="no-referrer" />
         <div class="classical-page-hero__inner"><p class="classical-overline">East Coast Foam LLC</p><h1>Our Blog</h1></div>
       </section>
-      <section class="classical-page-content">
-        <div>
-          <h2>Insulation information for Lowcountry property owners.</h2>
-          <p>Explore East Coast Foam articles covering spray foam insulation, roofing foam, protective coatings, and common questions about improving building comfort and performance.</p>
-          <div class="classical-blog-grid">
-            {posts.map((post) => (
-              <article>
+      <section class="classical-blog-listing" aria-label="East Coast Foam articles">
+        <div class="classical-blog-grid">
+          {posts.map((post) => (
+            <article>
+              <a class="classical-blog-card__image" href={post.url} target="_blank" rel="noopener noreferrer" aria-label={`Read ${post.title} on the current East Coast Foam site`}>
+                <img src={post.image} alt="" loading="lazy" referrerpolicy="no-referrer" />
+              </a>
+              <div>
                 <span>East Coast Foam</span>
-                <h3>{post.title}</h3>
+                <h2>{post.title}</h2>
                 <p>{post.summary}</p>
                 <a href={post.url} target="_blank" rel="noopener noreferrer">Read More ↗</a>
-              </article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </main>
