@@ -1,0 +1,27 @@
+---
+import ClassicalEstimateForm from './ClassicalEstimateForm.astro';
+import site from '../data/site.json';
+---
+<section class="classical-contact-panel" aria-label="Request a quote and contact East Coast Foam">
+  <div class="classical-contact-panel__form">
+    <ClassicalEstimateForm />
+  </div>
+  <div class="classical-contact-panel__details">
+    <p class="classical-overline">Contact East Coast Foam</p>
+    <h2>Ready to discuss your project?</h2>
+    <div class="classical-contact-list">
+      <div><span>Email Address</span><a href={`mailto:${site.currentEmail}`}>{site.currentEmail}</a></div>
+      <div><span>Phone Number</span><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a></div>
+      <div><span>Address</span><a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">{site.address}</a></div>
+      <div><span>Business Hours</span><strong>{site.hours}</strong></div>
+    </div>
+    <div class="classical-map-frame">
+      <iframe
+        title="East Coast Foam location"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=1352%20Trask%20Pkwy%2C%20Seabrook%2C%20SC%2029940&output=embed"
+      ></iframe>
+    </div>
+  </div>
+</section>

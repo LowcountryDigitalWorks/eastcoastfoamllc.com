@@ -1,0 +1,98 @@
+---
+import home from '../data/classical-home.json';
+import assets from '../data/demo-assets.json';
+import site from '../data/site.json';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+<div class={`google-review-carousel ${compact ? 'google-review-carousel--compact' : ''}`} data-review-carousel>
+  <div class="google-review-carousel__bar">
+    <div class="google-review-carousel__summary">
+      <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
+      <div><strong>5.0</strong><span>Customer reviews</span></div>
+    </div>
+    <div class="google-review-carousel__controls">
+      <button type="button" data-review-prev aria-label="Previous review">‹</button>
+      <button type="button" data-review-next aria-label="Next review">›</button>
+    </div>
+  </div>
+
+  <div class="google-review-carousel__viewport" data-review-viewport tabindex="0" aria-label="East Coast Foam Google customer reviews">
+    <div class="google-review-carousel__track">
+      {home.reviews.map((review) => (
+        <article class="google-review-card">
+          <div class="google-review-card__header">
+            <img class="google-review-card__avatar" src={review.avatar} alt={`${review.name} profile picture`} loading="lazy" referrerpolicy="no-referrer" />
+            <div class="google-review-card__identity"><strong>{review.name}</strong><span>{review.date}</span></div>
+            <img class="google-review-card__platform" src={assets.reviewPlatformIcon} alt="Google" loading="lazy" referrerpolicy="no-referrer" />
+          </div>
+          <div class="google-review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p>{review.quote}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  {!compact && (
+    <a class="google-review-carousel__link" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">View East Coast Foam on Google →</a>
+  )}
+</div>
+
+<script>
+  const setupReviewCarousel = (root: Element) => {
+    if (!(root instanceof HTMLElement) || root.dataset.carouselReady === 'true') return;
+    const viewport = root.querySelector('[data-review-viewport]');
+    const previous = root.querySelector('[data-review-prev]');
+    const next = root.querySelector('[data-review-next]');
+    if (!(viewport instanceof HTMLElement)) return;
+
+    root.dataset.carouselReady = 'true';
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let timer: number | undefined;
+
+    const step = (): number => {
+      const card = viewport.querySelector('.google-review-card');
+      if (!(card instanceof HTMLElement)) return Math.max(viewport.clientWidth * 0.85, 280);
+      const track = viewport.querySelector('.google-review-carousel__track');
+      const gap = track instanceof HTMLElement ? Number.parseFloat(getComputedStyle(track).gap || '0') : 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const move = (direction: number) => {
+      const max = viewport.scrollWidth - viewport.clientWidth;
+      if (direction > 0 && viewport.scrollLeft >= max - 8) {
+        viewport.scrollTo({ left: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      } else if (direction < 0 && viewport.scrollLeft <= 8) {
+        viewport.scrollTo({ left: max, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      } else {
+        viewport.scrollBy({ left: step() * direction, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }
+    };
+
+    if (previous instanceof HTMLButtonElement) previous.addEventListener('click', () => move(-1));
+    if (next instanceof HTMLButtonElement) next.addEventListener('click', () => move(1));
+
+    const stop = () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+    };
+    const start = () => {
+      stop();
+      if (!prefersReducedMotion) timer = window.setInterval(() => move(1), 6000);
+    };
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+    start();
+  };
+
+  const initializeReviewCarousels = () => document.querySelectorAll('[data-review-carousel]').forEach(setupReviewCarousel);
+  initializeReviewCarousels();
+  document.addEventListener('astro:page-load', initializeReviewCarousels);
+</script>

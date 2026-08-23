@@ -4,6 +4,8 @@
   "logo": "https://eastcoastfoamllc.com/wp-content/uploads/2024/04/Logo-East-Coast-Foam-LLC.png",
   "googleReviewsBadge": "https://eastcoastfoamllc.com/wp-content/uploads/2024/04/Google-Reviews.webp",
   "hero": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/open-cell-spray-Foam-5.webp",
+  "paymentOptions": "https://eastcoastfoamllc.com/wp-content/uploads/2024/04/Payment-Options-1.webp",
+  "reviewPlatformIcon": "https://cdn.trustindex.io/assets/platform/Google/icon.svg",
   "certifications": [
     {
       "name": "American Chemistry Council",
@@ -26,5 +28,15 @@
     "insulation-removal-services": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/insulation-removal-4.webp",
     "spray-foam-roofing": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/SPRAY-FOAM-ROOFING-2.webp",
     "silicone-roof-coating": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/PREMIER-SILICONE-ROOF-COATING-3.webp"
+  },
+  "companyLogos": {
+    "IDI Distributors": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/IDI-East-Coast-Foam-LLC.webp",
+    "Huntsman Building Solutions": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Brands-East-Coast-Foam-LLC-1-1.webp",
+    "Service Partners": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Brand.jpg"
+  },
+  "brandLogos": {
+    "Natural Polymers": "https://eastcoastfoamllc.com/wp-content/uploads/2024/07/Brands-East-Coast-Foam-LLC-3.webp",
+    "Huntsman Building Solutions": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Brands-East-Coast-Foam-LLC-1-1.webp",
+    "BASF Spray Foam": "https://eastcoastfoamllc.com/wp-content/uploads/2024/05/Brands-East-Coast-Foam-LLC-2-1.webp"
   }
 }

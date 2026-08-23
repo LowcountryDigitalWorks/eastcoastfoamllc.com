@@ -2,11 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ClassicalHeader from '../../components/ClassicalHeader.astro';
 import ClassicalFooter from '../../components/ClassicalFooter.astro';
+import ClassicalContactPanel from '../../components/ClassicalContactPanel.astro';
 import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
+import GoogleReviewsCarousel from '../../components/GoogleReviewsCarousel.astro';
 import ServiceGrid from '../../components/ServiceGrid.astro';
 import site from '../../data/site.json';
 import assets from '../../data/demo-assets.json';
 import home from '../../data/classical-home.json';
+
+const companyLogos = assets.companyLogos as Record<string, string>;
+const brandLogos = assets.brandLogos as Record<string, string>;
 ---
 <BaseLayout
   title={`East Coast Foam LLC | Spray Foam Insulation Contractor`}
@@ -28,22 +33,9 @@ import home from '../../data/classical-home.json';
             <a href="/classical/contact-us">Contact Us</a>
             <a href="#services">Check Our Services</a>
           </div>
+          <GoogleReviewsCarousel compact />
         </div>
         <div id="quote"><ClassicalEstimateForm /></div>
-      </section>
-
-      <section class="classical-review-ribbon" aria-label="Customer reviews">
-        <div class="classical-review-ribbon__score">
-          <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
-          <strong>5.0</strong><span>Google rating</span>
-        </div>
-        {home.reviews.slice(0, 3).map((review) => (
-          <blockquote>
-            <div class="review-stars" aria-label="5 stars">★★★★★</div>
-            <p>“{review.quote}”</p>
-            <cite>{review.name}</cite>
-          </blockquote>
-        ))}
       </section>
 
       <section class="classical-trust-strip" aria-label="Industry affiliations">
@@ -88,7 +80,7 @@ import home from '../../data/classical-home.json';
 
       <section class="classical-section classical-expect">
         <p class="classical-overline">What To Expect</p>
-        <h2>From the first conversation through project completion.</h2>
+        <h2>When you choose East Coast Foam LLC for your spray foam insulation needs.</h2>
         <div class="classical-steps">
           {home.whatToExpect.map((item) => (
             <article>
@@ -99,70 +91,58 @@ import home from '../../data/classical-home.json';
         </div>
       </section>
 
-      <section class="classical-section classical-section--alt" id="services">
-        <p class="classical-overline">Our Spray Foam Insulation Services</p>
-        <h2>Insulation, removal, roofing foam, and protective coatings.</h2>
+      <section class="classical-section classical-section--alt classical-services-section" id="services">
+        <h2>Our Spray Foam Insulation Services</h2>
         <ServiceGrid variant="classical" />
         <div class="classical-section-cta"><a href="/classical/services">View All Services →</a></div>
       </section>
 
       <section class="classical-contact-band">
         <div>
-          <p class="classical-overline">Get In Touch With East Coast Foam LLC Today</p>
-          <h2>Ready to talk about your insulation project?</h2>
-          <p>Call East Coast Foam to discuss the property, your goals, and the next step toward a quote.</p>
+          <p class="classical-overline">Get In Touch With East Coast Foam LLC Today!</p>
+          <h2>Ready to experience the benefits of properly installed insulation?</h2>
+          <p>Call East Coast Foam at {site.phoneDisplay} for a consultation and quote.</p>
         </div>
         <div class="classical-contact-band__actions">
           <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
-          <a href="/classical/get-a-quote">Get a Quote</a>
+          <a href="/classical/contact-us">Contact Us</a>
         </div>
       </section>
 
       <section class="classical-section classical-partners">
         <p class="classical-overline">Companies We Work With</p>
-        <h2>Established insulation suppliers and building-product companies.</h2>
-        <div class="classical-name-grid">
+        <div class="classical-logo-grid">
           {home.companies.map((company) => (
-            <a href={company.url} target="_blank" rel="noopener noreferrer">{company.name}<span>↗</span></a>
+            <a href={company.url} target="_blank" rel="noopener noreferrer" aria-label={company.name}>
+              <img src={companyLogos[company.name]} alt={company.name} loading="lazy" referrerpolicy="no-referrer" />
+            </a>
           ))}
         </div>
+      </section>
+
+      <section class="classical-appointment-band">
+        <span>What are you waiting for?</span>
+        <h2>Schedule an appointment today!</h2>
+        <a href="/classical/contact-us">Contact Us</a>
       </section>
 
       <section class="classical-section classical-section--alt" id="reviews">
         <p class="classical-overline">What Our Customers Say About Us</p>
-        <h2>Local feedback from East Coast Foam customers.</h2>
-        <div class="classical-review-grid">
-          {home.reviews.map((review) => (
-            <blockquote>
-              <div class="review-stars" aria-label="5 stars">★★★★★</div>
-              <p>“{review.quote}”</p>
-              <footer><strong>{review.name}</strong><span>{review.date}</span></footer>
-            </blockquote>
-          ))}
-        </div>
-        <a class="classical-google-link" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">View East Coast Foam on Google →</a>
+        <GoogleReviewsCarousel />
       </section>
 
       <section class="classical-section classical-brands">
         <p class="classical-overline">Brands We Offer</p>
-        <h2>Professional products selected around the needs of the job.</h2>
-        <div class="classical-name-grid">
+        <div class="classical-logo-grid classical-logo-grid--brands">
           {home.brands.map((brand) => (
-            <a href={brand.url} target="_blank" rel="noopener noreferrer">{brand.name}<span>↗</span></a>
+            <a href={brand.url} target="_blank" rel="noopener noreferrer" aria-label={brand.name}>
+              <img src={brandLogos[brand.name]} alt={brand.name} loading="lazy" referrerpolicy="no-referrer" />
+            </a>
           ))}
         </div>
       </section>
 
-      <section class="classical-section classical-blog-preview" id="work">
-        <p class="classical-overline">Our Blog</p>
-        <h2>Insulation information for Lowcountry homeowners and builders.</h2>
-        <div class="classical-blog-grid">
-          <article><span>Closed-cell spray foam</span><h3>Discover How Closed-Cell Spray Foam Benefits Beaufort County’s Home!</h3><a href="/classical/blog">Read More →</a></article>
-          <article><span>Roofing foam</span><h3>Why Spray Foam Roofing Insulation Is a Strong Choice for Your Roof</h3><a href="/classical/blog">Read More →</a></article>
-          <article><span>Polyurea coatings</span><h3>Choosing the Right Polyurea Coating Contractor in Hilton Head, SC</h3><a href="/classical/blog">Read More →</a></article>
-          <article><span>Open-cell spray foam</span><h3>Open Up a World of Comfort: The Benefits of Open-Cell Spray Foam Insulation</h3><a href="/classical/blog">Read More →</a></article>
-        </div>
-      </section>
+      <ClassicalContactPanel />
     </main>
 
     <ClassicalFooter />
