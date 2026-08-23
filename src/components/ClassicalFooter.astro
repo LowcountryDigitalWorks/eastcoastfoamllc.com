@@ -1,0 +1,39 @@
+---
+import BrandMark from './BrandMark.astro';
+import site from '../data/site.json';
+import services from '../data/services.json';
+---
+<footer class="classical-site-footer" id="contact">
+  <div class="classical-site-footer__grid">
+    <section>
+      <BrandMark compact href="/classical" />
+      <p>East Coast Foam LLC is a locally owned and operated insulation contractor serving Beaufort County, Charleston County, and surrounding Lowcountry communities.</p>
+      <a class="classical-footer-facebook" href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+    </section>
+    <section>
+      <h2>Our Services</h2>
+      <ul>
+        {services.map((service) => <li><a href={`/classical/${service.slug}`}>{service.title}</a></li>)}
+      </ul>
+    </section>
+    <section>
+      <h2>Contact Us</h2>
+      <ul class="classical-footer-contact">
+        <li><a href={`mailto:${site.currentEmail}`}>{site.currentEmail}</a></li>
+        <li><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a></li>
+        <li><a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">{site.address}</a></li>
+        <li>{site.hours}</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Areas We Serve</h2>
+      <div class="classical-footer-areas">
+        {site.serviceAreas.map((area) => <span>{area}</span>)}
+      </div>
+    </section>
+  </div>
+  <div class="classical-site-footer__bottom">
+    <span>© {new Date().getFullYear()} East Coast Foam LLC. All Rights Reserved.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
