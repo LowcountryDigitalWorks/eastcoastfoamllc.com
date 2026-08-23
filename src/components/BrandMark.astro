@@ -1,0 +1,13 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+<a class={`brand-mark ${compact ? 'brand-mark--compact' : ''}`} href="#top" aria-label="East Coast Foam home">
+  <span class="brand-mark__roof" aria-hidden="true">⌂</span>
+  <span>
+    <strong>East Coast Foam</strong>
+    <small>Insulation</small>
+  </span>
+</a>

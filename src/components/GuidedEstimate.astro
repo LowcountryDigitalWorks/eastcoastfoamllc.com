@@ -1,0 +1,37 @@
+---
+import services from '../data/services.json';
+---
+<section class="guided-estimate" id="estimate">
+  <div class="section-kicker">A better first conversation</div>
+  <h2>Tell us enough to make the first call useful.</h2>
+  <p class="section-intro">The Future concept asks for the details Casey actually needs without turning a quote request into homework.</p>
+  <form class="guided-form" onsubmit="return false">
+    <div class="guided-grid">
+      <label>What can we help with?
+        <select name="service">
+          <option value="">Choose a service</option>
+          {services.map((service) => <option value={service.slug}>{service.title}</option>)}
+          <option value="unsure">I'm not sure yet</option>
+        </select>
+      </label>
+      <label>Property type
+        <select name="propertyType">
+          <option>Home</option>
+          <option>New construction</option>
+          <option>Commercial / shop</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Project location<input name="location" placeholder="City or ZIP" /></label>
+      <label>Best way to reach you
+        <select name="contactPreference"><option>Call</option><option>Text</option><option>Email</option></select>
+      </label>
+    </div>
+    <label>What are you trying to improve?<textarea rows="4" placeholder="Tell us about the space, problem, timing, or questions you have."></textarea></label>
+    <label class="upload-demo">Project photos (future option)<input type="file" multiple disabled /></label>
+    <div class="form-actions">
+      <button class="future-button" type="submit" disabled>Request my estimate</button>
+      <span>Demo only — no information is transmitted.</span>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,22 @@
+{
+  "name": "East Coast Foam LLC",
+  "shortName": "East Coast Foam",
+  "tagline": "Where quality and energy efficiency collide",
+  "phoneDisplay": "(843) 263-4933",
+  "phoneHref": "+18432634933",
+  "publicEmail": "hello@eastcoastfoamllc.com",
+  "quoteEmail": "quotes@eastcoastfoamllc.com",
+  "address": "3 Broad River Blvd, Beaufort, SC 29906",
+  "hours": "Mon–Fri: 8am–5pm · Sat–Sun: Closed",
+  "facebook": "https://www.facebook.com/foamit247",
+  "serviceAreas": [
+    "Beaufort",
+    "Bluffton",
+    "Hilton Head",
+    "Lady's Island",
+    "Edisto",
+    "Hampton County",
+    "Mount Pleasant",
+    "Savannah"
+  ]
+}

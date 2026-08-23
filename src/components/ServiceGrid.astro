@@ -1,0 +1,15 @@
+---
+import services from '../data/services.json';
+interface Props { variant?: 'classical' | 'future'; }
+const { variant = 'future' } = Astro.props;
+---
+<div class={`service-grid service-grid--${variant}`}>
+  {services.map((service, index) => (
+    <article class="service-card">
+      <span class="service-number">{String(index + 1).padStart(2, '0')}</span>
+      <h3>{service.title}</h3>
+      <p>{service.summary}</p>
+      <a href="#estimate">{variant === 'classical' ? 'Learn More' : 'Talk about this project'} <span aria-hidden="true">→</span></a>
+    </article>
+  ))}
+</div>

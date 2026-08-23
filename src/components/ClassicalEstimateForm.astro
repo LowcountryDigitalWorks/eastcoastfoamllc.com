@@ -1,0 +1,19 @@
+---
+import services from '../data/services.json';
+---
+<form class="classical-form" onsubmit="return false">
+  <div class="form-title">Get A Quote</div>
+  <label>Full Name *<input name="name" autocomplete="name" /></label>
+  <label>Phone *<input name="phone" type="tel" autocomplete="tel" /></label>
+  <label>Email *<input name="email" type="email" autocomplete="email" /></label>
+  <label>Address *<input name="address" autocomplete="street-address" /></label>
+  <label>Select A Service
+    <select name="service">
+      <option value="">Choose a service</option>
+      {services.map((service) => <option value={service.slug}>{service.title}</option>)}
+    </select>
+  </label>
+  <label>Your Message<textarea name="message" rows="4"></textarea></label>
+  <button type="submit" disabled>Submit demo</button>
+  <p class="form-note">Presentation only. The production form will use Turnstile and a Worker endpoint.</p>
+</form>

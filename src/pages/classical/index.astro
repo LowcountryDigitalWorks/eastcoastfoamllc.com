@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandMark from '../../components/BrandMark.astro';
+import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import site from '../../data/site.json';
+---
+<BaseLayout title={`Classical Demo | ${site.name}`} description="Classical East Coast Foam website migration concept." theme="classical">
+  <div id="top" class="classical-site">
+    <div class="classical-topbar">
+      <div><a href={`tel:${site.phoneHref}`}>☎ {site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>✉ {site.publicEmail}</a></div>
+      <div><span>Google Reviews ★★★★★</span><a href={site.facebook} rel="noreferrer">Facebook</a></div>
+    </div>
+    <header class="classical-header">
+      <BrandMark />
+      <nav aria-label="Classical navigation">
+        <a href="#top">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#work">Blog</a><a href="#contact">Contact Us</a>
+      </nav>
+      <a class="classical-quote-button" href="#quote">Get a Quote</a>
+    </header>
+
+    <main>
+      <section class="classical-hero">
+        <div class="classical-hero__copy">
+          <p class="classical-overline">{site.tagline}</p>
+          <h1>Your trusted spray foam insulation contractor in Beaufort County</h1>
+          <p>East Coast Foam helps Lowcountry homeowners and builders improve comfort, efficiency, and protection with practical insulation and coating solutions.</p>
+          <div class="classical-actions"><a href="#contact">Contact Us</a><a href="#services">Check Our Services</a></div>
+        </div>
+        <div id="quote"><ClassicalEstimateForm /></div>
+      </section>
+
+      <section class="classical-section" id="about">
+        <p class="classical-overline">Locally owned and operated</p>
+        <h2>Beaufort-area insulation expertise, rebuilt on a simpler foundation.</h2>
+        <p>This demo intentionally keeps the current site's familiar structure while removing WordPress/plugin dependency. Final copy, claims, certifications, logos, reviews, and photography will be validated with Casey before production.</p>
+        <div class="classical-values">
+          <article><h3>Quality-minded work</h3><p>Solutions matched to the building, climate, and project requirements.</p></article>
+          <article><h3>Clear communication</h3><p>A direct line from quote request through project completion.</p></article>
+          <article><h3>Local service</h3><p>Focused on Beaufort County, the Lowcountry, and surrounding service areas.</p></article>
+        </div>
+      </section>
+
+      <section class="classical-section classical-section--alt" id="services">
+        <p class="classical-overline">Our services</p>
+        <h2>Insulation, removal, roofing foam, and protective coatings.</h2>
+        <ServiceGrid variant="classical" />
+      </section>
+
+      <section class="classical-contact" id="contact">
+        <div><p class="classical-overline">Get in touch</p><h2>Ready to talk about your project?</h2><p>This concept uses the future professional domain identity while the existing Outlook account can remain part of the transition plan.</p></div>
+        <div class="contact-stack"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a><span>{site.address}</span><span>{site.hours}</span></div>
+      </section>
+    </main>
+    <footer class="classical-footer"><BrandMark compact /><p>Classical migration concept · assets and copy subject to owner approval.</p></footer>
+  </div>
+</BaseLayout>

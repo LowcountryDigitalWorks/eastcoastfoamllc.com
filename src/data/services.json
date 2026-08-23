@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Open-Cell Spray Foam",
+    "slug": "open-cell-spray-foam-insulation",
+    "summary": "An air-sealing insulation option well suited to many conditioned attic and wall applications.",
+    "featured": true
+  },
+  {
+    "title": "Closed-Cell Spray Foam",
+    "slug": "closed-cell-spray-foam-insulation",
+    "summary": "Dense spray foam combining strong thermal performance, air sealing, and moisture resistance.",
+    "featured": true
+  },
+  {
+    "title": "Polyurea Coating",
+    "slug": "polyurea-coating",
+    "summary": "Durable protective coating solutions for demanding surfaces and waterproofing applications.",
+    "featured": false
+  },
+  {
+    "title": "Fiberglass Batt Insulation",
+    "slug": "fiberglass-batt-insulation",
+    "summary": "Traditional batt insulation for projects where fiberglass is the practical fit.",
+    "featured": false
+  },
+  {
+    "title": "Insulation Removal",
+    "slug": "insulation-removal",
+    "summary": "Removal of existing insulation to prepare spaces for a cleaner, better-performing installation.",
+    "featured": true
+  },
+  {
+    "title": "Roofing Foam",
+    "slug": "roofing-foam",
+    "summary": "Spray-applied roofing foam options designed to create a continuous insulated roof surface.",
+    "featured": false
+  },
+  {
+    "title": "Silicone & Acrylic Coatings",
+    "slug": "silicone-acrylic-coatings",
+    "summary": "Roof coating options selected around weather exposure, existing roof condition, and project goals.",
+    "featured": false
+  }
+]
