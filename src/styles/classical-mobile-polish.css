@@ -68,6 +68,17 @@
     overflow:hidden;
   }
 
+  .theme-classical .classical-topbar,
+  .theme-classical .classical-topbar > div:first-child,
+  .theme-classical .classical-topbar > div:first-child > a {
+    min-width:0;
+    max-width:100%;
+  }
+
+  .theme-classical .classical-topbar > div:first-child > a {
+    overflow-wrap:anywhere;
+  }
+
   .theme-classical .classical-header {
     position:sticky;
     top:0;
