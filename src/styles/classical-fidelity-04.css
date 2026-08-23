@@ -1,0 +1,49 @@
+/* Classical fidelity pass 0.4 — post-deployment desktop alignment. */
+
+@media (min-width:1101px) {
+  .theme-classical .classical-header {
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr) auto;
+    gap:32px;
+  }
+
+  .theme-classical .classical-header .brand-mark {
+    margin-right:0;
+  }
+
+  .theme-classical .classical-header .brand-mark img {
+    width:138px;
+    max-height:68px;
+  }
+
+  .theme-classical .classical-header nav {
+    justify-content:center;
+    margin:0;
+  }
+
+  .theme-classical .classical-hero__copy {
+    align-self:start;
+    margin-top:64px;
+    max-width:900px;
+  }
+
+  .theme-classical .classical-hero h1 {
+    max-width:870px;
+    font-size:clamp(40px,3.15vw,50px);
+  }
+}
+
+.theme-classical .classical-hero::before {
+  background:linear-gradient(90deg,rgba(0,0,0,.40) 0%,rgba(0,0,0,.33) 55%,rgba(0,0,0,.23) 100%);
+}
+
+.theme-classical .classical-topbar {
+  min-height:48px;
+}
+
+@media (max-width:1100px) and (min-width:901px) {
+  .theme-classical .classical-hero__copy {
+    align-self:start;
+    margin-top:34px;
+  }
+}
