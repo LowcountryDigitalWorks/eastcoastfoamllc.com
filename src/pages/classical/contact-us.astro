@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ClassicalHeader from '../../components/ClassicalHeader.astro';
 import ClassicalFooter from '../../components/ClassicalFooter.astro';
 import ClassicalEstimateForm from '../../components/ClassicalEstimateForm.astro';
+import ClassicalServiceAreaMap from '../../components/ClassicalServiceAreaMap.astro';
 import site from '../../data/site.json';
 import assets from '../../data/demo-assets.json';
 ---
@@ -20,7 +21,7 @@ import assets from '../../data/demo-assets.json';
           <p class="classical-overline">Get in touch</p>
           <h2>Talk with East Coast Foam about your project.</h2>
           <dl>
-            <div><dt>Email Address</dt><dd><a href={`mailto:${site.currentEmail}`}>{site.currentEmail}</a></dd></div>
+            <div><dt>Email Address</dt><dd><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></dd></div>
             <div><dt>Phone Number</dt><dd><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a></dd></div>
             <div><dt>Address</dt><dd><a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">{site.address}</a></dd></div>
             <div><dt>Business Hours</dt><dd>{site.hours}</dd></div>
@@ -29,6 +30,7 @@ import assets from '../../data/demo-assets.json';
           <div class="classical-area-list">{site.serviceAreas.map((area) => <span>{area}</span>)}</div>
         </div>
       </section>
+      <ClassicalServiceAreaMap />
     </main>
     <ClassicalFooter />
   </div>
