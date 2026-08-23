@@ -1,43 +1,53 @@
 ---
-import site from '../data/site.json';
-
+const business = { name: 'East Coast Foam LLC', lat: 32.5931719, lng: -80.7520489 };
 const areas = [
   { name: 'Beaufort', lat: 32.4316, lng: -80.6698 },
   { name: "Lady's Island", lat: 32.4269, lng: -80.6548 },
   { name: 'Hilton Head', lat: 32.2163, lng: -80.7526 },
   { name: 'Bluffton', lat: 32.2371, lng: -80.8604 },
-  { name: 'Savannah', lat: 32.0809, lng: -81.0912 },
+  { name: 'Savannah, GA', lat: 32.0809, lng: -81.0912 },
   { name: 'Edisto', lat: 32.4794, lng: -80.3357 },
   { name: 'Hampton County', lat: 32.8779, lng: -81.1276 },
   { name: 'Charleston', lat: 32.7765, lng: -79.9311 },
   { name: 'North Charleston', lat: 32.8546, lng: -79.9748 },
   { name: 'Mount Pleasant', lat: 32.8323, lng: -79.8284 }
 ];
+const coverageRadiusMeters = 100000;
 ---
 <section class="classical-service-map" aria-labelledby="service-area-map-title">
   <div class="classical-service-map__intro">
     <p class="classical-overline">Areas We Serve</p>
-    <h2 id="service-area-map-title">Serving Beaufort, Charleston and surrounding Lowcountry communities.</h2>
-    <p>East Coast Foam serves projects throughout the Lowcountry and nearby coastal communities. The map shows the named service areas currently listed on the site; exact project availability is confirmed during the estimate process.</p>
+    <h2 id="service-area-map-title">Serving Beaufort, Charleston, Savannah and surrounding Lowcountry communities.</h2>
+    <p>East Coast Foam serves projects across Beaufort County, the Charleston area, the South Carolina Lowcountry and nearby Savannah, Georgia. The map shows the communities currently listed on the site; exact project availability is confirmed during the estimate process.</p>
     <div class="classical-service-map__chips">
-      {site.serviceAreas.map((area) => <span>{area}</span>)}
+      {areas.map((area) => <span>{area.name}</span>)}
     </div>
   </div>
   <div class="classical-service-map__canvas-wrap">
-    <div id="classical-service-map-canvas" class="classical-service-map__canvas" data-areas={JSON.stringify(areas)}></div>
-    <p class="classical-service-map__note">Representative coverage only — contact East Coast Foam to confirm availability for a specific address.</p>
+    <div
+      id="classical-service-map-canvas"
+      class="classical-service-map__canvas"
+      data-areas={JSON.stringify(areas)}
+      data-business={JSON.stringify(business)}
+      data-radius={coverageRadiusMeters}
+    ></div>
+    <p class="classical-service-map__note">The shaded radius is a representative service-area view, not a guaranteed boundary. Contact East Coast Foam to confirm availability for a specific address.</p>
   </div>
 </section>
 
 <style>
   @import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
-  .classical-service-map { display:grid; grid-template-columns:.8fr 1.2fr; gap:44px; align-items:center; padding:78px max(5vw,36px); background:#f4f5f2; }
+  .classical-service-map { position:relative; z-index:0; isolation:isolate; display:grid; grid-template-columns:.8fr 1.2fr; gap:44px; align-items:center; padding:78px max(5vw,36px); overflow:hidden; background:#f4f5f2; }
+  .classical-service-map .classical-overline { color:#217332 !important; border-color:#2f963f !important; text-shadow:none !important; }
   .classical-service-map h2 { margin:10px 0 18px; color:#171a18; font-size:clamp(34px,4vw,54px); line-height:1.08; text-transform:uppercase; }
   .classical-service-map__intro>p:not(.classical-overline) { color:#4f5952; font:16px/1.75 Manrope,sans-serif; }
   .classical-service-map__chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
   .classical-service-map__chips span { padding:8px 10px; border-left:4px solid #2f963f; background:#fff; color:#263029; font:700 11px Manrope,sans-serif; }
-  .classical-service-map__canvas-wrap { min-width:0; }
-  .classical-service-map__canvas { width:100%; height:480px; border:8px solid #fff; box-shadow:0 18px 44px rgba(0,0,0,.10); background:#dfe5df; }
+  .classical-service-map__canvas-wrap { position:relative; z-index:0; min-width:0; overflow:hidden; }
+  .classical-service-map__canvas { position:relative; z-index:0; width:100%; height:480px; border:8px solid #fff; box-shadow:0 18px 44px rgba(0,0,0,.10); background:#dfe5df; }
+  .classical-service-map__canvas :global(.leaflet-container),
+  .classical-service-map__canvas :global(.leaflet-pane),
+  .classical-service-map__canvas :global(.leaflet-control) { z-index:auto; }
   .classical-service-map__note { margin:10px 0 0; color:#687069; font:12px/1.5 Manrope,sans-serif; }
   @media (max-width:900px) { .classical-service-map { grid-template-columns:1fr; } .classical-service-map__canvas { height:420px; } }
   @media (max-width:680px) { .classical-service-map { padding:52px 20px; } .classical-service-map__canvas { height:360px; border-width:5px; } }
@@ -46,6 +56,7 @@ const areas = [
 <script>
   type LeafletLike = any;
   type ServiceArea = { name: string; lat: number; lng: number };
+  type BusinessPoint = { name: string; lat: number; lng: number };
   const browserWindow = window as typeof window & { L?: LeafletLike };
 
   const loadLeaflet = (): Promise<LeafletLike> => new Promise((resolve, reject) => {
@@ -72,42 +83,45 @@ const areas = [
       const L: LeafletLike = await loadLeaflet();
       if (!L) return;
       const areas: ServiceArea[] = JSON.parse(node.dataset.areas || '[]');
+      const business: BusinessPoint = JSON.parse(node.dataset.business || '{}');
+      const radius = Number(node.dataset.radius || '100000');
       const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      const bounds: Array<[number, number]> = [];
+      const center: [number, number] = [business.lat, business.lng];
+      const serviceRadius = L.circle(center, {
+        radius,
+        color: '#258238',
+        weight: 2,
+        opacity: .72,
+        fillColor: '#2f963f',
+        fillOpacity: .09,
+        interactive: false
+      }).addTo(map);
+
       areas.forEach((area) => {
         const point: [number, number] = [area.lat, area.lng];
-        bounds.push(point);
         L.circleMarker(point, {
-          radius: 7,
-          color: '#176b2a',
+          radius: 6,
+          color: '#135d24',
           weight: 2,
           fillColor: '#2f963f',
-          fillOpacity: .92
+          fillOpacity: .95
         }).addTo(map).bindTooltip(area.name, { direction: 'top' });
       });
 
-      [
-        { point: [32.4316, -80.6698], radius: 56000 },
-        { point: [32.816, -79.92], radius: 43000 },
-        { point: [32.0809, -81.0912], radius: 30000 }
-      ].forEach((zone) => {
-        L.circle(zone.point, {
-          radius: zone.radius,
-          color: '#2f963f',
-          weight: 1.5,
-          opacity: .55,
-          fillColor: '#2f963f',
-          fillOpacity: .075,
-          interactive: false
-        }).addTo(map);
-      });
+      L.circleMarker(center, {
+        radius: 9,
+        color: '#07150b',
+        weight: 3,
+        fillColor: '#2f963f',
+        fillOpacity: 1
+      }).addTo(map).bindTooltip(`${business.name} — Seabrook`, { direction: 'top', permanent: false });
 
-      map.fitBounds(bounds, { padding: [28, 28] });
+      map.fitBounds(serviceRadius.getBounds(), { padding: [22, 22] });
       node.dataset.ready = 'true';
     } catch (error) {
       console.warn('Service-area map could not initialize.', error);
