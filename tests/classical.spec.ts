@@ -112,7 +112,17 @@ test('mobile header keeps the logo, compact quote CTA, and visible hamburger at 
       await expect(bar).toHaveCSS('background-color', 'rgb(255, 255, 255)');
     }
 
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    const overflowDetails = await page.evaluate(() => ({
+      width: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      offenders: [...document.querySelectorAll<HTMLElement>('*')]
+        .map((element) => ({ tag: element.tagName, className: element.className, left: Math.round(element.getBoundingClientRect().left), right: Math.round(element.getBoundingClientRect().right), width: Math.round(element.getBoundingClientRect().width) }))
+        .filter((element) => element.right > document.documentElement.clientWidth + 1 || element.left < -1)
+        .sort((a, b) => (b.right - document.documentElement.clientWidth) - (a.right - document.documentElement.clientWidth))
+        .slice(0, 8)
+    }));
+    console.log('Classical narrow overflow details', JSON.stringify(overflowDetails));
+    const overflow = overflowDetails.scrollWidth - overflowDetails.width;
     expect(overflow).toBeLessThanOrEqual(1);
   }
 });
