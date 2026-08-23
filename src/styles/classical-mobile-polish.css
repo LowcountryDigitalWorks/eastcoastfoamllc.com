@@ -306,6 +306,20 @@
   .theme-classical .classical-menu-toggle { width:48px; }
 }
 
+@media (max-width:680px) {
+  .theme-classical .classical-form {
+    padding-right:20px;
+    padding-left:20px;
+  }
+
+  .theme-classical .classical-form .form-title {
+    margin-right:-20px;
+    margin-left:-20px;
+    padding-right:20px;
+    padding-left:20px;
+  }
+}
+
 @media (prefers-reduced-motion:reduce) {
   .classical-menu-toggle__icon > span,
   .classical-mobile-caret {
