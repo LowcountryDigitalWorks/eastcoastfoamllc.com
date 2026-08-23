@@ -1,7 +1,7 @@
 /* Future 1.0 is deliberately isolated from the Classical fidelity build. */
 body.theme-future { background:#f5f4ef; color:#121715; }
 body.theme-future:has(.future-v1) { overflow-x:clip; }
-.future-v1 { --ink:#101512; --charcoal:#1c211f; --green:#217332; --green-deep:#123f29; --acid:#789661; --paper:#f5f4ef; --warm:#e7e4dc; --line:rgba(16,21,18,.14); --muted:#5f6862; background:var(--paper); color:var(--ink); font-family:Manrope,system-ui,sans-serif; overflow:clip; }
+.future-v1 { --ink:#101512; --charcoal:#1c211f; --green:#217332; --green-deep:#123f29; --acid:#9ab87a; --paper:#f5f4ef; --warm:#e7e4dc; --line:rgba(16,21,18,.14); --muted:#5f6862; background:var(--paper); color:var(--ink); font-family:Manrope,system-ui,sans-serif; overflow:clip; }
 .future-v1 :is(h1,h2,h3,p) { text-wrap:pretty; }
 .future-v1 :focus-visible { outline:3px solid var(--acid); outline-offset:4px; }
 .future-v1__header { position:sticky; top:0; z-index:40; border-bottom:1px solid rgba(255,255,255,.14); background:rgba(16,21,18,.94); color:#fff; backdrop-filter:blur(18px); }
