@@ -25,6 +25,8 @@ test('Future homepage keeps its factual conversion structure and preview safegua
   await expect(page.locator('.future-v1__proof-brand')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   await expect(page.locator('.future-v1__proof-brand img')).toHaveCSS('filter', 'none');
   await expect(page.locator('.future-v1__estimate-actions a[href^="mailto:"]')).toHaveAttribute('href', /hello@eastcoastfoamllc\.com/);
+  await expect(page.locator('.future-v1__about-photo img')).toHaveAttribute('src', /EAST-COAST-FOAM-LLC-1\.webp/);
+  await expect(page.locator('.future-v1__about-photo')).toContainText('Recognizable on the road and at the jobsite.');
 });
 
 test('Future desktop navigation exposes the primary directions and service routes', async ({ page }) => {
@@ -63,6 +65,9 @@ test('Future mobile menu, service details, and persistent conversion actions are
   const mobileActions = page.getByRole('region', { name: 'Contact East Coast Foam' });
   await expect(mobileActions.getByRole('link', { name: 'Call' })).toHaveAttribute('href', 'tel:+18432634933');
   await expect(mobileActions.getByRole('link', { name: 'Request Estimate' })).toHaveAttribute('href', '#estimate');
+  await expect(mobileActions.getByRole('link', { name: 'Request Estimate' })).toHaveCSS('background-color', 'rgb(33, 115, 50)');
+  await page.locator('#estimate').scrollIntoViewIfNeeded();
+  await expect(mobileActions).toHaveAttribute('data-hidden', '');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });
