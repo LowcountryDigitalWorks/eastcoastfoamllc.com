@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ClassicalHeader from '../../components/ClassicalHeader.astro';
+import ClassicalFooter from '../../components/ClassicalFooter.astro';
+import ServiceGrid from '../../components/ServiceGrid.astro';
+import site from '../../data/site.json';
+import assets from '../../data/demo-assets.json';
+---
+<BaseLayout title={`Insulation Services | ${site.name}`} description="Explore East Coast Foam LLC spray foam insulation, fiberglass, insulation removal, roofing foam, and protective coating services." theme="classical" showDemoBanner={false}>
+  <div id="top" class="classical-site">
+    <ClassicalHeader />
+    <main>
+      <section class="classical-page-hero">
+        <img src={assets.serviceImages['open-cell-spray-foam-insulation']} alt="" referrerpolicy="no-referrer" />
+        <div class="classical-page-hero__inner"><p class="classical-overline">East Coast Foam LLC</p><h1>Our Services</h1></div>
+      </section>
+      <section class="classical-section classical-section--alt" id="services">
+        <p class="classical-overline">Insulation and protective coating services</p>
+        <h2>Solutions for homes, buildings, roof systems, and insulation upgrades.</h2>
+        <p>East Coast Foam provides multiple insulation and coating options so the recommendation can fit the building, climate exposure, and project goals.</p>
+        <ServiceGrid variant="classical" />
+      </section>
+      <section class="classical-contact-band">
+        <div><p class="classical-overline">Not sure which service fits?</p><h2>Start with the project, not the product.</h2><p>Tell East Coast Foam what you are working on and the team can help identify the appropriate next step.</p></div>
+        <div class="classical-contact-band__actions"><a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a><a href="/classical/get-a-quote">Get a Quote</a></div>
+      </section>
+    </main>
+    <ClassicalFooter />
+  </div>
+</BaseLayout>
