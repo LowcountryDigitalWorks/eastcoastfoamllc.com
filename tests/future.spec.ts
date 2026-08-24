@@ -12,7 +12,7 @@ const serviceRoutes = [
 ];
 
 const futurePages = [
-  { path: '/future/', title: /East Coast Foam \| Spray Foam & Insulation for the Lowcountry/, h1: /Spray Foam & Insulation Built for the Lowcountry/ },
+  { path: '/future', title: /East Coast Foam \| Spray Foam & Insulation for the Lowcountry/, h1: /Spray Foam & Insulation Built for the Lowcountry/ },
   { path: '/future/services', title: /Services \| East Coast Foam/, h1: /Find the service conversation that fits the work/ },
   { path: '/future/projects', title: /Recent Work \| East Coast Foam/, h1: /See the materials, application, and finished work/ },
   { path: '/future/about', title: /About East Coast Foam/, h1: /Local expertise. Direct accountability/ },
@@ -23,7 +23,7 @@ const futurePages = [
 ];
 
 test('Future homepage is a concise orientation and routing experience with preview safeguards', async ({ page }) => {
-  const response = await page.goto('/future/', { waitUntil: 'load' });
+  const response = await page.goto('/future', { waitUntil: 'load' });
   expect(response?.ok()).toBeTruthy();
   await expect(page.locator('h1')).toHaveText(/Spray Foam & Insulation Built for the Lowcountry/i);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex.*nofollow/);
@@ -49,7 +49,7 @@ test('every Future route has unique factual metadata and one clear H1', async ({
 
 test('Future route hubs expose intentional internal paths and factual content', async ({ page }) => {
   await page.goto('/future/services', { waitUntil: 'load' });
-  for (const slug of serviceRoutes) await expect(page.locator(`a[href="/classical/${slug}"]`).first()).toBeVisible();
+  for (const slug of serviceRoutes) await expect(page.locator(`main a[href="/classical/${slug}"]`).first()).toBeVisible();
   await expect(page.getByRole('link', { name: /Compare the existing open-cell and closed-cell overviews/ })).toHaveAttribute('href', '/future/resources#foam-types');
 
   await page.goto('/future/projects', { waitUntil: 'load' });
@@ -76,7 +76,7 @@ test('Future route hubs expose intentional internal paths and factual content', 
 
 test('Future desktop navigation exposes the primary destinations and existing service routes', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto('/future/', { waitUntil: 'load' });
+  await page.goto('/future', { waitUntil: 'load' });
   const navigation = page.getByRole('navigation', { name: 'Future navigation' });
   for (const [label, href] of [['Projects', '/future/projects'], ['About', '/future/about'], ['Reviews', '/future/reviews'], ['Service Area', '/future/service-area'], ['Resources', '/future/resources']] as const) {
     await expect(navigation.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', href);
@@ -89,7 +89,7 @@ test('Future desktop navigation exposes the primary destinations and existing se
 
 test('Future mobile menu, contextual sticky actions, and estimate suppression are usable', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/future/', { waitUntil: 'load' });
+  await page.goto('/future', { waitUntil: 'load' });
   const toggle = page.getByRole('button', { name: 'Menu' });
   const menu = page.getByRole('navigation', { name: 'Future mobile navigation' });
   await expect(toggle).toBeVisible();
@@ -118,7 +118,7 @@ test('Future mobile menu, contextual sticky actions, and estimate suppression ar
 test('Future has no persistent horizontal overflow at desktop, Pixel, and narrow iPhone widths', async ({ page }) => {
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { width: 375, height: 812 }]) {
     await page.setViewportSize(viewport);
-    for (const path of ['/future/', '/future/services', '/future/projects', '/future/about', '/future/reviews', '/future/service-area', '/future/resources', '/future/estimate']) {
+    for (const path of ['/future', '/future/services', '/future/projects', '/future/about', '/future/reviews', '/future/service-area', '/future/resources', '/future/estimate']) {
       await page.goto(path, { waitUntil: 'load' });
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, `${path} at ${viewport.width}px`).toBeLessThanOrEqual(1);
@@ -127,13 +127,13 @@ test('Future has no persistent horizontal overflow at desktop, Pixel, and narrow
 });
 
 test('Future homepage, mobile menu, and route hubs have no WCAG A/AA smoke-test violations', async ({ page }) => {
-  for (const path of ['/future/', '/future/services', '/future/projects', '/future/about', '/future/reviews', '/future/service-area', '/future/resources', '/future/estimate']) {
+  for (const path of ['/future', '/future/services', '/future/projects', '/future/about', '/future/reviews', '/future/service-area', '/future/resources', '/future/estimate']) {
     await page.goto(path, { waitUntil: 'load' });
     const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
     expect(results.violations, path).toEqual([]);
   }
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/future/', { waitUntil: 'load' });
+  await page.goto('/future', { waitUntil: 'load' });
   await page.getByRole('button', { name: 'Menu' }).click();
   const mobileResults = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
   expect(mobileResults.violations).toEqual([]);
