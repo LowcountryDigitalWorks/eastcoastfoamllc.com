@@ -1,5 +1,5 @@
 ---
-import site from '../data/site.json';
+import { futureContact } from '../data/future-content';
 
 interface Props {
   estimatePage?: boolean;
@@ -8,8 +8,8 @@ interface Props {
 const { estimatePage = false } = Astro.props;
 ---
 {!estimatePage && <div class="future-v1__mobile-actions" data-hidden role="region" aria-label="Contact East Coast Foam">
-  <a href={`tel:${site.phoneHref}`}><span aria-hidden="true">☎</span> Call</a>
-  <a href="/future/estimate"><span aria-hidden="true">→</span> Request Estimate</a>
+  <a href={`tel:${futureContact.phoneHref}`}><span class="future-v1__action-icon" aria-hidden="true">☎</span> Call</a>
+  <a href="/future/estimate">Request Estimate</a>
 </div>}
 
 <script>
@@ -24,13 +24,13 @@ const { estimatePage = false } = Astro.props;
     const observer = new IntersectionObserver(([entry]) => {
       nearEstimate = entry.isIntersecting;
       setVisibility();
-    }, { threshold: 0.12 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -16% 0px' });
     if (estimate) observer.observe(estimate);
     if (anchor) {
       const anchorObserver = new IntersectionObserver(([entry]) => {
         pastAnchor = !entry.isIntersecting;
         setVisibility();
-      }, { threshold: 0.12 });
+      }, { threshold: 0.05, rootMargin: '-88px 0px -34% 0px' });
       anchorObserver.observe(anchor);
     } else {
       setVisibility();

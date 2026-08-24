@@ -1,0 +1,32 @@
+---
+import assets from '../data/demo-assets.json';
+import type { FutureService } from '../data/future-content';
+
+interface Props {
+  service: FutureService;
+  related: FutureService[];
+}
+
+const { service, related } = Astro.props;
+const images = (assets.serviceDetailImages as Record<string, string[]>)[service.slug] ?? [assets.serviceImages[service.slug as keyof typeof assets.serviceImages]];
+---
+<article class="future-v1__service-detail">
+  <section class="future-v1__service-detail-hero" aria-labelledby="future-service-title">
+    <div><p class="future-v1__kicker">East Coast Foam service</p><nav class="future-v1__breadcrumbs" aria-label="Breadcrumb"><a href="/future">Home</a><span aria-hidden="true">/</span><a href="/future/services">Services</a><span aria-hidden="true">/</span><span>{service.title}</span></nav><h1 id="future-service-title">{service.title}</h1><p>{service.summary}</p></div>
+    <img src={images[0]} alt={`${service.title} work by East Coast Foam`} fetchpriority="high" referrerpolicy="no-referrer" />
+  </section>
+
+  <section class="future-v1__service-detail-copy" aria-labelledby="future-service-understand-title">
+    <div><p class="future-v1__kicker">What to understand</p><h2 id="future-service-understand-title">Start with the assembly, not a product label.</h2></div>
+    <div><p>{service.approach}</p><ul>{service.useCases.map((item) => <li>{item}</li>)}</ul><a class="future-v1__text-link" href="/future/estimate">Talk through this service <span aria-hidden="true">→</span></a></div>
+  </section>
+
+  <section class="future-v1__service-detail-media" aria-label={`${service.title} service photography`}>
+    {images.slice(1, 2).map((image) => <img src={image} alt={`${service.title} service photography`} loading="lazy" referrerpolicy="no-referrer" />)}
+    <div><p class="future-v1__kicker">Recent work</p><h2>Project details follow permission.</h2><p>East Coast Foam currently shares authorized service photography. Specific project records will appear here when their location, scope, and website permission are confirmed.</p><a href="/future/projects">View all service photography <span aria-hidden="true">→</span></a></div>
+  </section>
+
+  <section class="future-v1__service-faq" aria-labelledby="future-service-faq-title"><p class="future-v1__kicker">Helpful questions</p><h2 id="future-service-faq-title">Questions about {service.title.toLowerCase()}.</h2><div>{service.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div></section>
+
+  <section class="future-v1__related-services" aria-labelledby="future-related-services-title"><div><p class="future-v1__kicker">Keep exploring</p><h2 id="future-related-services-title">Related East Coast Foam services.</h2></div><div>{related.map((item) => <a href={item.futurePath}><span>{item.title}</span><b aria-hidden="true">→</b></a>)}</div></section>
+</article>

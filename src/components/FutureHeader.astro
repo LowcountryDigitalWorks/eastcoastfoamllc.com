@@ -1,8 +1,8 @@
 ---
 import BrandMark from './BrandMark.astro';
-import services from '../data/services.json';
+import { futureServices } from '../data/future-content';
 
-const serviceLinks = services.map((service) => ({ title: service.title, href: `/classical/${service.slug}` }));
+const serviceLinks = futureServices.map((service) => ({ title: service.title, href: service.futurePath }));
 ---
 <header class="future-v1__header">
   <nav class="future-v1__nav" aria-label="Future navigation">
@@ -21,11 +21,12 @@ const serviceLinks = services.map((service) => ({ title: service.title, href: `/
       <a href="/future/about">About</a>
       <a href="/future/reviews">Reviews</a>
       <a href="/future/service-area">Service Area</a>
-      <a href="/future/resources">Resources</a>
+      <a href="/future/resources">Guides</a>
+      <a href="/future/contact">Contact</a>
     </div>
     <a class="future-v1__estimate-button future-v1__estimate-button--header" href="/future/estimate">Request an Estimate</a>
     <button class="future-v1__menu-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="future-mobile-navigation">
-      <span></span><span></span><span></span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       <span class="sr-only">Open menu</span>
     </button>
   </nav>
@@ -41,7 +42,8 @@ const serviceLinks = services.map((service) => ({ title: service.title, href: `/
       <a href="/future/about">About</a>
       <a href="/future/reviews">Reviews</a>
       <a href="/future/service-area">Service Area</a>
-      <a href="/future/resources">Resources</a>
+      <a href="/future/resources">Guides</a>
+      <a href="/future/contact">Contact</a>
       <a class="future-v1__estimate-button" href="/future/estimate">Request an Estimate</a>
     </nav>
   </div>

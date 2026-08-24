@@ -1,7 +1,6 @@
 ---
-import home from '../data/classical-home.json';
 import assets from '../data/demo-assets.json';
-import site from '../data/site.json';
+import { futureContact, futureReviews } from '../data/future-content';
 
 interface Props {
   compact?: boolean;
@@ -9,13 +8,13 @@ interface Props {
 }
 
 const { compact = false, limit } = Astro.props;
-const reviews = limit ? home.reviews.slice(0, limit) : home.reviews;
+const reviews = limit ? futureReviews.slice(0, limit) : futureReviews;
 ---
 <div class={`google-review-carousel ${compact ? 'google-review-carousel--compact' : ''}`} data-review-carousel>
   <div class="google-review-carousel__bar">
     <div class="google-review-carousel__summary">
       <img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" />
-      <div><strong>5.0</strong><span>Customer reviews</span></div>
+      <div><strong>Google</strong><span>Customer reviews</span></div>
     </div>
     <div class="google-review-carousel__controls">
       <button type="button" data-review-prev aria-label="Previous review">‹</button>
@@ -32,7 +31,6 @@ const reviews = limit ? home.reviews.slice(0, limit) : home.reviews;
             <div class="google-review-card__identity"><strong>{review.name}</strong><span>{review.date}</span></div>
             <img class="google-review-card__platform" src={assets.reviewPlatformIcon} alt="Google" loading="lazy" referrerpolicy="no-referrer" />
           </div>
-          <div class="google-review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
           <p>{review.quote}</p>
         </article>
       ))}
@@ -40,7 +38,7 @@ const reviews = limit ? home.reviews.slice(0, limit) : home.reviews;
   </div>
 
   {!compact && (
-    <a class="google-review-carousel__link" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">View East Coast Foam on Google →</a>
+    <a class="google-review-carousel__link" href={futureContact.mapsUrl} target="_blank" rel="noopener noreferrer">View East Coast Foam on Google →</a>
   )}
 </div>
 
@@ -54,7 +52,6 @@ const reviews = limit ? home.reviews.slice(0, limit) : home.reviews;
 
     root.dataset.carouselReady = 'true';
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let timer: number | undefined;
 
     const step = (): number => {
       const card = viewport.querySelector('.google-review-card');
@@ -78,20 +75,7 @@ const reviews = limit ? home.reviews.slice(0, limit) : home.reviews;
     if (previous instanceof HTMLButtonElement) previous.addEventListener('click', () => move(-1));
     if (next instanceof HTMLButtonElement) next.addEventListener('click', () => move(1));
 
-    const stop = () => {
-      if (timer !== undefined) window.clearInterval(timer);
-      timer = undefined;
-    };
-    const start = () => {
-      stop();
-      if (!prefersReducedMotion) timer = window.setInterval(() => move(1), 6000);
-    };
-
-    root.addEventListener('mouseenter', stop);
-    root.addEventListener('mouseleave', start);
-    root.addEventListener('focusin', stop);
-    root.addEventListener('focusout', start);
-    start();
+    // Review evidence advances only when the visitor chooses to swipe, scroll, or use a control.
   };
 
   const initializeReviewCarousels = () => document.querySelectorAll('[data-review-carousel]').forEach(setupReviewCarousel);

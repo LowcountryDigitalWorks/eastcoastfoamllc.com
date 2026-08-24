@@ -1,0 +1,15 @@
+---
+import FutureServiceDetail from '../../components/FutureServiceDetail.astro';
+import FutureLayout from '../../layouts/FutureLayout.astro';
+import { futureServices } from '../../data/future-content';
+
+export function getStaticPaths() {
+  return futureServices.map((service) => ({ params: { service: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const related = futureServices.filter((item) => item.slug !== service.slug).slice(0, 3);
+---
+<FutureLayout title={`${service.title} | East Coast Foam`} description={`${service.summary} Explore this East Coast Foam service for Lowcountry and Coastal Georgia properties.`}>
+  <FutureServiceDetail service={service} related={related} />
+</FutureLayout>

@@ -1,5 +1,5 @@
 ---
-import site from '../data/site.json';
+import { futureContact } from '../data/future-content';
 ---
 <section class="future-v1__closing" id="service-area" aria-labelledby="future-closing-area-title">
   <div class="future-v1__closing-area">
@@ -13,6 +13,6 @@ import site from '../data/site.json';
     <h2 id="future-closing-estimate-title">Ready to talk through the project?</h2>
     <p>Start with a call or email. East Coast Foam can help identify the next useful conversation.</p>
     <a class="future-v1__estimate-button" href="/future/estimate">Request an Estimate <span aria-hidden="true">→</span></a>
-    <a class="future-v1__closing-call" href={`tel:${site.phoneHref}`}>Call {site.phoneDisplay}</a>
+    <a class="future-v1__closing-call" href={`tel:${futureContact.phoneHref}`}>Call {futureContact.phoneDisplay}</a>
   </div>
 </section>

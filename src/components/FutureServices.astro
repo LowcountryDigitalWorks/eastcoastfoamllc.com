@@ -1,8 +1,8 @@
 ---
-import services from '../data/services.json';
+import { futureServices } from '../data/future-content';
 import assets from '../data/demo-assets.json';
 
-const bySlug = new Map(services.map((service) => [service.slug, service]));
+const bySlug = new Map(futureServices.map((service) => [service.slug, service]));
 const serviceImages = assets.serviceImages as Record<string, string>;
 const groups = [
   { label: 'Insulate & air seal', slugs: ['open-cell-spray-foam-insulation', 'closed-cell-spray-foam-insulation', 'fiberglass-batt-insulation'] },
@@ -22,7 +22,7 @@ const groups = [
         <div>
           {group.slugs.map((slug) => {
             const service = bySlug.get(slug)!;
-            return <a href={`/classical/${service.slug}`}><img src={serviceImages[service.slug]} alt="" loading="lazy" referrerpolicy="no-referrer" /><span><strong>{service.title}</strong><small>{service.summary}</small></span><b aria-hidden="true">→</b></a>;
+            return <a href={service.futurePath}><img src={serviceImages[service.slug]} alt="" loading="lazy" referrerpolicy="no-referrer" /><span><strong>{service.title}</strong><small>{service.summary}</small></span><b aria-hidden="true">→</b></a>;
           })}
         </div>
       </section>
