@@ -291,10 +291,11 @@ test('Workflow concepts are disclosed, cross-linked, and stay outside Future nav
   }
 
   await page.goto('/future/capture', { waitUntil: 'load' });
-  await expect(page.getByText('Saved on this device')).toBeVisible();
-  await expect(page.getByText('Waiting for connection')).toBeVisible();
-  await expect(page.getByText('Uploading')).toBeVisible();
-  await expect(page.getByText('Sent')).toBeVisible();
+  const sync = page.locator('.future-concept__sync');
+  await expect(sync.getByText('Saved on this device')).toBeVisible();
+  await expect(sync.getByText('Waiting for connection')).toBeVisible();
+  await expect(sync.getByText('Uploading')).toBeVisible();
+  await expect(sync.getByText('Sent')).toBeVisible();
   await expect(page.getByText('Save for Later')).toBeVisible();
   await expect(page.getByText('I’ll Handle Publishing')).toBeVisible();
   await expect(page.getByText('Send to LDW')).toBeVisible();
