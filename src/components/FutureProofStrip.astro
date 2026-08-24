@@ -1,9 +1,9 @@
 ---
 import assets from '../data/demo-assets.json';
+import { manufacturerLinks } from '../data/future-content';
 ---
-<section class="future-v1__proof" aria-label="East Coast Foam information">
-  <div><span class="future-v1__proof-label">Local business</span><strong>Locally owned &amp; operated</strong></div>
-  <div><span class="future-v1__proof-label">Service region</span><strong>Lowcountry &amp; Coastal Georgia</strong></div>
-  <a class="future-v1__proof-review" href="/future/reviews"><img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" /><span>Read customer feedback <span aria-hidden="true">→</span></span></a>
-  <div class="future-v1__proof-brand"><img src={assets.brandLogos['Huntsman Building Solutions']} alt="Huntsman Building Solutions" loading="lazy" referrerpolicy="no-referrer" /><span>Established manufacturer materials</span></div>
+<section class="future-v1__proof" aria-labelledby="future-proof-title">
+  <div class="future-v1__proof-local"><span class="future-v1__proof-label">Local</span><h2 id="future-proof-title">A Lowcountry company with a direct line to the job.</h2><p>East Coast Foam is locally owned and operated, serving the Lowcountry and Coastal Georgia.</p><a href="/future/about">Why East Coast Foam <span aria-hidden="true">→</span></a></div>
+  <a class="future-v1__proof-review" href="/future/reviews"><span class="future-v1__proof-label">Customer proof</span><img src={assets.googleReviewsBadge} alt="Google Reviews" referrerpolicy="no-referrer" /><strong>Read verified customer feedback</strong><span>Explore reviews <span aria-hidden="true">→</span></span></a>
+  <div class="future-v1__proof-materials"><span class="future-v1__proof-label">Materials represented</span><p>Manufacturer marks shown on East Coast Foam’s current public site.</p><div>{manufacturerLinks.map((brand) => <a href={brand.url} target="_blank" rel="noopener noreferrer"><img src={(assets.brandLogos as Record<string, string>)[brand.name]} alt={brand.name} loading="lazy" referrerpolicy="no-referrer" /></a>)}</div><a href="/future/about">See material context <span aria-hidden="true">→</span></a></div>
 </section>

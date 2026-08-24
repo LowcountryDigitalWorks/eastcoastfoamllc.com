@@ -1,0 +1,16 @@
+---
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<div class:list={['future-v1__contact-qr', { 'future-v1__contact-qr--compact': compact }]} data-contact-qr>
+  <img width="180" height="180" alt="QR code linking to East Coast Foam contact information" />
+  <div><p class="future-v1__kicker">Share contact</p><h2>Save East Coast Foam.</h2><p>Scan to open the current contact page on this site, or use the link instead.</p><a href="/future/contact">Open contact page <span aria-hidden="true">→</span></a></div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-contact-qr]').forEach((root) => {
+    const image = root.querySelector('img');
+    if (!(image instanceof HTMLImageElement)) return;
+    const contactUrl = new URL('/future/contact', window.location.origin).href;
+    image.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&format=svg&data=${encodeURIComponent(contactUrl)}`;
+  });
+</script>
