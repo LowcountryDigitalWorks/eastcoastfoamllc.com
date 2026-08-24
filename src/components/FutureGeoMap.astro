@@ -32,6 +32,7 @@ const areas = [
       const business: Point = JSON.parse(node.dataset.business || '{}');
       const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
       const center: L.LatLngExpression = [business.lat, business.lng];
+      map.setView(center, 8);
       const radius = L.circle(center, { radius: Number(node.dataset.radius || 100000), color: '#217332', weight: 2, opacity: .8, fillColor: '#217332', fillOpacity: .11, interactive: false }).addTo(map);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
       areas.forEach((area) => L.circleMarker([area.lat, area.lng], { radius: 6, color: '#102a20', weight: 2, fillColor: '#217332', fillOpacity: 1 }).addTo(map).bindTooltip(area.name, { direction: 'top' }));

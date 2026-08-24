@@ -65,6 +65,7 @@ test('Future route hubs expose intentional internal paths and factual content', 
 
   await page.goto('/future/service-area', { waitUntil: 'load' });
   for (const area of ['Beaufort', "Lady's Island", 'Hilton Head', 'Bluffton', 'Edisto', 'Hampton County', 'Charleston', 'North Charleston', 'Mount Pleasant', 'Savannah, GA']) await expect(page.locator('.future-v1__geo-chips')).toContainText(area);
+  await expect(page.locator('#future-service-area-map')).toHaveAttribute('data-ready', 'true');
 
   await page.goto('/future/resources', { waitUntil: 'load' });
   await expect(page.locator('#foam-types')).toHaveAttribute('href', '/classical/open-cell-spray-foam-insulation');
