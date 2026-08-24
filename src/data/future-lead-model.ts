@@ -10,3 +10,18 @@ export type FutureLeadAttachment = {
   name: string;
   publicEligible?: boolean;
 };
+
+/**
+ * Future lead-source contract. The preview only lets a visitor describe how
+ * they heard about East Coast Foam; technical attribution remains a future
+ * production concern and is deliberately not collected in this preview.
+ */
+export type FutureLeadAttribution = {
+  declaredSource?: string;
+  referralName?: string;
+  landingPage?: string;
+  referringDomain?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+};

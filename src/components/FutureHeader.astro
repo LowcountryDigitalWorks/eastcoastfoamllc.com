@@ -33,9 +33,9 @@ const serviceLinks = futureServices.map((service) => ({ title: service.title, hr
 
   <div class="future-v1__mobile-menu" id="future-mobile-navigation" hidden>
     <nav aria-label="Future mobile navigation">
-      <a href="/future/services">Services</a>
-      <button type="button" class="future-v1__mobile-services-toggle" aria-expanded="false" aria-controls="future-mobile-service-links">Show service pages <span aria-hidden="true">+</span></button>
+      <button type="button" class="future-v1__mobile-services-toggle" aria-expanded="false" aria-controls="future-mobile-service-links" aria-label="Services, show service pages"><span>Services</span><span aria-hidden="true" data-mobile-services-symbol>+</span></button>
       <div class="future-v1__mobile-service-links" id="future-mobile-service-links" hidden>
+        <a href="/future/services">All services</a>
         {serviceLinks.map((service) => <a href={service.href}>{service.title}</a>)}
       </div>
       <a href="/future/projects">Projects</a>
@@ -64,6 +64,11 @@ const serviceLinks = futureServices.map((service) => ({ title: service.title, hr
       menu.hidden = true;
       button.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('future-menu-open');
+      if (servicesToggle instanceof HTMLButtonElement && serviceLinks instanceof HTMLElement) {
+        servicesToggle.setAttribute('aria-expanded', 'false');
+        servicesToggle.setAttribute('aria-label', 'Services, show service pages');
+        serviceLinks.hidden = true;
+      }
       if (restoreFocus) button.focus();
     };
     const open = () => {
@@ -78,6 +83,7 @@ const serviceLinks = futureServices.map((service) => ({ title: service.title, hr
       if (!(servicesToggle instanceof HTMLButtonElement) || !(serviceLinks instanceof HTMLElement)) return;
       const isOpen = servicesToggle.getAttribute('aria-expanded') === 'true';
       servicesToggle.setAttribute('aria-expanded', String(!isOpen));
+      servicesToggle.setAttribute('aria-label', `Services, ${isOpen ? 'show' : 'hide'} service pages`);
       serviceLinks.hidden = isOpen;
     });
     menu.addEventListener('click', (event) => {

@@ -97,9 +97,16 @@ export const manufacturerLinks = [
   { name: 'BASF Spray Foam', url: 'https://spf.basf.com/' }
 ];
 
+// Public reputation-profile links verified for the preview. These labels are
+// intentionally limited to the facts displayed by the source profiles.
+export const futureReputationSources = [
+  { label: 'Angi 5.0', detail: 'View East Coast Foam on Angi', url: 'https://www.angi.com/companylist/us/sc/beauford/east-coast-foam-llc-reviews-1.htm' },
+  { label: 'A+ BBB Rating', detail: 'View East Coast Foam on BBB', url: 'https://www.bbb.org/us/sc/beaufort/profile/spray-foam-insulation-contractors/east-coast-foam-llc-0403-236024328' }
+];
+
 export const futureAboutPoints = [
   { title: 'Project-led guidance', text: 'The conversation starts with the property, the accessible conditions, and the work being considered.' },
-  { title: 'Professional materials', text: 'Current public materials represent established manufacturers used in East Coast Foam conversations.' },
+  { title: 'Professional materials', text: 'Material options are discussed in the context of the property, accessible conditions, and project goals.' },
   { title: 'Connected services', text: 'Insulation, removal, roofing foam, and coating services can be discussed together when the project calls for it.' }
 ];
 

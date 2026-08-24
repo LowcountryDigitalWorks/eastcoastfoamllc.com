@@ -17,7 +17,7 @@ const futureHubs = [
   { path: '/future/projects', h1: /See East Coast Foam service photography/ },
   { path: '/future/about', h1: /Local expertise. Direct accountability/ },
   { path: '/future/reviews', h1: /Customer feedback, in their own words/ },
-  { path: '/future/service-area', h1: /South Carolina Lowcountry & Coastal Georgia/ },
+  { path: '/future/service-area', h1: /Service Area/ },
   { path: '/future/resources', h1: /Start with the questions that matter to your project/ },
   { path: '/future/contact', h1: /Keep East Coast Foam close to the project/ },
   { path: '/future/estimate', h1: /Tell us about the project/ }
@@ -56,8 +56,9 @@ test('Future stays independent of Classical and exposes seven purpose-built serv
 test('Future trust, project, and about content use real approved source material without fake project metadata', async ({ page }) => {
   await page.goto('/future', { waitUntil: 'load' });
   await expect(page.locator('.future-v1__proof-local')).toContainText('locally owned and operated');
-  await expect(page.locator('.future-v1__proof-review')).toHaveAttribute('href', '/future/reviews');
   await expect(page.locator('.future-v1__proof-materials img')).toHaveCount(3);
+  await expect(page.locator('.future-v1__proof')).not.toContainText('Google Reviews');
+  await expect(page.locator('.future-v1__reviews--home .google-review-carousel')).toHaveCount(1);
   await expect(page.locator('.future-v1__work-proof-vehicle img')).toHaveAttribute('src', /EAST-COAST-FOAM-LLC-1\.webp/);
   await expect(page.locator('.future-v1__work-proof-links')).toContainText('Meet East Coast Foam');
 
@@ -74,10 +75,10 @@ test('Future trust, project, and about content use real approved source material
 
 test('Future contact provides a usable bundled QR, owner-confirmed address, and save/contact path', async ({ page, request }) => {
   await page.goto('/future/contact', { waitUntil: 'load' });
-  await expect(page.getByRole('link', { name: /Save contact/ })).toHaveAttribute('href', '/future/contact.vcf');
+  await expect(page.getByRole('link', { name: /Download Contact Card/ }).first()).toHaveAttribute('href', '/future/contact.vcf');
   await expect(page.locator('[data-contact-qr-code] svg')).toHaveAttribute('data-contact-qr-svg', '');
-  await expect(page.locator('[data-contact-qr]')).toContainText('Scan to open East Coast Foam contact information and save it to your phone.');
-  await expect(page.getByRole('link', { name: /Open contact page/ })).toHaveAttribute('href', '/future/contact');
+  await expect(page.locator('[data-contact-qr]')).toContainText('Scan to download and save East Coast Foam’s contact card.');
+  await expect(page.locator('[data-contact-qr]').getByRole('link', { name: /Download Contact Card/ })).toHaveAttribute('href', '/future/contact.vcf');
   await expect(page.getByRole('link', { name: /1352 Trask Pkwy, Seabrook, SC 29940/ }).first()).toHaveAttribute('href', /1352\+Trask\+Pkwy/);
   expect(await page.content()).not.toContain('api.qrserver.com');
   expect(await page.content()).not.toContain('3 Broad River');
@@ -103,8 +104,13 @@ test('Guided Estimate retains a complete local-only request through review and r
     await expect(input).toBeChecked();
   }
   await form.locator('input[name="projectType"][value="Existing Home"]').check();
+  await expect(page.getByText('Question 1 of 3')).toBeVisible();
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await expect(page.getByText('Question 2 of 3')).toBeVisible();
   await form.locator('input[name="goals"][value="Improve comfort / existing insulation"]').check();
   await form.locator('input[name="goals"][value="Address a crawlspace"]').check();
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await expect(page.getByText('Question 3 of 3')).toBeVisible();
   const openCell = form.locator('input[name="services"][value="Open-Cell Spray Foam"]');
   const notSure = form.locator('input[name="services"][value="Not Sure"]');
   await openCell.check(); await notSure.check(); await expect(openCell).not.toBeChecked(); await expect(notSure).toBeChecked();
@@ -127,6 +133,8 @@ test('Guided Estimate retains a complete local-only request through review and r
 
   const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL5/QAAAABJRU5ErkJggg==', 'base64');
   const pdf = Buffer.from('%PDF-1.4\n1 0 obj\n<<>>\nendobj\ntrailer\n<<>>\n%%EOF');
+  await expect(form.locator('[data-photo-input]')).not.toHaveAttribute('capture', /.+/);
+  await expect(form.locator('[data-camera-input]')).toHaveAttribute('capture', 'environment');
   await form.locator('[data-photo-input]').setInputFiles([{ name: 'crawlspace.png', mimeType: 'image/png', buffer: png }, { name: 'attic.png', mimeType: 'image/png', buffer: png }]);
   await form.locator('[data-document-input]').setInputFiles([{ name: 'floor-plan.pdf', mimeType: 'application/pdf', buffer: pdf }, { name: 'roof-report.pdf', mimeType: 'application/pdf', buffer: pdf }]);
   await expect(page.locator('.future-v1__selected-file--photo')).toHaveCount(2);
@@ -138,7 +146,10 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.getByRole('button', { name: 'Review Request' }).click();
   await expect(page.getByText('Enter your name to continue.')).toBeVisible();
   await form.getByLabel('Full name').fill('Jordan Example');
-  await form.getByLabel('Phone').fill('(843) 555-0123');
+  await form.getByLabel('Phone').fill('+1 (843) 555-0123');
+  await expect(form.getByLabel('Phone')).toHaveValue('(843) 555-0123');
+  await form.getByRole('button', { name: /Add extension/ }).click();
+  await form.getByLabel('Ext.').fill('42');
   await form.locator('input[name="contactPreference"][value="Email"]').check();
   await form.getByRole('button', { name: 'Review Request' }).click();
   await expect(page.getByText('Enter an email address when Email is preferred.')).toBeVisible();
@@ -146,6 +157,8 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.locator('input[name="contactPreference"][value="Text"]').check();
   await expect(page.getByText(/Text preference is noted/)).toBeVisible();
   await form.getByLabel(/Best time to reach you/).fill('Weekday afternoons');
+  await form.locator('select[name="leadSource"]').selectOption('Friend / Referral');
+  await form.getByLabel(/Who can we thank/).fill('Taylor');
   await form.getByRole('button', { name: 'Review Request' }).click();
 
   const review = page.locator('[data-estimate-review]');
@@ -162,7 +175,8 @@ test('Guided Estimate retains a complete local-only request through review and r
   const receipt = page.locator('[data-owner-receipt]');
   await expect(receipt).toContainText('Jordan Example');
   await expect(receipt).toContainText('1 project photo · 2 PDF documents');
-  await expect(page.getByRole('button', { name: 'Scheduling unavailable' })).toBeDisabled();
+  await expect(page.getByText('Schedule a Site Evaluation')).toBeVisible();
+  await expect(page.getByText('Future option')).toBeVisible();
   expect(nonGetRequests).toEqual([]);
 });
 
@@ -175,6 +189,8 @@ test('Guided Estimate supports keyboard-safe validation, back navigation, and re
   await page.keyboard.press('Enter');
   await expect(page.getByText('Choose what you are working on to continue.')).toBeVisible();
   await form.locator('input[name="projectType"][value="Not Sure"]').check();
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByRole('button', { name: 'Continue' }).click();
   await form.getByRole('button', { name: 'Continue' }).click();
   await form.getByLabel(/City or community/).fill('Beaufort');
   await form.getByLabel(/ZIP code/).fill('29906');
@@ -209,7 +225,8 @@ test('Future mobile menu is visible at iPhone and narrow widths and sticky actio
     expect((await toggle.boundingBox())?.height).toBeGreaterThanOrEqual(44);
     await toggle.click();
     await expect(menu).toBeVisible();
-    await menu.getByRole('button', { name: 'Show service pages' }).click();
+    await menu.getByRole('button', { name: /Services/ }).click();
+    await expect(menu.getByRole('button', { name: /Services/ })).toHaveAttribute('aria-expanded', 'true');
     for (const slug of serviceRoutes) await expect(menu.locator(`a[href="/future/${slug}"]`)).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(toggle).toBeFocused();
@@ -225,6 +242,26 @@ test('Future mobile menu is visible at iPhone and narrow widths and sticky actio
   }
   await page.goto('/future/estimate', { waitUntil: 'load' });
   await expect(page.getByRole('region', { name: 'Contact East Coast Foam' })).toHaveCount(0);
+});
+
+test('Future service-area map remains below the open mobile navigation and restores page interaction on close', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/future/service-area', { waitUntil: 'load' });
+  const toggle = page.getByRole('button', { name: 'Menu' });
+  await toggle.click();
+  const menu = page.getByRole('navigation', { name: 'Future mobile navigation' });
+  await expect(menu).toBeVisible();
+  expect(await page.locator('body').evaluate((body) => body.classList.contains('future-menu-open'))).toBeTruthy();
+  const menuBox = await menu.boundingBox();
+  expect(menuBox).toBeTruthy();
+  const elementIsInMenu = await page.evaluate(({ x, y }) => {
+    const nav = document.querySelector('#future-mobile-navigation');
+    const element = document.elementFromPoint(x, y);
+    return Boolean(nav && element && nav.contains(element));
+  }, { x: (menuBox?.x ?? 0) + 20, y: (menuBox?.y ?? 0) + 20 });
+  expect(elementIsInMenu).toBeTruthy();
+  await page.keyboard.press('Escape');
+  expect(await page.locator('body').evaluate((body) => body.classList.contains('future-menu-open'))).toBeFalsy();
 });
 
 test('Future has no persistent horizontal overflow at desktop, Android, iPhone, and narrow mobile widths', async ({ page }) => {

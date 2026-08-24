@@ -16,6 +16,7 @@ const { estimatePage = false } = Astro.props;
   const actions = document.querySelector<HTMLElement>('.future-v1__mobile-actions');
   const estimate = document.querySelector('#estimate');
   const anchor = document.querySelector('[data-mobile-actions-anchor]');
+  const header = document.querySelector<HTMLElement>('.future-v1__header');
 
   if (actions && 'IntersectionObserver' in window) {
     let pastAnchor = !anchor;
@@ -26,14 +27,20 @@ const { estimatePage = false } = Astro.props;
       setVisibility();
     }, { threshold: 0.08, rootMargin: '0px 0px -16% 0px' });
     if (estimate) observer.observe(estimate);
-    if (anchor) {
-      const anchorObserver = new IntersectionObserver(([entry]) => {
-        pastAnchor = !entry.isIntersecting;
-        setVisibility();
-      }, { threshold: 0.05, rootMargin: '-88px 0px -34% 0px' });
-      anchorObserver.observe(anchor);
-    } else {
+    let frame = 0;
+    const updateAnchorVisibility = () => {
+      frame = 0;
+      if (anchor instanceof HTMLElement) {
+        const headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+        // Show the floating controls once the actual hero/page conversion controls
+        // are no longer reasonably reachable, rather than after a fixed scroll.
+        pastAnchor = anchor.getBoundingClientRect().bottom <= headerBottom + 12;
+      }
       setVisibility();
-    }
+    };
+    const scheduleAnchorUpdate = () => { if (!frame) frame = requestAnimationFrame(updateAnchorVisibility); };
+    window.addEventListener('scroll', scheduleAnchorUpdate, { passive: true });
+    window.addEventListener('resize', scheduleAnchorUpdate);
+    scheduleAnchorUpdate();
   }
 </script>

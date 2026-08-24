@@ -3,11 +3,11 @@ interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 ---
 <div class:list={['future-v1__contact-qr', { 'future-v1__contact-qr--compact': compact }]} data-contact-qr>
-  <div class="future-v1__contact-qr-code" data-contact-qr-code aria-label="QR code linking to East Coast Foam contact information"></div>
-  <div><p class="future-v1__kicker">Share contact</p><h2>Save East Coast Foam.</h2><p>Scan to open East Coast Foam contact information and save it to your phone.</p><a href="/future/contact">Open contact page <span aria-hidden="true">→</span></a></div>
+  <div class="future-v1__contact-qr-code" data-contact-qr-code aria-label="QR code linking to the East Coast Foam contact card download"></div>
+  <div><p class="future-v1__kicker">Contact card</p><h2>Save East Coast Foam.</h2><p>Scan to download and save East Coast Foam’s contact card.</p><a href="/future/contact.vcf" download>Download Contact Card <span aria-hidden="true">↓</span></a></div>
 </div>
 <script>
-  /** A bundled byte-mode QR encoder (Version 5-L) for the current contact URL. */
+  /** A bundled byte-mode QR encoder (Version 5-L) for the contact-card download. */
   const roots = document.querySelectorAll<HTMLElement>('[data-contact-qr]');
   const EXP = new Uint8Array(512); const LOG = new Uint8Array(256);
   let field = 1;
@@ -66,10 +66,10 @@ const { compact = false } = Astro.props;
   };
   roots.forEach((root) => {
     const target = root.querySelector<HTMLElement>('[data-contact-qr-code]'); if (!target) return;
-    const destination = new URL('/future/contact', window.location.origin).href;
+    const destination = new URL('/future/contact.vcf', window.location.origin).href;
     const matrix = contactQr(destination); if (!matrix) return;
     const namespace = 'http://www.w3.org/2000/svg'; const svg = document.createElementNS(namespace, 'svg');
-    svg.setAttribute('viewBox', '0 0 37 37'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'QR code linking to East Coast Foam contact information'); svg.setAttribute('data-contact-qr-svg', '');
+    svg.setAttribute('viewBox', '0 0 37 37'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'QR code linking to the East Coast Foam contact card download'); svg.setAttribute('data-contact-qr-svg', '');
     const background = document.createElementNS(namespace, 'rect'); background.setAttribute('width', '37'); background.setAttribute('height', '37'); background.setAttribute('fill', '#fff'); svg.append(background);
     const path = document.createElementNS(namespace, 'path'); let d = '';
     matrix.forEach((line, y) => line.forEach((dark, x) => { if (dark) d += `M${x} ${y}h1v1h-1z`; }));
