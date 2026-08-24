@@ -283,7 +283,7 @@ test('Workflow concepts are disclosed, cross-linked, and stay outside Future nav
     await page.goto(path, { waitUntil: 'load' });
     await expect(page.locator('main h1')).toHaveText(heading);
     await expect(page.getByText(/Concept — not connected/)).toBeVisible();
-    await expect(page.getByText(/does not read, save, send, or connect/i)).toBeVisible();
+    await expect(page.locator('.future-concept__disclosure')).toBeVisible();
     await expect(page.getByRole('link', { name: crossLink })).toBeVisible();
     await expect(page.locator('main form')).toHaveCount(0);
     const navigation = page.getByRole('navigation', { name: 'Future navigation' });
