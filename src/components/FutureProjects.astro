@@ -17,5 +17,5 @@ const work = [
     {work.map((project, index) => <a class={`future-v1__project future-v1__project--${index + 1}`} href={project.href}><img src={project.image} alt={`${project.title} work by East Coast Foam`} loading="lazy" referrerpolicy="no-referrer" /><span><small>East Coast Foam service photography</small><strong>{project.title}</strong><b>Explore service <i aria-hidden="true">→</i></b></span></a>)}
   </div>
   {currentPublicProjects.length === 0 && <p class="future-v1__project-permission-note">Individual project pages, locations, before/during/after sequences, and filters will appear only when project records have approved publication details and website permission.</p>}
-  <a class="future-v1__facebook-link" href="https://www.facebook.com/foamit247" target="_blank" rel="noopener noreferrer">See more from East Coast Foam on Facebook <span aria-hidden="true">↗</span></a>
+  <a class="future-v1__facebook-link" href="https://www.facebook.com/foamit247" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.2 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.6 1.7-1.6H17V3.5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 4v2.3H8.3V13h2.6v8h3.3Z" /></svg>Follow on Facebook <span aria-hidden="true">↗</span></a>
 </section>

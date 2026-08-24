@@ -10,7 +10,7 @@ import { futureAboutPoints } from '../data/future-content';
   <div>
     <p class="future-v1__kicker">Why East Coast Foam</p>
     <h2 id="future-about-title">Local expertise. Direct accountability.</h2>
-    <p class="future-v1__lede">East Coast Foam is a locally owned and operated company serving Beaufort County, Charleston County, and surrounding Lowcountry communities. The work starts with the property, its accessible conditions, and the customer’s goals.</p>
+    <p class="future-v1__lede">East Coast Foam is a locally owned and operated company. The work starts with the property, its accessible conditions, and the customer’s goals.</p>
     <div class="future-v1__about-points">
       {futureAboutPoints.map((point, index) => <article><span>{String(index + 1).padStart(2, '0')}</span><h3>{point.title}</h3><p>{point.text}</p></article>)}
     </div>

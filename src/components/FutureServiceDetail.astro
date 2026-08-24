@@ -23,7 +23,7 @@ const images = (assets.serviceDetailImages as Record<string, string[]>)[service.
 
   <section class="future-v1__service-detail-media" aria-label={`${service.title} service photography`}>
     {images.slice(1, 2).map((image) => <img src={image} alt={`${service.title} service photography`} loading="lazy" referrerpolicy="no-referrer" />)}
-    <div><p class="future-v1__kicker">Recent work</p><h2>Project details follow permission.</h2><p>East Coast Foam currently shares authorized service photography. Specific project records will appear here when their location, scope, and website permission are confirmed.</p><a href="/future/projects">View all service photography <span aria-hidden="true">→</span></a></div>
+    <div><p class="future-v1__kicker">Recent work</p><h2>See the work in context.</h2><p>Explore East Coast Foam service photography and use the project conversation to connect the work to your property.</p><a href="/future/projects">View recent work <span aria-hidden="true">→</span></a></div>
   </section>
 
   <section class="future-v1__service-faq" aria-labelledby="future-service-faq-title"><p class="future-v1__kicker">Helpful questions</p><h2 id="future-service-faq-title">Questions about {service.title.toLowerCase()}.</h2><div>{service.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div></section>

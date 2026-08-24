@@ -16,7 +16,7 @@ const areas = [
 ];
 ---
 <section class="future-v1__geo" aria-labelledby="future-geo-map-title">
-  <div class="future-v1__geo-copy"><p class="future-v1__kicker">Listed communities</p><h2 id="future-geo-map-title">A Lowcountry and Coastal Georgia service area.</h2><p>The map shows the communities currently listed by East Coast Foam. Availability for a specific address is confirmed during the estimate conversation.</p><div class="future-v1__geo-chips">{areas.map((area) => <span>{area.name}</span>)}</div></div>
+  <div class="future-v1__geo-copy"><p class="future-v1__kicker">Listed communities</p><h2 id="future-geo-map-title">See if we work in your community.</h2><p>The map shows the communities currently listed by East Coast Foam. Availability for a specific address is confirmed during the estimate conversation.</p><div class="future-v1__geo-chips">{areas.map((area) => <span>{area.name}</span>)}</div></div>
   <div class="future-v1__geo-canvas-wrap"><div id="future-service-area-map" class="future-v1__geo-canvas" data-areas={JSON.stringify(areas)} data-business={JSON.stringify(business)} data-radius="100000"></div><p>The shaded radius is a representative view, not a guaranteed service boundary.</p></div>
 </section>
 
