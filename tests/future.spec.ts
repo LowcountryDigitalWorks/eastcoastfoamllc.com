@@ -144,7 +144,7 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.getByRole('button', { name: 'Continue' }).click();
 
   await form.getByRole('button', { name: 'Review Request' }).click();
-  await expect(page.getByText('Enter your name to continue.')).toBeVisible();
+  await expect(page.getByText('Enter a full name with at least two meaningful characters.')).toBeVisible();
   await form.getByLabel('Full name').fill('Jordan Example');
   await form.getByLabel('Phone').fill('+1 (843) 555-0123');
   await expect(form.getByLabel('Phone')).toHaveValue('(843) 555-0123');
