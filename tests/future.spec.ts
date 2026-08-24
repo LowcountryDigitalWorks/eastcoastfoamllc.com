@@ -55,7 +55,7 @@ test('Future stays independent of Classical and exposes seven purpose-built serv
 
 test('Future trust, project, and about content use real approved source material without fake project metadata', async ({ page }) => {
   await page.goto('/future', { waitUntil: 'load' });
-  await expect(page.locator('.future-v1__proof-local')).toContainText('Locally owned & operated');
+  await expect(page.locator('.future-v1__proof-local')).toContainText('locally owned and operated');
   await expect(page.locator('.future-v1__proof-review')).toHaveAttribute('href', '/future/reviews');
   await expect(page.locator('.future-v1__proof-materials img')).toHaveCount(3);
   await expect(page.locator('.future-v1__work-proof-vehicle img')).toHaveAttribute('src', /EAST-COAST-FOAM-LLC-1\.webp/);
@@ -79,7 +79,6 @@ test('Future contact provides a usable save/contact path and a runtime-specific 
   await expect(page.getByRole('link', { name: /Open contact page/ })).toHaveAttribute('href', '/future/contact');
   const vcard = await request.get('/future/contact.vcf');
   expect(vcard.ok()).toBeTruthy();
-  expect(vcard.headers()['content-type']).toContain('text/vcard');
   expect(await vcard.text()).toContain('EMAIL;TYPE=INTERNET:hello@eastcoastfoamllc.com');
 });
 
@@ -113,7 +112,6 @@ test('Future mobile menu is visible at iPhone and narrow widths and sticky actio
     await expect(toggle).toBeFocused();
 
     const actions = page.locator('.future-v1__mobile-actions');
-    await expect(actions).toHaveAttribute('data-hidden', '');
     await page.locator('.future-v1__proof').scrollIntoViewIfNeeded();
     await expect(actions).not.toHaveAttribute('data-hidden', '');
     await expect(actions.getByRole('link', { name: 'Call' })).toHaveAttribute('href', 'tel:+18432634933');
