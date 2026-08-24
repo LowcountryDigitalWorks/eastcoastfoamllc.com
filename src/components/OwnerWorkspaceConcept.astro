@@ -1,0 +1,31 @@
+---
+import FutureConceptDisclosure from './FutureConceptDisclosure.astro';
+import FutureConceptQuestions from './FutureConceptQuestions.astro';
+import { ownerWorkspaceQuestions } from '../data/future-concepts';
+
+const attention = [['01', 'Today’s attention', 'A simple view of conversations or work that may need a response.'], ['02', 'Lead path', 'A possible way to see a request moving toward a site visit or estimate.'], ['03', 'Upcoming work', 'A focused view of scheduled work without replacing the calendar of record.'], ['04', 'Project history', 'A useful record of completed work, photos, and follow-up context.']];
+---
+<section class="future-concept future-concept--owner" aria-labelledby="owner-workspace-title">
+  <header class="future-concept__hero">
+    <p class="future-v1__kicker">Business workflow concept</p>
+    <h1 id="owner-workspace-title">One useful view of work needing attention.</h1>
+    <p>Owner Workspace explores a future place to review exceptions and next steps without rebuilding the systems that already work for East Coast Foam.</p>
+    <FutureConceptDisclosure />
+  </header>
+
+  <section class="future-concept__workspace" aria-label="Illustrative Owner Workspace screen">
+    <div class="future-concept__workspace-bar"><span>East Coast Foam</span><b>Illustrative view</b><span>Today</span></div>
+    <div class="future-concept__workspace-title"><div><p>Owner Workspace</p><strong>Here’s what may need attention.</strong></div><a href="/future/capture">Capture a project <span aria-hidden="true">→</span></a></div>
+    <div class="future-concept__workspace-grid">
+      {attention.map(([number, title, text]) => <article><span>{number}</span><h2>{title}</h2><p>{text}</p><small>Example only — no live business data</small></article>)}
+    </div>
+    <div class="future-concept__workspace-foot"><span>Nothing here is connected to estimates, accounting, calendar, messages, or storage.</span><span>Validate before building.</span></div>
+  </section>
+
+  <section class="future-concept__value" aria-labelledby="owner-value-title">
+    <div><p class="future-v1__kicker">The product hypothesis</p><h2 id="owner-value-title">Make exceptions easier to see, not another system to manage.</h2></div>
+    <div><p>A future workspace could help surface the few things that need a decision or follow-up. It should leave the source-of-truth systems in place unless there is a real reason to change them.</p><a href="/future/capture">See the related Project Capture concept <span aria-hidden="true">→</span></a></div>
+  </section>
+
+  <FutureConceptQuestions questions={ownerWorkspaceQuestions} title="Would this solve a real daily problem?" />
+</section>
