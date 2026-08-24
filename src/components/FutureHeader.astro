@@ -6,24 +6,24 @@ const serviceLinks = services.map((service) => ({ title: service.title, href: `/
 ---
 <header class="future-v1__header">
   <nav class="future-v1__nav" aria-label="Future navigation">
-    <BrandMark href="#top" />
+    <BrandMark href="/future/" />
     <div class="future-v1__desktop-links">
       <details class="future-v1__services-menu">
         <summary>Services</summary>
         <div class="future-v1__services-panel">
-          <a class="future-v1__services-all" href="#services">Explore all services <span aria-hidden="true">→</span></a>
+          <a class="future-v1__services-all" href="/future/services">Explore all services <span aria-hidden="true">→</span></a>
           <div>
             {serviceLinks.map((service) => <a href={service.href}>{service.title}</a>)}
           </div>
         </div>
       </details>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#service-area">Service Area</a>
-      <a href="#resources">Resources</a>
+      <a href="/future/projects">Projects</a>
+      <a href="/future/about">About</a>
+      <a href="/future/reviews">Reviews</a>
+      <a href="/future/service-area">Service Area</a>
+      <a href="/future/resources">Resources</a>
     </div>
-    <a class="future-v1__estimate-button future-v1__estimate-button--header" href="#estimate">Request an Estimate</a>
+    <a class="future-v1__estimate-button future-v1__estimate-button--header" href="/future/estimate">Request an Estimate</a>
     <button class="future-v1__menu-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="future-mobile-navigation">
       <span></span><span></span><span></span>
       <span class="sr-only">Open menu</span>
@@ -32,17 +32,17 @@ const serviceLinks = services.map((service) => ({ title: service.title, href: `/
 
   <div class="future-v1__mobile-menu" id="future-mobile-navigation" hidden>
     <nav aria-label="Future mobile navigation">
-      <a href="#services">Services</a>
+      <a href="/future/services">Services</a>
       <button type="button" class="future-v1__mobile-services-toggle" aria-expanded="false" aria-controls="future-mobile-service-links">Show service pages <span aria-hidden="true">+</span></button>
       <div class="future-v1__mobile-service-links" id="future-mobile-service-links" hidden>
         {serviceLinks.map((service) => <a href={service.href}>{service.title}</a>)}
       </div>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#service-area">Service Area</a>
-      <a href="#resources">Resources</a>
-      <a class="future-v1__estimate-button" href="#estimate">Request an Estimate</a>
+      <a href="/future/projects">Projects</a>
+      <a href="/future/about">About</a>
+      <a href="/future/reviews">Reviews</a>
+      <a href="/future/service-area">Service Area</a>
+      <a href="/future/resources">Resources</a>
+      <a class="future-v1__estimate-button" href="/future/estimate">Request an Estimate</a>
     </nav>
   </div>
 </header>

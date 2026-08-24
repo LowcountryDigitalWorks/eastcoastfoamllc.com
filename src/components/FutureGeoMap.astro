@@ -1,0 +1,47 @@
+---
+import 'leaflet/dist/leaflet.css';
+
+const business = { name: 'East Coast Foam LLC', lat: 32.5931719, lng: -80.7520489 };
+const areas = [
+  { name: 'Beaufort', lat: 32.4316, lng: -80.6698 },
+  { name: "Lady's Island", lat: 32.4269, lng: -80.6548 },
+  { name: 'Hilton Head', lat: 32.2163, lng: -80.7526 },
+  { name: 'Bluffton', lat: 32.2371, lng: -80.8604 },
+  { name: 'Edisto', lat: 32.4794, lng: -80.3357 },
+  { name: 'Hampton County', lat: 32.8779, lng: -81.1276 },
+  { name: 'Charleston', lat: 32.7765, lng: -79.9311 },
+  { name: 'North Charleston', lat: 32.8546, lng: -79.9748 },
+  { name: 'Mount Pleasant', lat: 32.8323, lng: -79.8284 },
+  { name: 'Savannah, GA', lat: 32.0809, lng: -81.0912 }
+];
+---
+<section class="future-v1__geo" aria-labelledby="future-geo-map-title">
+  <div class="future-v1__geo-copy"><p class="future-v1__kicker">Listed communities</p><h2 id="future-geo-map-title">A Lowcountry and Coastal Georgia service area.</h2><p>The map shows the communities currently listed by East Coast Foam. Availability for a specific address is confirmed during the estimate conversation.</p><div class="future-v1__geo-chips">{areas.map((area) => <span>{area.name}</span>)}</div></div>
+  <div class="future-v1__geo-canvas-wrap"><div id="future-service-area-map" class="future-v1__geo-canvas" data-areas={JSON.stringify(areas)} data-business={JSON.stringify(business)} data-radius="100000"></div><p>The shaded radius is a representative view, not a guaranteed service boundary.</p></div>
+</section>
+
+<script>
+  import L from 'leaflet';
+
+  type Point = { name: string; lat: number; lng: number };
+  const initializeFutureMap = () => {
+    const node = document.getElementById('future-service-area-map');
+    if (!(node instanceof HTMLElement) || node.dataset.ready === 'true') return;
+    try {
+      const areas: Point[] = JSON.parse(node.dataset.areas || '[]');
+      const business: Point = JSON.parse(node.dataset.business || '{}');
+      const map = L.map(node, { scrollWheelZoom: false, attributionControl: true });
+      const center: L.LatLngExpression = [business.lat, business.lng];
+      const radius = L.circle(center, { radius: Number(node.dataset.radius || 100000), color: '#217332', weight: 2, opacity: .8, fillColor: '#217332', fillOpacity: .11, interactive: false }).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+      areas.forEach((area) => L.circleMarker([area.lat, area.lng], { radius: 6, color: '#102a20', weight: 2, fillColor: '#217332', fillOpacity: 1 }).addTo(map).bindTooltip(area.name, { direction: 'top' }));
+      L.circleMarker(center, { radius: 9, color: '#102a20', weight: 3, fillColor: '#fff', fillOpacity: 1 }).addTo(map).bindTooltip(`${business.name} — Seabrook`, { direction: 'top' });
+      map.fitBounds(radius.getBounds(), { padding: [22, 22] });
+      node.dataset.ready = 'true';
+    } catch {
+      node.innerHTML = '<p class="future-v1__geo-fallback">Interactive map unavailable. East Coast Foam serves Beaufort, Hilton Head, Lady’s Island, Bluffton, Edisto, Hampton County, Charleston, North Charleston, Mount Pleasant, and Savannah, Georgia.</p>';
+    }
+  };
+  initializeFutureMap();
+  document.addEventListener('astro:page-load', initializeFutureMap);
+</script>

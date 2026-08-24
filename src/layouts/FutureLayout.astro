@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FutureFooter from '../components/FutureFooter.astro';
+import FutureHeader from '../components/FutureHeader.astro';
+import FutureMobileActions from '../components/FutureMobileActions.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  estimatePage?: boolean;
+}
+
+const { title, description, estimatePage = false } = Astro.props;
+---
+<BaseLayout title={title} description={description} theme="future">
+  <div id="top" class="future-v1">
+    <FutureHeader />
+    <main><slot /></main>
+    <FutureFooter />
+    <FutureMobileActions estimatePage={estimatePage} />
+  </div>
+</BaseLayout>

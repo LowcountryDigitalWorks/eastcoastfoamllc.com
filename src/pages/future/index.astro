@@ -1,43 +1,21 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import FutureAbout from '../../components/FutureAbout.astro';
-import FutureEstimate from '../../components/FutureEstimate.astro';
-import FutureFoamTeaser from '../../components/FutureFoamTeaser.astro';
-import FutureFooter from '../../components/FutureFooter.astro';
-import FutureHeader from '../../components/FutureHeader.astro';
+import FutureClosing from '../../components/FutureClosing.astro';
 import FutureHero from '../../components/FutureHero.astro';
-import FutureMobileActions from '../../components/FutureMobileActions.astro';
-import FutureProcess from '../../components/FutureProcess.astro';
-import FutureProjectPaths from '../../components/FutureProjectPaths.astro';
-import FutureProjects from '../../components/FutureProjects.astro';
 import FutureProofStrip from '../../components/FutureProofStrip.astro';
-import FutureResources from '../../components/FutureResources.astro';
-import FutureServiceArea from '../../components/FutureServiceArea.astro';
-import FutureServices from '../../components/FutureServices.astro';
+import FutureServicesOverview from '../../components/FutureServicesOverview.astro';
+import FutureWorkProof from '../../components/FutureWorkProof.astro';
+import FutureLayout from '../../layouts/FutureLayout.astro';
 import GoogleReviewsCarousel from '../../components/GoogleReviewsCarousel.astro';
-import site from '../../data/site.json';
 ---
-<BaseLayout title={`Future | ${site.name}`} description="East Coast Foam spray foam, insulation, roofing, and coating services for the South Carolina Lowcountry and Coastal Georgia." theme="future">
-  <div id="top" class="future-v1">
-    <FutureHeader />
-    <main>
-      <FutureHero />
-      <FutureProofStrip />
-      <FutureProjectPaths />
-      <FutureServices />
-      <FutureFoamTeaser />
-      <FutureProjects />
-      <FutureAbout />
-      <section class="future-v1__section future-v1__reviews" id="reviews" aria-labelledby="future-reviews-title">
-        <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Customer reviews</p><h2 id="future-reviews-title">Hear from East Coast Foam customers.</h2></div><p>Read the customer feedback already shared on Google.</p></div>
-        <GoogleReviewsCarousel />
-      </section>
-      <FutureProcess />
-      <FutureServiceArea />
-      <FutureResources />
-      <FutureEstimate />
-    </main>
-    <FutureFooter />
-    <FutureMobileActions />
-  </div>
-</BaseLayout>
+<FutureLayout title={`East Coast Foam | Spray Foam & Insulation for the Lowcountry`} description="Explore East Coast Foam spray foam, insulation, roofing, and coating services for the South Carolina Lowcountry and Coastal Georgia.">
+  <FutureHero />
+  <FutureProofStrip />
+  <FutureServicesOverview />
+  <FutureWorkProof />
+  <section class="future-v1__section future-v1__reviews future-v1__reviews--home" id="reviews" aria-labelledby="future-reviews-title">
+    <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Customer reviews</p><h2 id="future-reviews-title">Customer feedback, in their own words.</h2></div><p>Read the East Coast Foam reviews currently shared on Google.</p></div>
+    <GoogleReviewsCarousel compact limit={2} />
+    <a class="future-v1__section-route" href="/future/reviews">Read customer reviews <span aria-hidden="true">→</span></a>
+  </section>
+  <FutureClosing />
+</FutureLayout>
