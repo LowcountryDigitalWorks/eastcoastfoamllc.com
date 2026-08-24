@@ -315,7 +315,7 @@ body.future-menu-open { overflow:hidden; overscroll-behavior:none; touch-action:
 .future-v1__reputation-links span { color:var(--green-deep); font-size:12px; font-weight:900; }
 .future-v1__reputation-links strong { font-size:14px; line-height:1.35; }
 .future-v1__reputation-links b { position:absolute; right:18px; top:50%; color:var(--green); font-size:19px; transform:translateY(-50%); }
-.future-v1__facebook-link,.future-v1__footer-facebook { display:inline-flex; align-items:center; gap:7px; color:#1877f2 !important; }
+.future-v1__facebook-link,.future-v1__footer-facebook { display:inline-flex; align-items:center; gap:7px; color:#0a5dbb !important; }
 .future-v1__facebook-link svg,.future-v1__footer-facebook svg { width:17px; height:17px; fill:currentColor; }
 .future-v1__contact-card-button { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:13px 18px; border:1px solid var(--green-deep); background:transparent; color:var(--green-deep); font-size:13px; font-weight:900; }
 .future-v1__contact-card-help { max-width:410px; margin:13px 0 0 !important; color:var(--muted); font-size:13px; line-height:1.55; }

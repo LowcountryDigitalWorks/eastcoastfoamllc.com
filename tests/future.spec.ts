@@ -126,7 +126,7 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.getByRole('button', { name: 'Continue' }).click();
 
   await form.locator('input[name="timing"][value="ASAP"]').check();
-  await form.getByLabel(/Approximate project size/).fill('1,500 sq ft');
+  await form.getByLabel(/Approximate project size/).fill('1,500');
   await form.getByLabel(/Anything else we should know/).fill('Please review crawlspace access.');
   await expect(page.getByRole('link', { name: /Need to talk sooner/ })).toBeVisible();
   await form.getByRole('button', { name: 'Continue' }).click();
