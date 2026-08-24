@@ -1,7 +1,7 @@
 ---
 import FutureConceptDisclosure from './FutureConceptDisclosure.astro';
 import FutureConceptQuestions from './FutureConceptQuestions.astro';
-import { captureStates, captureWorkflow, caseyDiscoveryQuestions } from '../data/future-concepts';
+import { captureStates, captureWorkflow, projectCaptureQuestions } from '../data/future-concepts';
 import { futureContact } from '../data/future-content';
 
 const photoRoles = ['Before', 'During', 'After', 'General'];
@@ -28,5 +28,5 @@ const photoRoles = ['Before', 'During', 'After', 'General'];
 
   <section class="future-concept__flow" aria-labelledby="capture-flow-title"><p class="future-v1__kicker">Potential downstream value</p><h2 id="capture-flow-title">One project, shared details, many useful uses.</h2><ol>{captureWorkflow.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{step}</li>)}</ol><p>Future presentation rules could choose relevant Recent Work, service-page proof, project history, and geographic evidence from approved structured metadata. Casey would not need to choose every webpage placement.</p><a href="/future/owner">See the related Owner Workspace concept <span aria-hidden="true">→</span></a></section>
 
-  <FutureConceptQuestions questions={caseyDiscoveryQuestions.slice(3)} title="Could this make project proof easier to keep?" />
+  <FutureConceptQuestions questions={projectCaptureQuestions} title="Could this make project proof easier to keep?" />
 </section>

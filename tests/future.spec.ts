@@ -300,7 +300,7 @@ test('Workflow concepts are disclosed, cross-linked, and stay outside Future nav
   await expect(page.getByText('I’ll Handle Publishing')).toBeVisible();
   await expect(page.getByText('Send to LDW')).toBeVisible();
   await expect(page.getByText('Publish Now')).toHaveCount(0);
-  await expect(page.getByText('(843) 263-4933')).toBeVisible();
+  await expect(page.locator('.future-concept__capture-support')).toContainText('(843) 263-4933');
   await expect(page.locator('main')).not.toContainText('843-987-6300');
 });
 
