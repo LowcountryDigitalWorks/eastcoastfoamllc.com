@@ -1,0 +1,10 @@
+---
+import FutureLayout from '../../layouts/FutureLayout.astro';
+import FutureEstimate from '../../components/FutureEstimate.astro';
+import FuturePageIntro from '../../components/FuturePageIntro.astro';
+---
+<FutureLayout title="Request an Estimate | East Coast Foam" description="Contact East Coast Foam by phone or email to begin an insulation, roofing, or coating estimate conversation." estimatePage>
+  <FuturePageIntro eyebrow="Request an estimate" title="Start with the project in front of you." text="Call or email East Coast Foam with the property and the work you are considering. The guided estimate experience is not required to begin this conversation." />
+  <section class="future-v1__estimate-steps" aria-labelledby="future-estimate-steps-title"><h2 id="future-estimate-steps-title">What happens next</h2><ol><li>Share the property and project.</li><li>Discuss the useful next step.</li><li>Confirm the estimate or site-evaluation conversation.</li></ol></section>
+  <FutureEstimate />
+</FutureLayout>

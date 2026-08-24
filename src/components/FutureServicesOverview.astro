@@ -1,0 +1,17 @@
+---
+const groups = [
+  { label: 'Insulate & air seal', text: 'Spray foam and fiberglass options for the spaces that need a better insulation conversation.' },
+  { label: 'Restore & upgrade', text: 'Insulation removal when the existing material needs to be addressed before the next step.' },
+  { label: 'Protect', text: 'Coating and roofing options for prepared surfaces and project-specific conditions.' }
+];
+---
+<section class="future-v1__section future-v1__services-overview" id="services" aria-labelledby="future-services-overview-title">
+  <div class="future-v1__section-heading">
+    <div><p class="future-v1__kicker">Services</p><h2 id="future-services-overview-title">A clearer way into the right service.</h2></div>
+    <p>Start with the kind of work your property needs, then explore the relevant East Coast Foam service.</p>
+  </div>
+  <div class="future-v1__overview-grid">
+    {groups.map((group, index) => <a href="/future/services" class={`future-v1__overview-card future-v1__overview-card--${index + 1}`}><span>{group.label}</span><strong>{group.text}</strong><b>View services <i aria-hidden="true">→</i></b></a>)}
+  </div>
+  <p class="future-v1__context-link">Not sure which spray foam approach fits your project? <a href="/future/resources#foam-types">Compare foam types</a>.</p>
+</section>

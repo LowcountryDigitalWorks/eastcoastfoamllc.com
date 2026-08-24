@@ -5,9 +5,11 @@ import site from '../data/site.json';
 
 interface Props {
   compact?: boolean;
+  limit?: number;
 }
 
-const { compact = false } = Astro.props;
+const { compact = false, limit } = Astro.props;
+const reviews = limit ? home.reviews.slice(0, limit) : home.reviews;
 ---
 <div class={`google-review-carousel ${compact ? 'google-review-carousel--compact' : ''}`} data-review-carousel>
   <div class="google-review-carousel__bar">
@@ -23,7 +25,7 @@ const { compact = false } = Astro.props;
 
   <div class="google-review-carousel__viewport" data-review-viewport tabindex="0" aria-label="East Coast Foam Google customer reviews">
     <div class="google-review-carousel__track">
-      {home.reviews.map((review) => (
+      {reviews.map((review) => (
         <article class="google-review-card">
           <div class="google-review-card__header">
             <img class="google-review-card__avatar" src={review.avatar} alt={`${review.name} profile picture`} loading="lazy" referrerpolicy="no-referrer" />

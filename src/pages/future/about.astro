@@ -1,0 +1,17 @@
+---
+import FutureLayout from '../../layouts/FutureLayout.astro';
+import FutureAbout from '../../components/FutureAbout.astro';
+import FuturePageIntro from '../../components/FuturePageIntro.astro';
+import assets from '../../data/demo-assets.json';
+import home from '../../data/classical-home.json';
+
+const brandLogos = assets.brandLogos as Record<string, string>;
+---
+<FutureLayout title="About East Coast Foam" description="Learn about East Coast Foam, its local service focus, and the established manufacturer materials represented on the current site.">
+  <FuturePageIntro eyebrow="About East Coast Foam" title="Local expertise. Direct accountability." text="East Coast Foam serves homeowners, builders, and property owners across the Lowcountry and Coastal Georgia with insulation, roofing, and coating conversations grounded in the project." />
+  <FutureAbout />
+  <section class="future-v1__section future-v1__partners" aria-labelledby="future-partners-title">
+    <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Materials represented</p><h2 id="future-partners-title">Established manufacturers, shown clearly.</h2></div><p>Supplier and certification artwork appears here as represented on East Coast Foam’s current public site.</p></div>
+    <div class="future-v1__partner-grid">{home.brands.map((brand) => <a href={brand.url} target="_blank" rel="noopener noreferrer"><img src={brandLogos[brand.name]} alt={brand.name} loading="lazy" referrerpolicy="no-referrer" /><span>{brand.name}</span></a>)}</div>
+  </section>
+</FutureLayout>

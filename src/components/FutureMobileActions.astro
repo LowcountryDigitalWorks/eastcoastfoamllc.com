@@ -1,19 +1,39 @@
 ---
 import site from '../data/site.json';
+
+interface Props {
+  estimatePage?: boolean;
+}
+
+const { estimatePage = false } = Astro.props;
 ---
-<div class="future-v1__mobile-actions" role="region" aria-label="Contact East Coast Foam">
+{!estimatePage && <div class="future-v1__mobile-actions" data-hidden role="region" aria-label="Contact East Coast Foam">
   <a href={`tel:${site.phoneHref}`}><span aria-hidden="true">☎</span> Call</a>
-  <a href="#estimate"><span aria-hidden="true">→</span> Request Estimate</a>
-</div>
+  <a href="/future/estimate"><span aria-hidden="true">→</span> Request Estimate</a>
+</div>}
 
 <script>
   const actions = document.querySelector<HTMLElement>('.future-v1__mobile-actions');
   const estimate = document.querySelector('#estimate');
+  const anchor = document.querySelector('[data-mobile-actions-anchor]');
 
-  if (actions && estimate && 'IntersectionObserver' in window) {
+  if (actions && 'IntersectionObserver' in window) {
+    let pastAnchor = !anchor;
+    let nearEstimate = false;
+    const setVisibility = () => actions.toggleAttribute('data-hidden', !pastAnchor || nearEstimate);
     const observer = new IntersectionObserver(([entry]) => {
-      actions.toggleAttribute('data-hidden', entry.isIntersecting);
+      nearEstimate = entry.isIntersecting;
+      setVisibility();
     }, { threshold: 0.12 });
-    observer.observe(estimate);
+    if (estimate) observer.observe(estimate);
+    if (anchor) {
+      const anchorObserver = new IntersectionObserver(([entry]) => {
+        pastAnchor = !entry.isIntersecting;
+        setVisibility();
+      }, { threshold: 0.12 });
+      anchorObserver.observe(anchor);
+    } else {
+      setVisibility();
+    }
   }
 </script>

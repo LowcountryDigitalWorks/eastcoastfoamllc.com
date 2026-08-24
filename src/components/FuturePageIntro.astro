@@ -1,0 +1,14 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+}
+
+const { eyebrow, title, text } = Astro.props;
+---
+<section class="future-v1__page-intro" data-mobile-actions-anchor aria-labelledby="future-page-title">
+  <p class="future-v1__kicker">{eyebrow}</p>
+  <h1 id="future-page-title">{title}</h1>
+  <p>{text}</p>
+</section>
