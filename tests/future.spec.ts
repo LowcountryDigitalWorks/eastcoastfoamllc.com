@@ -20,7 +20,7 @@ const futureHubs = [
   { path: '/future/service-area', h1: /South Carolina Lowcountry & Coastal Georgia/ },
   { path: '/future/resources', h1: /Start with the questions that matter to your project/ },
   { path: '/future/contact', h1: /Keep East Coast Foam close to the project/ },
-  { path: '/future/estimate', h1: /Start with the project in front of you/ }
+  { path: '/future/estimate', h1: /Tell us about the project/ }
 ];
 
 test('Future hub routes have unique customer-facing structure and preserve preview safeguards', async ({ page }) => {
@@ -68,18 +68,121 @@ test('Future trust, project, and about content use real approved source material
 
   await page.goto('/future/about', { waitUntil: 'load' });
   await expect(page.locator('.future-v1__about-photo img')).toHaveAttribute('src', /EAST-COAST-FOAM-LLC-1\.webp/);
-  await expect(page.locator('.future-v1__story-note')).toContainText('Owner biography');
+  await expect(page.locator('main')).not.toContainText(/owner biography|after Casey confirms|current public site/i);
   await expect(page.locator('.future-v1__partner-grid a')).toHaveCount(3);
 });
 
-test('Future contact provides a usable save/contact path and a runtime-specific QR destination', async ({ page, request }) => {
+test('Future contact provides a usable bundled QR, owner-confirmed address, and save/contact path', async ({ page, request }) => {
   await page.goto('/future/contact', { waitUntil: 'load' });
   await expect(page.getByRole('link', { name: /Save contact/ })).toHaveAttribute('href', '/future/contact.vcf');
-  await expect(page.locator('[data-contact-qr] img')).toHaveAttribute('src', /api\.qrserver\.com/);
+  await expect(page.locator('[data-contact-qr-code] svg')).toHaveAttribute('data-contact-qr-svg', '');
+  await expect(page.locator('[data-contact-qr]')).toContainText('Scan to open East Coast Foam contact information and save it to your phone.');
   await expect(page.getByRole('link', { name: /Open contact page/ })).toHaveAttribute('href', '/future/contact');
+  await expect(page.getByRole('link', { name: /1352 Trask Pkwy, Seabrook, SC 29940/ }).first()).toHaveAttribute('href', /1352\+Trask\+Pkwy/);
+  expect(await page.content()).not.toContain('api.qrserver.com');
+  expect(await page.content()).not.toContain('3 Broad River');
   const vcard = await request.get('/future/contact.vcf');
   expect(vcard.ok()).toBeTruthy();
-  expect(await vcard.text()).toContain('EMAIL;TYPE=INTERNET:hello@eastcoastfoamllc.com');
+  const vcardText = await vcard.text();
+  expect(vcardText).toContain('EMAIL;TYPE=INTERNET:hello@eastcoastfoamllc.com');
+  expect(vcardText).toContain('1352 Trask Pkwy;Seabrook;SC;29940');
+});
+
+test('Guided Estimate retains a complete local-only request through review and receipt', async ({ page }) => {
+  const nonGetRequests: string[] = [];
+  page.on('request', (request) => { if (request.method() !== 'GET') nonGetRequests.push(`${request.method()} ${request.url()}`); });
+  await page.goto('/future/estimate', { waitUntil: 'load' });
+  const form = page.locator('[data-estimate-form]');
+  await expect(form).not.toHaveAttribute('action', /.+/);
+  await expect(page.getByText('Interactive preview — nothing entered here is sent yet.')).toBeVisible();
+
+  const projectChoices = ['New Construction', 'Existing Home', 'Attic', 'Crawlspace', 'Garage / Shop', 'Roof', 'Commercial Property', 'Other', 'Not Sure'];
+  for (const choice of projectChoices) {
+    const input = form.locator(`input[name="projectType"][value="${choice}"]`);
+    await input.check();
+    await expect(input).toBeChecked();
+  }
+  await form.locator('input[name="projectType"][value="Existing Home"]').check();
+  await form.locator('input[name="goals"][value="Improve comfort / existing insulation"]').check();
+  await form.locator('input[name="goals"][value="Address a crawlspace"]').check();
+  const openCell = form.locator('input[name="services"][value="Open-Cell Spray Foam"]');
+  const notSure = form.locator('input[name="services"][value="Not Sure"]');
+  await openCell.check(); await notSure.check(); await expect(openCell).not.toBeChecked(); await expect(notSure).toBeChecked();
+  await openCell.check(); await expect(notSure).not.toBeChecked();
+  await form.getByRole('button', { name: 'Continue' }).click();
+
+  await form.getByLabel(/City or community/).fill('Outsideville');
+  await form.getByLabel(/ZIP code/).fill('29920');
+  await expect(page.getByText('This may be outside our normal service area')).toBeVisible();
+  await form.locator('input[name="access"][value="Guard gate"]').check();
+  await expect(page.getByText('East Coast Foam can confirm gate codes')).toBeVisible();
+  await expect(form.locator('input[name*="gate" i]')).toHaveCount(0);
+  await form.getByRole('button', { name: 'Continue' }).click();
+
+  await form.locator('input[name="timing"][value="ASAP"]').check();
+  await form.getByLabel(/Approximate project size/).fill('1,500 sq ft');
+  await form.getByLabel(/Anything else we should know/).fill('Please review crawlspace access.');
+  await expect(page.getByRole('link', { name: /Need to talk sooner/ })).toBeVisible();
+  await form.getByRole('button', { name: 'Continue' }).click();
+
+  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL5/QAAAABJRU5ErkJggg==', 'base64');
+  const pdf = Buffer.from('%PDF-1.4\n1 0 obj\n<<>>\nendobj\ntrailer\n<<>>\n%%EOF');
+  await form.locator('[data-photo-input]').setInputFiles([{ name: 'crawlspace.png', mimeType: 'image/png', buffer: png }, { name: 'attic.png', mimeType: 'image/png', buffer: png }]);
+  await form.locator('[data-document-input]').setInputFiles([{ name: 'floor-plan.pdf', mimeType: 'application/pdf', buffer: pdf }, { name: 'roof-report.pdf', mimeType: 'application/pdf', buffer: pdf }]);
+  await expect(page.locator('.future-v1__selected-file--photo')).toHaveCount(2);
+  await expect(page.locator('.future-v1__selected-file--document')).toHaveCount(2);
+  await page.getByRole('button', { name: 'Remove attic.png' }).click();
+  await expect(page.locator('.future-v1__selected-file--photo')).toHaveCount(1);
+  await form.getByRole('button', { name: 'Continue' }).click();
+
+  await form.getByRole('button', { name: 'Review Request' }).click();
+  await expect(page.getByText('Enter your name to continue.')).toBeVisible();
+  await form.getByLabel('Full name').fill('Jordan Example');
+  await form.getByLabel('Phone').fill('(843) 555-0123');
+  await form.locator('input[name="contactPreference"][value="Email"]').check();
+  await form.getByRole('button', { name: 'Review Request' }).click();
+  await expect(page.getByText('Enter an email address when Email is preferred.')).toBeVisible();
+  await form.locator('input[name="email"]').fill('jordan@example.com');
+  await form.locator('input[name="contactPreference"][value="Text"]').check();
+  await expect(page.getByText(/Text preference is noted/)).toBeVisible();
+  await form.getByLabel(/Best time to reach you/).fill('Weekday afternoons');
+  await form.getByRole('button', { name: 'Review Request' }).click();
+
+  const review = page.locator('[data-estimate-review]');
+  await expect(review).toBeVisible();
+  await expect(review.locator('[data-review-files]')).toContainText('floor-plan.pdf');
+  await expect(review.locator('[data-review-files]')).toContainText('roof-report.pdf');
+  await review.getByRole('button', { name: 'Edit' }).nth(1).click();
+  await expect(form.getByLabel(/City or community/)).toHaveValue('Outsideville');
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByRole('button', { name: 'Review Request' }).click();
+  await review.getByRole('button', { name: 'Finish Preview' }).click();
+  const receipt = page.locator('[data-owner-receipt]');
+  await expect(receipt).toContainText('Jordan Example');
+  await expect(receipt).toContainText('1 project photo · 2 PDF documents');
+  await expect(page.getByRole('button', { name: 'Scheduling unavailable' })).toBeDisabled();
+  expect(nonGetRequests).toEqual([]);
+});
+
+test('Guided Estimate supports keyboard-safe validation, back navigation, and reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto('/future/estimate', { waitUntil: 'load' });
+  const form = page.locator('[data-estimate-form]');
+  await form.getByRole('button', { name: 'Continue' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByText('Choose what you are working on to continue.')).toBeVisible();
+  await form.locator('input[name="projectType"][value="Not Sure"]').check();
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByLabel(/City or community/).fill('Beaufort');
+  await form.getByLabel(/ZIP code/).fill('29906');
+  await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByRole('button', { name: 'Back' }).click();
+  await expect(form.getByLabel(/City or community/)).toHaveValue('Beaufort');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
 });
 
 test('Future desktop navigation uses only Future destinations in customer-intent order', async ({ page }) => {
