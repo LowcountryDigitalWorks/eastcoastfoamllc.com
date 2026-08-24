@@ -44,7 +44,7 @@ body.theme-future:has(.future-v1) { overflow-x:clip; }
   .future-v1 { padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
   .future-v1__mobile-actions { position:fixed; z-index:60; right:12px; bottom:max(12px,env(safe-area-inset-bottom)); left:12px; display:grid; grid-template-columns:1fr 1.28fr; min-height:63px; border:1px solid rgba(255,255,255,.13); border-radius:4px; background:#101512; box-shadow:0 12px 30px rgba(0,0,0,.26); transition:transform .2s ease,opacity .2s ease,visibility .2s ease; }
   .future-v1__mobile-actions[data-hidden] { visibility:hidden; opacity:0; pointer-events:none; transform:translateY(calc(100% + 20px)); }
-  .future-v1__mobile-actions a:last-child { background:var(--green); color:#fff; }
+  .future-v1__mobile-actions a:last-child { background:#1e6b37; color:#fff; }
 }
 
 /* Future 1B — intentionally short home and focused route system. */
