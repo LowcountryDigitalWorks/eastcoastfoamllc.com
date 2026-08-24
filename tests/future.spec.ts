@@ -102,7 +102,7 @@ test('Future mobile menu, contextual sticky actions, and estimate suppression ar
   await page.keyboard.press('Escape');
   await expect(toggle).toBeFocused();
 
-  const actions = page.getByRole('region', { name: 'Contact East Coast Foam' });
+  const actions = page.locator('.future-v1__mobile-actions');
   await expect(actions).toHaveAttribute('data-hidden', '');
   await page.locator('#projects').scrollIntoViewIfNeeded();
   await expect(actions).not.toHaveAttribute('data-hidden', '');
