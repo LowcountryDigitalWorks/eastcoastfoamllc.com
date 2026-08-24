@@ -78,7 +78,7 @@ test('Future contact provides a usable bundled QR, owner-confirmed address, and 
   await expect(page.locator('[data-contact-qr-code] svg')).toHaveAttribute('data-contact-qr-svg', '');
   await expect(page.locator('[data-contact-qr]')).toContainText('Scan to open East Coast Foam contact information and save it to your phone.');
   await expect(page.getByRole('link', { name: /Open contact page/ })).toHaveAttribute('href', '/future/contact');
-  await expect(page.getByRole('link', { name: /1352 Trask Pkwy, Seabrook, SC 29940/ })).toHaveAttribute('href', /1352\+Trask\+Pkwy/);
+  await expect(page.getByRole('link', { name: /1352 Trask Pkwy, Seabrook, SC 29940/ }).first()).toHaveAttribute('href', /1352\+Trask\+Pkwy/);
   expect(await page.content()).not.toContain('api.qrserver.com');
   expect(await page.content()).not.toContain('3 Broad River');
   const vcard = await request.get('/future/contact.vcf');
