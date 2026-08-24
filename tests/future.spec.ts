@@ -142,7 +142,7 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.locator('input[name="contactPreference"][value="Email"]').check();
   await form.getByRole('button', { name: 'Review Request' }).click();
   await expect(page.getByText('Enter an email address when Email is preferred.')).toBeVisible();
-  await form.getByLabel('Email').fill('jordan@example.com');
+  await form.locator('input[name="email"]').fill('jordan@example.com');
   await form.locator('input[name="contactPreference"][value="Text"]').check();
   await expect(page.getByText(/Text preference is noted/)).toBeVisible();
   await form.getByLabel(/Best time to reach you/).fill('Weekday afternoons');
