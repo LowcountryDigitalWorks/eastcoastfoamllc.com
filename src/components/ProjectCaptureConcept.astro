@@ -1,0 +1,32 @@
+---
+import FutureConceptDisclosure from './FutureConceptDisclosure.astro';
+import FutureConceptQuestions from './FutureConceptQuestions.astro';
+import { captureStates, captureWorkflow, caseyDiscoveryQuestions } from '../data/future-concepts';
+import { futureContact } from '../data/future-content';
+
+const photoRoles = ['Before', 'During', 'After', 'General'];
+---
+<section class="future-concept future-concept--capture" aria-labelledby="capture-title">
+  <header class="future-concept__hero">
+    <p class="future-v1__kicker">Business workflow concept</p>
+    <h1 id="capture-title">Capture project proof while the work is still in front of you.</h1>
+    <p>Project Capture &amp; Publish explores a future local-first jobsite flow for organized project details and photos. It is not a connected app or publishing system.</p>
+    <FutureConceptDisclosure detail="This visual does not access a camera, photo library, schedule, storage account, or website publishing workflow." />
+  </header>
+
+  <section class="future-concept__capture-stage" aria-label="Illustrative Project Capture flow">
+    <div class="future-concept__capture-top"><div><span>East Coast Foam</span><strong>Project Capture</strong></div><div class="future-concept__appearance" aria-label="Appearance setting example"><b>Appearance</b><span aria-current="true">System</span><span>Light</span><span>Dark</span></div></div>
+    <div class="future-concept__capture-grid">
+      <article class="future-concept__capture-panel future-concept__capture-panel--match"><p class="future-v1__kicker">1 · Choose a project</p><h2>Start with what is in front of you.</h2><p>A future flow could suggest an active job, let the owner search, or allow manual entry. Nothing is auto-filled from a live system here.</p><div class="future-concept__sample-row"><span>Project</span><b>Choose or enter manually</b></div><div class="future-concept__sample-row"><span>Service</span><b>Add when known</b></div><small>Local draft status: <strong>Saved on this device</strong></small></article>
+      <article class="future-concept__capture-panel future-concept__capture-panel--photos"><p class="future-v1__kicker">2 · Add photos</p><h2>Choose or take several photos.</h2><p>Photo roles stay simple and belong to each photo—not the entire project.</p><div class="future-concept__photo-grid">{photoRoles.map((role, index) => <figure><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><figcaption>{role}</figcaption></figure>)}</div><div class="future-concept__capture-actions"><span>Choose photos</span><span>Take photo</span></div></article>
+      <article class="future-concept__capture-panel future-concept__capture-panel--review"><p class="future-v1__kicker">3 · Review the next step</p><h2>Keep control over what happens next.</h2><p>One approved project record could eventually support the website, useful project history, and other owner-approved follow-up.</p><div class="future-concept__choice-stack"><span>Save for Later</span><span>I’ll Handle Publishing</span><span>Send to LDW</span></div><small>No project becomes public without explicit approval.</small></article>
+    </div>
+    <p class="future-concept__capture-support">East Coast Foam · {futureContact.phoneDisplay} · {futureContact.publicEmail}</p>
+  </section>
+
+  <section class="future-concept__sync" aria-labelledby="capture-sync-title"><div><p class="future-v1__kicker">Local-first / offline-safe idea</p><h2 id="capture-sync-title">Honest status matters at a jobsite.</h2><p>A future app could save work locally first, wait safely for a connection, and notify only after synchronization succeeds.</p></div><ol>{captureStates.map(([state, detail], index) => <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{state}</strong><p>{detail}</p></li>)}</ol></section>
+
+  <section class="future-concept__flow" aria-labelledby="capture-flow-title"><p class="future-v1__kicker">Potential downstream value</p><h2 id="capture-flow-title">One project, shared details, many useful uses.</h2><ol>{captureWorkflow.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{step}</li>)}</ol><p>Future presentation rules could choose relevant Recent Work, service-page proof, project history, and geographic evidence from approved structured metadata. Casey would not need to choose every webpage placement.</p><a href="/future/owner">See the related Owner Workspace concept <span aria-hidden="true">→</span></a></section>
+
+  <FutureConceptQuestions questions={caseyDiscoveryQuestions.slice(3)} title="Could this make project proof easier to keep?" />
+</section>

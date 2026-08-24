@@ -264,6 +264,55 @@ test('Future service-area map remains below the open mobile navigation and resto
   expect(await page.locator('body').evaluate((body) => body.classList.contains('future-menu-open'))).toBeFalsy();
 });
 
+test('Chooser separates website directions from Casey-facing workflow concepts', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'load' });
+  const directions = page.locator('.chooser-grid');
+  await expect(directions.getByRole('link', { name: /Classical/ })).toHaveAttribute('href', '/classical');
+  await expect(directions.getByRole('link', { name: /Future/ })).toHaveAttribute('href', '/future');
+  const concepts = page.getByRole('region', { name: /Business workflow concepts/ });
+  await expect(concepts).toBeVisible();
+  await expect(concepts.getByRole('link', { name: /Owner Workspace/ })).toHaveAttribute('href', '/future/owner');
+  await expect(concepts.getByRole('link', { name: /Project Capture/ })).toHaveAttribute('href', '/future/capture');
+});
+
+test('Workflow concepts are disclosed, cross-linked, and stay outside Future navigation', async ({ page }) => {
+  for (const [path, heading, crossLink] of [
+    ['/future/owner', /One useful view of work needing attention/, /Project Capture concept/],
+    ['/future/capture', /Capture project proof while the work is still in front of you/, /Owner Workspace concept/]
+  ] as const) {
+    await page.goto(path, { waitUntil: 'load' });
+    await expect(page.locator('main h1')).toHaveText(heading);
+    await expect(page.getByText(/Concept — not connected/)).toBeVisible();
+    await expect(page.getByText(/does not read, save, send, or connect/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: crossLink })).toBeVisible();
+    await expect(page.locator('main form')).toHaveCount(0);
+    const navigation = page.getByRole('navigation', { name: 'Future navigation' });
+    await expect(navigation.locator('a[href="/future/owner"],a[href="/future/capture"]')).toHaveCount(0);
+  }
+
+  await page.goto('/future/capture', { waitUntil: 'load' });
+  await expect(page.getByText('Saved on this device')).toBeVisible();
+  await expect(page.getByText('Waiting for connection')).toBeVisible();
+  await expect(page.getByText('Uploading')).toBeVisible();
+  await expect(page.getByText('Sent')).toBeVisible();
+  await expect(page.getByText('Save for Later')).toBeVisible();
+  await expect(page.getByText('I’ll Handle Publishing')).toBeVisible();
+  await expect(page.getByText('Send to LDW')).toBeVisible();
+  await expect(page.getByText('Publish Now')).toHaveCount(0);
+  await expect(page.getByText('(843) 263-4933')).toBeVisible();
+  await expect(page.locator('main')).not.toContainText('843-987-6300');
+});
+
+test('Workflow concept routes are accessible and overflow-free on narrow mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  for (const path of ['/future/owner', '/future/capture']) {
+    await page.goto(path, { waitUntil: 'load' });
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+    expect(results.violations, path).toEqual([]);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), path).toBeLessThanOrEqual(1);
+  }
+});
+
 test('Future has no persistent horizontal overflow at desktop, Android, iPhone, and narrow mobile widths', async ({ page }) => {
   const paths = [...futureHubs.map((item) => item.path), ...serviceRoutes.map((slug) => `/future/${slug}`)];
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { width: 375, height: 812 }, { width: 320, height: 700 }]) {

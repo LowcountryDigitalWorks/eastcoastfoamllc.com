@@ -1,0 +1,8 @@
+---
+interface Props { label?: string; detail?: string; }
+const { label = 'Concept — not connected', detail = 'This is a discussion visual only. It does not read, save, send, or connect to business systems.' } = Astro.props;
+---
+<aside class="future-concept__disclosure" role="note">
+  <span aria-hidden="true">◇</span>
+  <div><strong>{label}</strong><p>{detail}</p></div>
+</aside>

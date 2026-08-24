@@ -1,0 +1,10 @@
+---
+interface Props { questions: string[]; title?: string; }
+const { questions, title = 'Questions worth discussing' } = Astro.props;
+---
+<section class="future-concept__questions" aria-labelledby="future-concept-questions-title">
+  <p class="future-v1__kicker">Discovery conversation</p>
+  <h2 id="future-concept-questions-title">{title}</h2>
+  <p>This is a short conversation guide, not a request to approve software.</p>
+  <ol>{questions.map((question) => <li>{question}</li>)}</ol>
+</section>
