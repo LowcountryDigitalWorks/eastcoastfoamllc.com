@@ -103,14 +103,14 @@ export const futureAboutPoints = [
   { title: 'Connected services', text: 'Insulation, removal, roofing foam, and coating services can be discussed together when the project calls for it.' }
 ];
 
-// Future uses the address and map link currently published on the owner-authorized
-// public site. The public-facing preview email remains the approved hello address.
+// Owner-confirmed Future contact details. The public-facing preview email remains
+// the approved hello address.
 export const futureContact = {
   phoneDisplay: '(843) 263-4933',
   phoneHref: '+18432634933',
   publicEmail: 'hello@eastcoastfoamllc.com',
-  address: '3 Broad River Blvd, Beaufort, SC 29906',
-  mapsUrl: 'https://maps.app.goo.gl/BdpVyS6tfL3djaGB6',
+  address: '1352 Trask Pkwy, Seabrook, SC 29940',
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=East+Coast+Foam+LLC+1352+Trask+Pkwy+Seabrook+SC+29940',
   hours: 'Mon–Fri: 8am–5pm · Sat–Sun: Closed',
   facebook: 'https://www.facebook.com/foamit247'
 };

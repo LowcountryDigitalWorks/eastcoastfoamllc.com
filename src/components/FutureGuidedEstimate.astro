@@ -1,0 +1,326 @@
+---
+import { futureContact, futureServices } from '../data/future-content';
+
+const projectTypes = ['New Construction', 'Existing Home', 'Attic', 'Crawlspace', 'Garage / Shop', 'Roof', 'Commercial Property', 'Other', 'Not Sure'];
+const goals = ['Insulate new construction', 'Improve comfort / existing insulation', 'Replace or remove old insulation', 'Insulate an attic or roofline', 'Address a crawlspace', 'Protect / restore a roof', 'Protect / coat another surface', 'Other', 'Not Sure'];
+const timings = ['ASAP', 'Within 30 days', '1–3 months', '3+ months', 'Just researching'];
+const accessOptions = ['No special access', 'Gated community', 'Guard gate', 'Guest / pass approval', 'Call on arrival', 'Other'];
+const communities = ['Beaufort', "Lady's Island", 'Hilton Head', 'Bluffton', 'Edisto', 'Hampton County', 'Charleston', 'North Charleston', 'Mount Pleasant', 'Savannah'];
+---
+<section class="future-v1__guided-estimate" data-guided-estimate aria-labelledby="guided-estimate-title">
+  <header class="future-v1__guided-estimate-intro">
+    <p class="future-v1__kicker">Guided estimate</p>
+    <h1 id="guided-estimate-title">Tell us about the project.</h1>
+    <p>Start with a few simple details. You can go back, make changes, and see a clear request summary before finishing.</p>
+    <p class="future-v1__preview-notice" role="note">Interactive preview — nothing entered here is sent yet.</p>
+  </header>
+
+  <div class="future-v1__estimate-shell">
+    <div class="future-v1__estimate-progress" aria-label="Estimate progress">
+      <p data-progress-copy aria-live="polite">Step 1 of 5 — Your project</p>
+      <ol>
+        <li data-progress-step="1" aria-current="step"><span>1</span>Project</li>
+        <li data-progress-step="2"><span>2</span>Property</li>
+        <li data-progress-step="3"><span>3</span>Timing</li>
+        <li data-progress-step="4"><span>4</span>Photos &amp; plans</li>
+        <li data-progress-step="5"><span>5</span>Contact</li>
+      </ol>
+    </div>
+
+    <form class="future-v1__estimate-form" data-estimate-form novalidate>
+      <section data-estimate-step="1" aria-labelledby="estimate-project-title">
+        <p class="future-v1__kicker">Step 1</p>
+        <h2 id="estimate-project-title" tabindex="-1">Your project</h2>
+        <fieldset data-validation-group="projectType">
+          <legend>What are you working on?</legend>
+          <p class="future-v1__field-help">Choose the one description that comes closest.</p>
+          <div class="future-v1__choice-grid future-v1__choice-grid--three">
+            {projectTypes.map((choice) => <label class="future-v1__choice"><input type="radio" name="projectType" value={choice} /><span>{choice}</span></label>)}
+          </div>
+          <p class="future-v1__field-error" data-error-for="projectType" aria-live="polite"></p>
+        </fieldset>
+        <fieldset>
+          <legend>What are you trying to accomplish?</legend>
+          <p class="future-v1__field-help">Choose any that fit. You do not need to know the technical answer.</p>
+          <div class="future-v1__choice-grid future-v1__choice-grid--three">
+            {goals.map((choice) => <label class="future-v1__choice"><input type="checkbox" name="goals" value={choice} /><span>{choice}</span></label>)}
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Do you know which service you are interested in?</legend>
+          <p class="future-v1__field-help">Choose any services you want to discuss, or choose Not Sure.</p>
+          <div class="future-v1__choice-grid future-v1__choice-grid--three">
+            {futureServices.map((service) => <label class="future-v1__choice"><input type="checkbox" name="services" value={service.title} /><span>{service.title}</span></label>)}
+            <label class="future-v1__choice"><input type="checkbox" name="services" value="Not Sure" data-not-sure-service /><span>Not Sure</span></label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section data-estimate-step="2" hidden aria-labelledby="estimate-property-title">
+        <p class="future-v1__kicker">Step 2</p>
+        <h2 id="estimate-property-title" tabindex="-1">Property &amp; access</h2>
+        <div class="future-v1__field-grid">
+          <label>City or community <span aria-hidden="true">*</span><input name="city" autocomplete="address-level2" list="future-community-list" /><small>Required. A community name is welcome if that is how you know the area.</small><span class="future-v1__field-error" data-error-for="city" aria-live="polite"></span></label>
+          <label>ZIP code <span aria-hidden="true">*</span><input name="zip" inputmode="numeric" autocomplete="postal-code" /><small>Required.</small><span class="future-v1__field-error" data-error-for="zip" aria-live="polite"></span></label>
+          <label>Street address <span class="future-v1__optional">Optional</span><input name="street" autocomplete="street-address" /></label>
+          <label>Community or subdivision <span class="future-v1__optional">Optional</span><input name="subdivision" /></label>
+        </div>
+        <datalist id="future-community-list">{communities.map((community) => <option value={community} />)}</datalist>
+        <p class="future-v1__area-note" data-area-note hidden role="status">This may be outside our normal service area, but East Coast Foam can still review the project.</p>
+        <fieldset>
+          <legend>Will we need special access to reach the property?</legend>
+          <div class="future-v1__choice-grid future-v1__choice-grid--three">
+            {accessOptions.map((choice, index) => <label class="future-v1__choice"><input type="radio" name="access" value={choice} checked={index === 0} /><span>{choice}</span></label>)}
+          </div>
+          <p class="future-v1__field-help future-v1__access-note" data-access-note hidden>East Coast Foam can confirm gate codes, guest-list or pass details before the visit.</p>
+        </fieldset>
+      </section>
+
+      <section data-estimate-step="3" hidden aria-labelledby="estimate-timing-title">
+        <p class="future-v1__kicker">Step 3</p>
+        <h2 id="estimate-timing-title" tabindex="-1">Timing &amp; details</h2>
+        <fieldset data-validation-group="timing">
+          <legend>When are you hoping to get started?</legend>
+          <div class="future-v1__choice-grid">
+            {timings.map((choice) => <label class="future-v1__choice"><input type="radio" name="timing" value={choice} /><span>{choice}</span></label>)}
+          </div>
+          <p class="future-v1__field-error" data-error-for="timing" aria-live="polite"></p>
+        </fieldset>
+        <label class="future-v1__full-field">Approximate project size / square footage <span class="future-v1__optional">If known</span><input name="size" inputmode="numeric" placeholder="For example: 1,500 sq ft" /></label>
+        <label class="future-v1__full-field">Anything else we should know about the project? <span class="future-v1__optional">Optional</span><textarea name="notes" rows="5" placeholder="Access, existing conditions, or anything you would like to discuss."></textarea></label>
+        <a class="future-v1__estimate-callout" data-asap-call hidden href={`tel:${futureContact.phoneHref}`}>Need to talk sooner? Call East Coast Foam <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section data-estimate-step="4" hidden aria-labelledby="estimate-files-title">
+        <p class="future-v1__kicker">Step 4</p>
+        <h2 id="estimate-files-title" tabindex="-1">Photos &amp; plans</h2>
+        <p class="future-v1__step-copy">Photos and PDFs can help provide context. Both are optional.</p>
+        <div class="future-v1__upload-grid">
+          <label class="future-v1__upload-card"><input type="file" name="photos" accept="image/jpeg,image/png,image/webp,image/heic" multiple capture="environment" data-photo-input /><span aria-hidden="true">▧</span><strong>Add project photos</strong><small>Up to 10 images. Photos are not uploaded in this preview.</small></label>
+          <label class="future-v1__upload-card"><input type="file" name="plans" accept="application/pdf" multiple data-document-input /><span aria-hidden="true">▤</span><strong>Add plans or PDFs</strong><small>Up to 3 PDFs, such as floor plans, site plans, roof reports, or sketches. Documents stay on this device in this preview.</small></label>
+        </div>
+        <p class="future-v1__file-status" data-file-status role="status">No files selected.</p>
+        <div class="future-v1__file-list" data-file-list aria-live="polite"></div>
+      </section>
+
+      <section data-estimate-step="5" hidden aria-labelledby="estimate-contact-title">
+        <p class="future-v1__kicker">Step 5</p>
+        <h2 id="estimate-contact-title" tabindex="-1">How should East Coast Foam reach you?</h2>
+        <div class="future-v1__field-grid">
+          <label>Full name <span aria-hidden="true">*</span><input name="fullName" autocomplete="name" /><span class="future-v1__field-error" data-error-for="fullName" aria-live="polite"></span></label>
+          <label>Phone <span aria-hidden="true">*</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" /><span class="future-v1__field-error" data-error-for="phone" aria-live="polite"></span></label>
+          <label>Email <span class="future-v1__optional">Required if Email is preferred</span><input name="email" type="email" autocomplete="email" /><span class="future-v1__field-error" data-error-for="email" aria-live="polite"></span></label>
+          <label>Best time to reach you <span class="future-v1__optional">Optional</span><input name="bestTime" placeholder="For example: weekday afternoons" /></label>
+        </div>
+        <fieldset data-validation-group="contactPreference">
+          <legend>Preferred contact <span aria-hidden="true">*</span></legend>
+          <div class="future-v1__choice-grid future-v1__choice-grid--three">
+            {['Call', 'Text', 'Email'].map((choice) => <label class="future-v1__choice"><input type="radio" name="contactPreference" value={choice} /><span>{choice}</span></label>)}
+          </div>
+          <p class="future-v1__field-error" data-error-for="contactPreference" aria-live="polite"></p>
+          <p class="future-v1__field-help" data-text-preference-note hidden>Text preference is noted for a future contact experience. Consent details will be confirmed before texting is enabled.</p>
+        </fieldset>
+      </section>
+
+      <div class="future-v1__estimate-controls" data-estimate-controls>
+        <button class="future-v1__control-button future-v1__control-button--secondary" type="button" data-back hidden>Back</button>
+        <button class="future-v1__control-button" type="button" data-next>Continue</button>
+      </div>
+    </form>
+
+    <section class="future-v1__estimate-review" data-estimate-review hidden aria-labelledby="estimate-review-title">
+      <p class="future-v1__kicker">Review request</p>
+      <h2 id="estimate-review-title" tabindex="-1">Make sure this looks right.</h2>
+      <p>Nothing is sent in this preview. Edit any section before you finish.</p>
+      <div class="future-v1__review-groups">
+        <article><div><h3>Project</h3><button type="button" data-edit-step="1">Edit</button></div><p data-review-project></p></article>
+        <article><div><h3>Property &amp; access</h3><button type="button" data-edit-step="2">Edit</button></div><p data-review-property></p></article>
+        <article><div><h3>Timing &amp; details</h3><button type="button" data-edit-step="3">Edit</button></div><p data-review-timing></p></article>
+        <article><div><h3>Photos &amp; plans</h3><button type="button" data-edit-step="4">Edit</button></div><p data-review-files></p></article>
+        <article><div><h3>Contact</h3><button type="button" data-edit-step="5">Edit</button></div><p data-review-contact></p></article>
+      </div>
+      <div class="future-v1__estimate-controls"><button class="future-v1__control-button future-v1__control-button--secondary" type="button" data-review-back>Back</button><button class="future-v1__control-button" type="button" data-finish-preview>Finish Preview</button></div>
+    </section>
+
+    <section class="future-v1__estimate-receipt" data-estimate-receipt hidden aria-labelledby="estimate-receipt-title" tabindex="-1">
+      <p class="future-v1__kicker">Preview complete</p>
+      <h2 id="estimate-receipt-title">What East Coast Foam would receive</h2>
+      <p class="future-v1__receipt-intro">This is a browser-only preview. No request, contact information, photo, or document has left this device.</p>
+      <div class="future-v1__receipt-card" data-owner-receipt></div>
+      <aside class="future-v1__scheduling-teaser"><div><p class="future-v1__kicker">Future scheduling</p><h3>Schedule a Site Evaluation</h3><p>Scheduling can be added after East Coast Foam reviews the project.</p></div><button type="button" disabled aria-describedby="future-scheduling-note">Scheduling unavailable</button><span id="future-scheduling-note" class="sr-only">Scheduling is not enabled in this preview.</span></aside>
+      <button class="future-v1__control-button future-v1__control-button--secondary" type="button" data-start-over>Start another preview</button>
+    </section>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-guided-estimate]');
+  if (!root) throw new Error('Guided estimate root was not found.');
+
+  const form = root.querySelector<HTMLFormElement>('[data-estimate-form]')!;
+  const steps = [...root.querySelectorAll<HTMLElement>('[data-estimate-step]')];
+  const review = root.querySelector<HTMLElement>('[data-estimate-review]')!;
+  const receipt = root.querySelector<HTMLElement>('[data-estimate-receipt]')!;
+  const progressCopy = root.querySelector<HTMLElement>('[data-progress-copy]')!;
+  const back = root.querySelector<HTMLButtonElement>('[data-back]')!;
+  const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+  const fileList = root.querySelector<HTMLElement>('[data-file-list]')!;
+  const fileStatus = root.querySelector<HTMLElement>('[data-file-status]')!;
+  const photoInput = root.querySelector<HTMLInputElement>('[data-photo-input]')!;
+  const documentInput = root.querySelector<HTMLInputElement>('[data-document-input]')!;
+  const cityInput = form.elements.namedItem('city') as HTMLInputElement;
+  const knownCommunities = ['beaufort', "lady's island", 'hilton head', 'bluffton', 'edisto', 'hampton county', 'charleston', 'north charleston', 'mount pleasant', 'savannah'];
+  const stepNames = ['Your project', 'Property & access', 'Timing & details', 'Photos & plans', 'Contact'];
+  let currentStep = 1;
+  let files: Array<{ id: string; kind: 'photo' | 'document'; name: string; size: number; url?: string }> = [];
+
+  const values = (name: string) => [...form.querySelectorAll<HTMLInputElement>(`[name="${name}"]:checked`)].map((input) => input.value);
+  const value = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement).value.trim();
+  const formatSize = (size: number) => size < 1024 * 1024 ? `${Math.max(1, Math.round(size / 1024))} KB` : `${(size / 1024 / 1024).toFixed(1)} MB`;
+  const error = (name: string, message = '') => {
+    const field = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+    if (field) field.textContent = message;
+    const controls = [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(`[name="${name}"]`)];
+    controls.forEach((control) => control.setAttribute('aria-invalid', message ? 'true' : 'false'));
+  };
+  const firstError = () => form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+  const normalArea = () => {
+    const city = cityInput.value.trim().toLowerCase();
+    const outside = Boolean(city) && !knownCommunities.some((community) => city.includes(community) || community.includes(city));
+    root.querySelector<HTMLElement>('[data-area-note]')!.hidden = !outside;
+  };
+  const accessNote = () => {
+    const selected = values('access')[0];
+    root.querySelector<HTMLElement>('[data-access-note]')!.hidden = !selected || selected === 'No special access';
+  };
+  const toggleServiceNotSure = (target: HTMLInputElement) => {
+    const services = [...form.querySelectorAll<HTMLInputElement>('[name="services"]')];
+    if (target.value === 'Not Sure' && target.checked) services.filter((item) => item !== target).forEach((item) => item.checked = false);
+    if (target.value !== 'Not Sure' && target.checked) services.find((item) => item.value === 'Not Sure')!.checked = false;
+  };
+  const renderFiles = () => {
+    fileList.replaceChildren();
+    const photos = files.filter((file) => file.kind === 'photo');
+    const documents = files.filter((file) => file.kind === 'document');
+    fileStatus.textContent = `${photos.length} ${photos.length === 1 ? 'photo' : 'photos'} and ${documents.length} ${documents.length === 1 ? 'PDF' : 'PDFs'} selected. Files remain only in this browser preview.`;
+    files.forEach((file) => {
+      const item = document.createElement('article');
+      item.className = `future-v1__selected-file future-v1__selected-file--${file.kind}`;
+      if (file.kind === 'photo' && file.url) {
+        const image = document.createElement('img');
+        image.src = file.url;
+        image.alt = `Selected project photo: ${file.name}`;
+        item.append(image);
+      } else {
+        const icon = document.createElement('span');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.textContent = 'PDF';
+        item.append(icon);
+      }
+      const copy = document.createElement('div');
+      const name = document.createElement('strong'); name.textContent = file.name;
+      const meta = document.createElement('small'); meta.textContent = `${file.kind === 'photo' ? 'Photo' : 'PDF document'} · ${formatSize(file.size)}`;
+      copy.append(name, meta);
+      const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = `Remove ${file.name}`;
+      remove.addEventListener('click', () => {
+        if (file.url) URL.revokeObjectURL(file.url);
+        files = files.filter((item) => item.id !== file.id);
+        renderFiles();
+      });
+      item.append(copy, remove);
+      fileList.append(item);
+    });
+  };
+  const addFiles = (selected: FileList | null, kind: 'photo' | 'document') => {
+    if (!selected) return;
+    const limit = kind === 'photo' ? 10 : 3;
+    const existing = files.filter((file) => file.kind === kind).length;
+    const valid = [...selected].filter((file) => kind === 'photo' ? file.type.startsWith('image/') : file.type === 'application/pdf');
+    const available = Math.max(0, limit - existing);
+    const accepted = valid.slice(0, available);
+    files.push(...accepted.map((file, index) => ({ id: `${Date.now()}-${index}-${file.name}`, kind, name: file.name, size: file.size, url: kind === 'photo' ? URL.createObjectURL(file) : undefined })));
+    const rejected = selected.length - accepted.length;
+    renderFiles();
+    if (rejected) fileStatus.textContent += ` ${rejected} file${rejected === 1 ? ' was' : 's were'} not added because only ${kind === 'photo' ? 'images (up to 10)' : 'PDFs (up to 3)'} are accepted.`;
+  };
+  const validateStep = (step: number) => {
+    ['projectType', 'city', 'zip', 'timing', 'fullName', 'phone', 'email', 'contactPreference'].forEach((name) => error(name));
+    if (step === 1 && !values('projectType')[0]) error('projectType', 'Choose what you are working on to continue.');
+    if (step === 2) {
+      if (!value('city')) error('city', 'Enter a city or community to continue.');
+      if (!/^\d{5}(?:-\d{4})?$/.test(value('zip'))) error('zip', 'Enter a 5-digit ZIP code (or ZIP+4).');
+    }
+    if (step === 3 && !values('timing')[0]) error('timing', 'Choose a timing option to continue.');
+    if (step === 5) {
+      if (!value('fullName')) error('fullName', 'Enter your name to continue.');
+      if (!/^[0-9()+.\-\s]{7,}$/.test(value('phone'))) error('phone', 'Enter a phone number with at least 7 digits.');
+      const preference = values('contactPreference')[0];
+      if (!preference) error('contactPreference', 'Choose how you prefer to be contacted.');
+      if (preference === 'Email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value('email'))) error('email', 'Enter an email address when Email is preferred.');
+    }
+    return !form.querySelector('[aria-invalid="true"]');
+  };
+  const setStep = (step: number, focus = true) => {
+    currentStep = step;
+    review.hidden = true;
+    receipt.hidden = true;
+    form.hidden = false;
+    steps.forEach((section) => section.hidden = Number(section.dataset.estimateStep) !== step);
+    root.querySelectorAll<HTMLElement>('[data-progress-step]').forEach((item) => {
+      const isCurrent = Number(item.dataset.progressStep) === step;
+      item.toggleAttribute('aria-current', isCurrent);
+      item.classList.toggle('is-complete', Number(item.dataset.progressStep) < step);
+    });
+    progressCopy.textContent = `Step ${step} of 5 — ${stepNames[step - 1]}`;
+    back.hidden = step === 1;
+    next.textContent = step === 5 ? 'Review Request' : 'Continue';
+    if (focus) steps[step - 1].querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+  };
+  const summary = (selector: string, text: string) => { const item = root.querySelector<HTMLElement>(selector); if (item) item.textContent = text; };
+  const renderReview = () => {
+    const project = [values('projectType')[0], values('goals').join(', '), values('services').join(' + ')].filter(Boolean).join(' · ') || 'Project details not selected.';
+    const property = [value('city'), value('zip'), value('street'), value('subdivision'), values('access')[0]].filter(Boolean).join(' · ');
+    const timing = [values('timing')[0], value('size') && `Approx. ${value('size')}`, value('notes')].filter(Boolean).join(' · ');
+    const photos = files.filter((file) => file.kind === 'photo'); const documents = files.filter((file) => file.kind === 'document');
+    const attachments = [photos.length ? `${photos.length} project photo${photos.length === 1 ? '' : 's'}` : '', documents.length ? `${documents.length} PDF${documents.length === 1 ? '' : 's'}: ${documents.map((file) => file.name).join(', ')}` : ''].filter(Boolean).join(' · ') || 'No photos or plans selected.';
+    const contact = [value('fullName'), value('phone'), value('email'), values('contactPreference')[0], value('bestTime')].filter(Boolean).join(' · ');
+    summary('[data-review-project]', project); summary('[data-review-property]', property); summary('[data-review-timing]', timing || 'No additional details selected.'); summary('[data-review-files]', attachments); summary('[data-review-contact]', contact);
+  };
+  const finishPreview = () => {
+    const ownerReceipt = root.querySelector<HTMLElement>('[data-owner-receipt]')!;
+    ownerReceipt.replaceChildren();
+    const photos = files.filter((file) => file.kind === 'photo'); const documents = files.filter((file) => file.kind === 'document');
+    const lines = [
+      [values('projectType')[0], values('goals').join(' + ')].filter(Boolean).join(' · '),
+      values('services').join(' + ') || 'Service conversation not selected',
+      [value('city'), value('subdivision'), values('access')[0] && values('access')[0] !== 'No special access' ? `${values('access')[0]} access` : 'No special access'].filter(Boolean).join(' · '),
+      values('timing')[0],
+      `${photos.length} project photo${photos.length === 1 ? '' : 's'} · ${documents.length} PDF document${documents.length === 1 ? '' : 's'}`,
+      [value('fullName'), value('phone'), value('email'), values('contactPreference')[0] && `Prefers ${values('contactPreference')[0].toLowerCase()}`].filter(Boolean).join(' · ')
+    ];
+    lines.forEach((line) => { const p = document.createElement('p'); p.textContent = line; ownerReceipt.append(p); });
+    form.hidden = true; review.hidden = true; receipt.hidden = false; receipt.focus();
+  };
+
+  form.addEventListener('submit', (event) => event.preventDefault());
+  form.addEventListener('change', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement)) return;
+    if (target.name === 'services') toggleServiceNotSure(target);
+    if (target.name === 'access') accessNote();
+    if (target.name === 'timing') root.querySelector<HTMLElement>('[data-asap-call]')!.hidden = target.value !== 'ASAP';
+    if (target.name === 'contactPreference') root.querySelector<HTMLElement>('[data-text-preference-note]')!.hidden = target.value !== 'Text';
+    if (target.name === 'city') normalArea();
+  });
+  cityInput.addEventListener('input', normalArea);
+  photoInput.addEventListener('change', () => { addFiles(photoInput.files, 'photo'); photoInput.value = ''; });
+  documentInput.addEventListener('change', () => { addFiles(documentInput.files, 'document'); documentInput.value = ''; });
+  next.addEventListener('click', () => { if (!validateStep(currentStep)) { firstError(); return; } if (currentStep === 5) { renderReview(); form.hidden = true; review.hidden = false; review.querySelector<HTMLElement>('h2')?.focus(); } else setStep(currentStep + 1); });
+  back.addEventListener('click', () => setStep(currentStep - 1));
+  root.querySelectorAll<HTMLButtonElement>('[data-edit-step]').forEach((button) => button.addEventListener('click', () => setStep(Number(button.dataset.editStep))));
+  root.querySelector<HTMLButtonElement>('[data-review-back]')!.addEventListener('click', () => setStep(5));
+  root.querySelector<HTMLButtonElement>('[data-finish-preview]')!.addEventListener('click', finishPreview);
+  root.querySelector<HTMLButtonElement>('[data-start-over]')!.addEventListener('click', () => { files.forEach((file) => file.url && URL.revokeObjectURL(file.url)); files = []; form.reset(); renderFiles(); accessNote(); setStep(1); });
+  window.addEventListener('pagehide', () => files.forEach((file) => file.url && URL.revokeObjectURL(file.url)), { once: true });
+  renderFiles();
+</script>

@@ -7,13 +7,11 @@ import { manufacturerLinks } from '../../data/future-content';
 
 const brandLogos = assets.brandLogos as Record<string, string>;
 ---
-<FutureLayout title="About East Coast Foam" description="Learn about East Coast Foam, its local service focus, and the established manufacturer materials represented on the current site.">
+<FutureLayout title="About East Coast Foam" description="Learn about East Coast Foam, its local service focus, and manufacturer materials connected to its service conversations.">
   <FuturePageIntro eyebrow="About East Coast Foam" title="Local expertise. Direct accountability." text="East Coast Foam serves homeowners, builders, and property owners across the Lowcountry and Coastal Georgia with insulation, roofing, and coating conversations grounded in the project." />
   <FutureAbout />
-  <section class="future-v1__section future-v1__story-note" aria-labelledby="future-story-note-title"><div><p class="future-v1__kicker">Our story</p><h2 id="future-story-note-title">A company story built around the work.</h2></div><p>East Coast Foam’s current public materials identify a locally owned and operated business. Owner biography, founding history, training details, and project milestones will be added here only after Casey confirms the underlying facts.</p></section>
   <section class="future-v1__section future-v1__partners" aria-labelledby="future-partners-title">
-    <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Materials represented</p><h2 id="future-partners-title">Manufacturers represented on the current site.</h2></div><p>These marks link to their public manufacturer sources. Product selection remains specific to the property and project.</p></div>
+    <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Materials represented</p><h2 id="future-partners-title">Material options for the work in front of you.</h2></div><p>These marks link to their public manufacturer sources. Product selection remains specific to the property and project.</p></div>
     <div class="future-v1__partner-grid">{manufacturerLinks.map((brand) => <a href={brand.url} target="_blank" rel="noopener noreferrer"><img src={brandLogos[brand.name]} alt={brand.name} loading="lazy" referrerpolicy="no-referrer" /><span>{brand.name}</span></a>)}</div>
-    <div class="future-v1__training-note"><p class="future-v1__kicker">Training &amp; associations</p><p>East Coast Foam’s current public site displays industry association artwork and describes certified installers. Specific credential names, scopes, and renewal details are intentionally held for owner confirmation.</p></div>
   </section>
 </FutureLayout>
