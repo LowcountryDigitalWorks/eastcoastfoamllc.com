@@ -104,13 +104,13 @@ test('Guided Estimate retains a complete local-only request through review and r
     await expect(input).toBeChecked();
   }
   await form.locator('input[name="projectType"][value="Existing Home"]').check();
-  await expect(page.getByText('Question 1 of 3')).toBeVisible();
+    await expect(page.getByText('Question 1 of 3', { exact: true })).toBeVisible();
   await form.getByRole('button', { name: 'Continue' }).click();
-  await expect(page.getByText('Question 2 of 3')).toBeVisible();
+    await expect(page.getByText('Question 2 of 3', { exact: true })).toBeVisible();
   await form.locator('input[name="goals"][value="Improve comfort / existing insulation"]').check();
   await form.locator('input[name="goals"][value="Address a crawlspace"]').check();
   await form.getByRole('button', { name: 'Continue' }).click();
-  await expect(page.getByText('Question 3 of 3')).toBeVisible();
+    await expect(page.getByText('Question 3 of 3', { exact: true })).toBeVisible();
   const openCell = form.locator('input[name="services"][value="Open-Cell Spray Foam"]');
   const notSure = form.locator('input[name="services"][value="Not Sure"]');
   await openCell.check(); await notSure.check(); await expect(openCell).not.toBeChecked(); await expect(notSure).toBeChecked();
