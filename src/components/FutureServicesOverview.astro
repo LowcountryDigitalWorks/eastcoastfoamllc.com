@@ -11,7 +11,7 @@ const groups = [
     <p>Start with the kind of work your property needs, then explore the relevant East Coast Foam service.</p>
   </div>
   <div class="future-v1__overview-grid">
-    {groups.map((group, index) => <a href="/future/services" class={`future-v1__overview-card future-v1__overview-card--${index + 1}`}><span>{group.label}</span><strong>{group.text}</strong><b>View services <i aria-hidden="true">→</i></b></a>)}
+    {groups.map((group, index) => <a href="/future/services" class={`future-v1__overview-card future-v1__overview-card--${index + 1}`}><span class="future-v1__overview-label">{group.label}</span><span class="future-v1__overview-icon" aria-hidden="true">{index === 0 ? '⌂' : index === 1 ? '↗' : '◒'}</span><strong>{group.text}</strong><b>Explore services <i aria-hidden="true">→</i></b></a>)}
   </div>
   <p class="future-v1__context-link">Not sure which spray foam approach fits your project? <a href="/future/resources#foam-types">Compare foam types</a>.</p>
 </section>

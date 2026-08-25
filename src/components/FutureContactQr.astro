@@ -1,10 +1,10 @@
 ---
-interface Props { compact?: boolean; }
-const { compact = false } = Astro.props;
+interface Props { compact?: boolean; showAction?: boolean; }
+const { compact = false, showAction = true } = Astro.props;
 ---
 <div class:list={['future-v1__contact-qr', { 'future-v1__contact-qr--compact': compact }]} data-contact-qr>
   <div class="future-v1__contact-qr-code" data-contact-qr-code aria-label="QR code linking to the East Coast Foam contact card download"></div>
-  <div><p class="future-v1__kicker">Contact card</p><h2>Save East Coast Foam.</h2><p>Scan to download and save East Coast Foam’s contact card.</p><a href="/future/contact.vcf" download>Download Contact Card <span aria-hidden="true">↓</span></a></div>
+  <div><p class="future-v1__kicker">Contact card</p><h2>Save East Coast Foam.</h2><p>Scan to download and save East Coast Foam’s contact card.</p>{showAction && <a href="/future/contact.vcf" download>Download Contact Card <span aria-hidden="true">↓</span></a>}</div>
 </div>
 <script>
   /** A bundled byte-mode QR encoder (Version 5-L) for the contact-card download. */

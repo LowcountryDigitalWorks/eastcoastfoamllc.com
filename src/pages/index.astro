@@ -6,10 +6,14 @@ import BrandMark from '../components/BrandMark.astro';
   <main class="chooser" id="top">
     <div class="chooser__inner">
       <div class="chooser__brand"><BrandMark /></div>
-      <p class="eyebrow">Lowcountry Digital Works · website direction review</p>
-      <h1>Two directions for East Coast Foam.</h1>
-      <p class="chooser__intro">Compare a familiar Classical experience with a more ambitious Future direction.</p>
-      <div class="chooser-grid">
+      <header class="chooser__heading">
+        <p class="eyebrow">Lowcountry Digital Works · website direction review</p>
+        <h1>Two directions for East Coast Foam.</h1>
+        <p class="chooser__intro">Compare a familiar Classical experience with a more ambitious Future direction.</p>
+      </header>
+      <section class="chooser__directions" aria-labelledby="website-directions-title">
+        <p class="chooser__section-label" id="website-directions-title">Website directions</p>
+        <div class="chooser-grid">
         <a class="chooser-card chooser-card--classical" href="/classical" target="_blank" rel="noopener noreferrer">
           <span>01</span>
           <h2>Classical</h2>
@@ -22,11 +26,12 @@ import BrandMark from '../components/BrandMark.astro';
           <p>A redesigned experience showing what the next generation of East Coast Foam could look like.</p>
           <strong>Open Future in new tab →</strong>
         </a>
-      </div>
+        </div>
+      </section>
       <p class="chooser-footnote">Each website direction opens in a new tab for easy side-by-side comparison.</p>
 
       <section class="chooser__concepts" role="region" aria-label="Business workflow concepts">
-        <div><p class="eyebrow">Business workflow concepts</p><h2 id="workflow-concepts-title">Possible ways to make the work behind the website easier.</h2><p>These are discussion visuals—not competing website directions. Nothing is connected, saved, or sent.</p></div>
+        <div class="chooser__concept-heading"><p class="eyebrow">Business workflow concepts</p><h2 id="workflow-concepts-title">Possible ways to make the work behind the website easier.</h2><p>These are discussion visuals—not competing website directions. Nothing is connected, saved, or sent.</p></div>
         <div class="chooser__concept-grid">
           <a class="chooser-concept-card" href="/future/owner"><span>01 · Concept</span><h3>Owner Workspace</h3><p>A future view for the exceptions and work that may need attention.</p><strong>Explore the idea <b aria-hidden="true">→</b></strong></a>
           <a class="chooser-concept-card" href="/future/capture"><span>02 · Concept</span><h3>Project Capture &amp; Publish</h3><p>A future local-first way to organize jobsite project details and photos.</p><strong>Explore the idea <b aria-hidden="true">→</b></strong></a>

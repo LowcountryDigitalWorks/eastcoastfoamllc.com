@@ -100,9 +100,17 @@ export const manufacturerLinks = [
 // Public reputation-profile links verified for the preview. These labels are
 // intentionally limited to the facts displayed by the source profiles.
 export const futureReputationSources = [
-  { label: 'Angi 5.0', detail: 'View East Coast Foam on Angi', url: 'https://www.angi.com/companylist/us/sc/beauford/east-coast-foam-llc-reviews-1.htm' },
-  { label: 'A+ BBB Rating', detail: 'View East Coast Foam on BBB', url: 'https://www.bbb.org/us/sc/beaufort/profile/spray-foam-insulation-contractors/east-coast-foam-llc-0403-236024328' }
+  { label: 'Angi 5.0', detail: '5.0 rating from 2 reviews', source: 'Angi', tone: 'angi', url: 'https://www.angi.com/companylist/us/sc/beauford/east-coast-foam-llc-reviews-1.htm' },
+  { label: 'A+ BBB Rating', detail: 'BBB lists East Coast Foam as not BBB Accredited', source: 'Better Business Bureau', tone: 'bbb', url: 'https://www.bbb.org/us/sc/beaufort/profile/spray-foam-insulation-contractors/east-coast-foam-llc-0403-236024328' }
 ];
+
+export const futureAngiReview = {
+  name: 'Trevor W.',
+  date: 'May 2024',
+  quote: 'Casey was such a pleasure to work with. His crew was respectful and polite.',
+  source: 'Angi',
+  url: 'https://www.angi.com/companylist/us/sc/beauford/east-coast-foam-llc-reviews-1.htm'
+};
 
 export const futureAboutPoints = [
   { title: 'Project-led guidance', text: 'The conversation starts with the property, the accessible conditions, and the work being considered.' },
