@@ -6,6 +6,7 @@ import FutureServicesOverview from '../../components/FutureServicesOverview.astr
 import FutureWorkProof from '../../components/FutureWorkProof.astro';
 import FutureLayout from '../../layouts/FutureLayout.astro';
 import GoogleReviewsCarousel from '../../components/GoogleReviewsCarousel.astro';
+import { futureAngiReview, futureReputationSources } from '../../data/future-content';
 ---
 <FutureLayout title={`East Coast Foam | Spray Foam & Insulation for the Lowcountry`} description="Explore East Coast Foam spray foam, insulation, roofing, and coating services for the South Carolina Lowcountry and Coastal Georgia.">
   <FutureHero />
@@ -13,9 +14,12 @@ import GoogleReviewsCarousel from '../../components/GoogleReviewsCarousel.astro'
   <FutureServicesOverview />
   <FutureWorkProof />
   <section class="future-v1__section future-v1__reviews future-v1__reviews--home" id="reviews" aria-labelledby="future-reviews-title">
-    <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Customer reviews</p><h2 id="future-reviews-title">Customer feedback, in their own words.</h2></div><p>Read current public feedback, then explore the independent profile sources that help customers evaluate a contractor.</p></div>
-    <GoogleReviewsCarousel compact limit={2} />
-    <a class="future-v1__section-route" href="/future/reviews">Read customer reviews <span aria-hidden="true">→</span></a>
+    <div class="future-v1__review-intro"><div><p class="future-v1__kicker">Customer reviews</p><h2 id="future-reviews-title">Customer feedback, in their own words.</h2></div><p>Verified public feedback is one useful part of choosing a contractor. Explore the customer excerpts and independent sources together.</p></div>
+    <div class="future-v1__review-proof-grid">
+      <GoogleReviewsCarousel compact limit={3} />
+      <aside class="future-v1__review-evidence" aria-label="Independent reputation sources"><p class="future-v1__kicker">Independent sources</p><blockquote><p>“{futureAngiReview.quote}”</p><footer>{futureAngiReview.name} · {futureAngiReview.source} · {futureAngiReview.date}</footer></blockquote><div class="future-v1__reputation-links">{futureReputationSources.map((source) => <a class={`future-v1__reputation-link future-v1__reputation-link--${source.tone}`} href={source.url} target="_blank" rel="noopener noreferrer"><span>{source.source}</span><strong>{source.label}</strong><small>{source.detail}</small><b aria-hidden="true">↗</b></a>)}</div></aside>
+    </div>
+    <a class="future-v1__section-route" href="/future/reviews">Read all available customer feedback <span aria-hidden="true">→</span></a>
   </section>
   <FutureClosing />
 </FutureLayout>

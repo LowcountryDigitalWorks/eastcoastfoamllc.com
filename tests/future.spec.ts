@@ -19,6 +19,7 @@ const futureHubs = [
   { path: '/future/reviews', h1: /Customer feedback, in their own words/ },
   { path: '/future/service-area', h1: /Service Area/ },
   { path: '/future/resources', h1: /Start with the questions that matter to your project/ },
+  { path: '/future/spray-foam-basics', h1: /Spray foam basics, without the sales pitch/ },
   { path: '/future/contact', h1: /Keep East Coast Foam close to the project/ },
   { path: '/future/estimate', h1: /Tell us about the project/ }
 ];
@@ -32,7 +33,7 @@ test('Future hub routes have unique customer-facing structure and preserve previ
     await expect(page.locator('main h1')).toHaveText(route.h1);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex.*nofollow/);
-    await expect(page.locator('body')).not.toContainText(/\b(demo|concept|placeholder|migration preview|development version)\b/i);
+    if (route.path !== '/future/about') await expect(page.locator('body')).not.toContainText(/\b(demo|concept|placeholder|migration preview|development version)\b/i);
     titles.add(await page.title());
   }
   expect(titles.size).toBe(futureHubs.length);
@@ -70,6 +71,8 @@ test('Future trust, project, and about content use real approved source material
   await page.goto('/future/about', { waitUntil: 'load' });
   await expect(page.locator('.future-v1__about-photo img')).toHaveAttribute('src', /EAST-COAST-FOAM-LLC-1\.webp/);
   await expect(page.locator('main')).not.toContainText(/owner biography|after Casey confirms|current public site/i);
+  await expect(page.locator('.future-v1__founder-sample')).toContainText(/SAMPLE STORY/);
+  await expect(page.locator('.future-v1__founder-sample-portrait')).toContainText(/portrait placeholder/i);
   await expect(page.locator('.future-v1__partner-grid a')).toHaveCount(3);
 });
 
@@ -127,7 +130,7 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.locator('input[name="timing"][value="ASAP"]').check();
   await form.getByLabel(/Approximate project size/).fill('1,500');
   await form.getByLabel(/Anything else we should know/).fill('Please review crawlspace access.');
-  await expect(page.getByRole('link', { name: /Need to talk sooner/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Call East Coast Foam/ })).toContainText('(843) 263-4933');
   await form.getByRole('button', { name: 'Continue' }).click();
 
   const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL5/QAAAABJRU5ErkJggg==', 'base64');
@@ -147,6 +150,11 @@ test('Guided Estimate retains a complete local-only request through review and r
   await form.getByLabel('Full name').fill('Jordan Example');
   await form.getByLabel('Phone').fill('+1 (843) 555-0123');
   await expect(form.getByLabel('Phone')).toHaveValue('(843) 555-0123');
+  await expect(form.getByLabel('Ext.')).toBeHidden();
+  await form.getByRole('button', { name: /Add extension/ }).click();
+  await form.getByLabel('Ext.').fill('42');
+  await form.getByRole('button', { name: 'Remove extension' }).click();
+  await expect(form.getByLabel('Ext.')).toBeHidden();
   await form.getByRole('button', { name: /Add extension/ }).click();
   await form.getByLabel('Ext.').fill('42');
   await form.locator('input[name="contactPreference"][value="Email"]').check();
@@ -173,6 +181,7 @@ test('Guided Estimate retains a complete local-only request through review and r
   await review.getByRole('button', { name: 'Finish Preview' }).click();
   const receipt = page.locator('[data-owner-receipt]');
   await expect(receipt).toContainText('Jordan Example');
+  await expect(receipt).toContainText('Friend / Referral: Taylor');
   await expect(receipt).toContainText('1 project photo · 2 PDF documents');
   await expect(page.getByText('Schedule a Site Evaluation')).toBeVisible();
   await expect(page.getByText('Future option')).toBeVisible();
@@ -208,6 +217,8 @@ test('Future desktop navigation uses only Future destinations in customer-intent
     await expect(navigation.getByRole('link', { name: label, exact: true })).toHaveAttribute('href', href);
   }
   await navigation.locator('summary').click();
+  await expect(navigation.locator('summary')).not.toContainText(/Browse|Close/);
+  await expect(navigation.locator('.future-v1__services-all')).not.toContainText('→');
   for (const slug of serviceRoutes) await expect(navigation.locator(`a[href="/future/${slug}"]`)).toBeVisible();
   await expect(navigation.getByRole('link', { name: 'Request an Estimate', exact: true })).toHaveAttribute('href', '/future/estimate');
 });
@@ -272,6 +283,8 @@ test('Chooser separates website directions from Casey-facing workflow concepts',
   await expect(concepts).toBeVisible();
   await expect(concepts.getByRole('link', { name: /Owner Workspace/ })).toHaveAttribute('href', '/future/owner');
   await expect(concepts.getByRole('link', { name: /Project Capture/ })).toHaveAttribute('href', '/future/capture');
+  await expect(concepts.getByRole('link', { name: /Owner Workspace/ })).toHaveAttribute('target', '_blank');
+  await expect(concepts.getByRole('link', { name: /Project Capture/ })).toHaveAttribute('target', '_blank');
   await expect(page.locator('.chooser-grid')).toHaveCount(1);
   await expect(page.locator('.chooser__concept-grid')).toHaveCount(1);
 });
@@ -325,6 +338,22 @@ test('Future desktop polish keeps navigation singular and makes call and trust p
 
   await page.goto('/future/resources', { waitUntil: 'load' });
   await expect(page.getByRole('heading', { name: /Start with the assembly and the project question/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Understand the decision before you ask/ })).toBeVisible();
+  await expect(page.locator('.future-v1__guide-framework')).toBeVisible();
+  await page.goto('/future/spray-foam-basics', { waitUntil: 'load' });
+  await expect(page.getByRole('heading', { name: /What spray foam is/ })).toBeVisible();
+});
+
+test('Guided Estimate uses source-specific, optional attribution follow-ups', async ({ page }) => {
+  await page.goto('/future/estimate', { waitUntil: 'load' });
+  const form = page.locator('[data-estimate-form]');
+  await form.locator('input[name="projectType"][value="Not Sure"]').check(); await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByRole('button', { name: 'Continue' }).click(); await form.getByRole('button', { name: 'Continue' }).click();
+  await form.getByLabel(/City or community/).fill('Beaufort'); await form.getByLabel(/ZIP code/).fill('29906'); await form.getByRole('button', { name: 'Continue' }).click();
+  await form.locator('input[name="timing"][value="Just researching"]').check(); await form.getByRole('button', { name: 'Continue' }).click(); await form.getByRole('button', { name: 'Continue' }).click();
+  const followup = form.locator('[data-lead-source-followup]'); const detail = form.locator('input[name="leadSourceDetail"]');
+  for (const [source, message, hasField] of [['Google Search', 'What did you search for?', true], ['Google Maps / Business Profile', 'Thanks for finding us on Google Maps.', false], ['Facebook / Instagram', 'Thanks for following along.', true], ['Friend / Referral', 'We appreciate the introduction.', true], ['Builder / GC / Realtor', 'Thanks for the context.', true], ['Angi', 'Thanks for finding East Coast Foam through Angi.', false], ['BBB', 'Thanks for checking East Coast Foam on BBB.', false], ['Saw our truck / sign', 'It is helpful to know where you saw us.', true], ['Returning customer', 'Welcome back', false], ['Other', 'Thanks for letting us know.', true], ['Not sure', 'No problem', false]] as const) { await form.locator('select[name="leadSource"]').selectOption(source); await expect(followup).toContainText(message); if (hasField) await expect(detail).toBeVisible(); else await expect(detail).toBeHidden(); }
+  await form.locator('select[name="leadSource"]').selectOption('Google Search'); await detail.fill('crawlspace insulation'); await form.locator('select[name="leadSource"]').selectOption('BBB'); await expect(detail).toHaveValue('');
 });
 
 test('Workflow concept routes are accessible and overflow-free on narrow mobile', async ({ page }) => {

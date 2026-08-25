@@ -9,9 +9,9 @@ const serviceLinks = futureServices.map((service) => ({ title: service.title, hr
     <BrandMark href="/future" />
     <div class="future-v1__desktop-links">
       <details class="future-v1__services-menu">
-        <summary><span>Services</span><em>Browse</em></summary>
+        <summary><span>Services</span><span class="future-v1__services-symbol" aria-hidden="true">+</span></summary>
         <div class="future-v1__services-panel">
-          <a class="future-v1__services-all" href="/future/services">Explore all services <span aria-hidden="true">→</span></a>
+          <a class="future-v1__services-all" href="/future/services">Explore all services</a>
           <div>
             {serviceLinks.map((service) => <a href={service.href}>{service.title}</a>)}
           </div>
