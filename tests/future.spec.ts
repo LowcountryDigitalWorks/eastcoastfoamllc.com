@@ -324,7 +324,7 @@ test('Future desktop polish keeps navigation singular and makes call and trust p
   await expect(page.getByText('Don’t see your community listed?')).toBeVisible();
 
   await page.goto('/future/resources', { waitUntil: 'load' });
-  await expect(page.getByRole('table', { name: /Open-cell and closed-cell conversation guide/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Start with the assembly and the project question/ })).toBeVisible();
 });
 
 test('Workflow concept routes are accessible and overflow-free on narrow mobile', async ({ page }) => {
