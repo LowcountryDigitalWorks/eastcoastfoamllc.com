@@ -18,7 +18,7 @@ export type FutureLeadAttachment = {
  */
 export type FutureLeadAttribution = {
   declaredSource?: string;
-  referralName?: string;
+  declaredSourceDetail?: string;
   landingPage?: string;
   referringDomain?: string;
   utmSource?: string;
