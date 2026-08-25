@@ -37,6 +37,20 @@ button,input,select,textarea { font:inherit; }
 .chooser-concept-card strong { display:block; margin-top:18px; color:#fff; font-size:13px; }
 .chooser-concept-card b { color:#9ab87a; }
 
+/* Phase 2C: keep the website comparison primary and the workflow ideas clearly secondary. */
+.chooser__heading,.chooser__concept-heading { text-align:center; }
+.chooser__heading .eyebrow,.chooser__heading .chooser__intro { margin-inline:auto; }
+.chooser__heading h1 { margin-inline:auto; }
+.chooser__directions { margin-top:42px; }
+.chooser__section-label { margin:0 0 14px; color:#a8b9ae; font-size:11px; font-weight:900; letter-spacing:.14em; text-align:center; text-transform:uppercase; }
+.chooser-grid { margin-top:0; }
+.chooser__concepts { margin-top:48px; padding-top:32px; }
+.chooser__concept-heading { max-width:760px; margin:auto; }
+.chooser__concept-heading>p:last-child { max-width:620px; margin:15px auto 0; }
+.chooser__concept-grid { max-width:900px; margin:27px auto 0; }
+.chooser-concept-card { min-height:172px; padding:23px; }
+.chooser-concept-card h3 { margin-top:25px; }
+
 /* shared brand */
 .brand-mark { display:inline-flex; align-items:center; gap:10px; font-family:Montserrat,sans-serif; text-transform:uppercase; }
 .brand-mark__roof { display:grid; place-items:center; width:40px; height:40px; border-radius:10px; background:var(--green); color:#fff; font-size:25px; }

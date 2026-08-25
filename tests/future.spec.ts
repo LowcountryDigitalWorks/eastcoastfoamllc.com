@@ -273,6 +273,8 @@ test('Chooser separates website directions from Casey-facing workflow concepts',
   await expect(concepts).toBeVisible();
   await expect(concepts.getByRole('link', { name: /Owner Workspace/ })).toHaveAttribute('href', '/future/owner');
   await expect(concepts.getByRole('link', { name: /Project Capture/ })).toHaveAttribute('href', '/future/capture');
+  await expect(page.locator('.chooser-grid')).toHaveCount(1);
+  await expect(page.locator('.chooser__concept-grid')).toHaveCount(1);
 });
 
 test('Workflow concepts are disclosed, cross-linked, and stay outside Future navigation', async ({ page }) => {
@@ -285,6 +287,8 @@ test('Workflow concepts are disclosed, cross-linked, and stay outside Future nav
     await expect(page.getByText(/Concept — not connected/)).toBeVisible();
     await expect(page.locator('.future-concept__disclosure')).toBeVisible();
     await expect(page.getByRole('link', { name: crossLink })).toBeVisible();
+    await expect(page.locator('.future-concept__switcher')).toBeVisible();
+    await expect(page.locator('.future-concept__vision img')).toBeVisible();
     await expect(page.locator('main form')).toHaveCount(0);
     const navigation = page.getByRole('navigation', { name: 'Future navigation' });
     await expect(navigation.locator('a[href="/future/owner"],a[href="/future/capture"]')).toHaveCount(0);
@@ -302,6 +306,26 @@ test('Workflow concepts are disclosed, cross-linked, and stay outside Future nav
   await expect(page.getByText('Publish Now')).toHaveCount(0);
   await expect(page.locator('.future-concept__capture-support')).toContainText('(843) 263-4933');
   await expect(page.locator('main')).not.toContainText('843-987-6300');
+});
+
+test('Future desktop polish keeps navigation singular and makes call and trust paths clear', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/future', { waitUntil: 'load' });
+  await expect(page.getByRole('button', { name: 'Menu' })).toBeHidden();
+  await expect(page.locator('.future-v1__hero-actions')).toContainText('(843) 263-4933');
+
+  await page.goto('/future/reviews', { waitUntil: 'load' });
+  await expect(page.getByText('5.0 rating from 2 reviews')).toBeVisible();
+  await expect(page.getByText('BBB lists East Coast Foam as not BBB Accredited')).toBeVisible();
+
+  await page.goto('/future/contact', { waitUntil: 'load' });
+  await expect(page.getByRole('link', { name: /Download Contact Card/ })).toHaveCount(1);
+
+  await page.goto('/future/service-area', { waitUntil: 'load' });
+  await expect(page.getByText('Don’t see your community listed?')).toBeVisible();
+
+  await page.goto('/future/resources', { waitUntil: 'load' });
+  await expect(page.getByRole('table', { name: /Open-cell and closed-cell conversation guide/ })).toBeVisible();
 });
 
 test('Workflow concept routes are accessible and overflow-free on narrow mobile', async ({ page }) => {

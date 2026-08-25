@@ -10,6 +10,10 @@ const brandLogos = assets.brandLogos as Record<string, string>;
 <FutureLayout title="About East Coast Foam" description="Learn about East Coast Foam, its local service focus, and manufacturer materials connected to its service conversations.">
   <FuturePageIntro eyebrow="About East Coast Foam" title="Local expertise. Direct accountability." text="East Coast Foam serves homeowners, builders, and property owners across the Lowcountry and Coastal Georgia with insulation, roofing, and coating conversations grounded in the project." />
   <FutureAbout />
+  <section class="future-v1__founder-sample" aria-labelledby="future-founder-sample-title">
+    <div class="future-v1__founder-sample-portrait" aria-hidden="true"><span>ECF</span><i></i></div>
+    <div><p class="future-v1__kicker">Story direction sample</p><h2 id="future-founder-sample-title">A company story can be direct, local, and personal.</h2><p>This is a sample structure for review—not a published biography or statement of Casey’s history. The approved story can introduce the owner, the way East Coast Foam approaches a project, and the accountability customers can expect from a local contractor.</p><p>It leaves room for owner-confirmed details about the business, team, training, work history, and the projects that best represent East Coast Foam.</p><span class="future-v1__sample-note">Owner facts and portrait to be added only after approval.</span></div>
+  </section>
   <section class="future-v1__section future-v1__partners" aria-labelledby="future-partners-title">
     <div class="future-v1__section-heading"><div><p class="future-v1__kicker">Materials represented</p><h2 id="future-partners-title">Material options for the work in front of you.</h2></div><p>These marks link to their public manufacturer sources. Product selection remains specific to the property and project.</p></div>
     <div class="future-v1__partner-grid">{manufacturerLinks.map((brand) => <a href={brand.url} target="_blank" rel="noopener noreferrer"><img src={brandLogos[brand.name]} alt={brand.name} loading="lazy" referrerpolicy="no-referrer" /><span>{brand.name}</span></a>)}</div>

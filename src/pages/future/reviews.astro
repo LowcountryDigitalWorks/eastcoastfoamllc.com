@@ -2,9 +2,17 @@
 import FutureLayout from '../../layouts/FutureLayout.astro';
 import FuturePageIntro from '../../components/FuturePageIntro.astro';
 import GoogleReviewsCarousel from '../../components/GoogleReviewsCarousel.astro';
-import { futureReputationSources } from '../../data/future-content';
+import { futureAngiReview, futureReputationSources } from '../../data/future-content';
 ---
 <FutureLayout title="Customer Reviews | East Coast Foam" description="Read the East Coast Foam customer feedback currently shared through Google reviews.">
-  <FuturePageIntro eyebrow="Customer reviews" title="Customer feedback, in their own words." text="Read the customer feedback currently shared through Google, then explore the relevant public reputation profiles." />
-  <section class="future-v1__section future-v1__reviews future-v1__reviews--page" aria-label="East Coast Foam customer reviews"><GoogleReviewsCarousel /><div class="future-v1__reputation-links" aria-label="Public reputation profiles">{futureReputationSources.map((source) => <a href={source.url} target="_blank" rel="noopener noreferrer"><span>{source.label}</span><strong>{source.detail}</strong><b aria-hidden="true">↗</b></a>)}</div></section>
+  <FuturePageIntro eyebrow="Customer reviews" title="Customer feedback, in their own words." text="Read customer feedback shared on Google and see the public reputation profiles that help people evaluate East Coast Foam." />
+  <section class="future-v1__section future-v1__reviews future-v1__reviews--page" aria-label="East Coast Foam customer reviews">
+    <div class="future-v1__review-intro"><div><p class="future-v1__kicker">Independent feedback</p><h2>Useful proof should be easy to find.</h2></div><p>These public sources are presented as places to explore—not as a substitute for a project-specific conversation.</p></div>
+    <GoogleReviewsCarousel />
+    <div class="future-v1__review-proof-grid">
+      <a class="future-v1__review-spotlight" href={futureAngiReview.url} target="_blank" rel="noopener noreferrer"><span>Angi review · {futureAngiReview.date}</span><blockquote>“{futureAngiReview.quote}”</blockquote><strong>{futureAngiReview.name} <b aria-hidden="true">↗</b></strong></a>
+      <div class="future-v1__review-guidance"><span aria-hidden="true">✦</span><div><strong>Explore the sources that matter to you.</strong><p>Read the available feedback, then talk with East Coast Foam about the property and work you have in mind.</p></div></div>
+    </div>
+    <div class="future-v1__reputation-links" aria-label="Public reputation profiles">{futureReputationSources.map((source) => <a class={`future-v1__reputation-link future-v1__reputation-link--${source.tone}`} href={source.url} target="_blank" rel="noopener noreferrer"><span>{source.source}</span><strong>{source.label}</strong><small>{source.detail}</small><b aria-hidden="true">↗</b></a>)}</div>
+  </section>
 </FutureLayout>
