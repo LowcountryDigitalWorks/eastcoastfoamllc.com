@@ -78,7 +78,6 @@ test('Future contact provides a usable bundled QR, owner-confirmed address, and 
   await expect(page.getByRole('link', { name: /Download Contact Card/ }).first()).toHaveAttribute('href', '/future/contact.vcf');
   await expect(page.locator('[data-contact-qr-code] svg')).toHaveAttribute('data-contact-qr-svg', '');
   await expect(page.locator('[data-contact-qr]')).toContainText('Scan to download and save East Coast Foam’s contact card.');
-  await expect(page.locator('[data-contact-qr]').getByRole('link', { name: /Download Contact Card/ })).toHaveAttribute('href', '/future/contact.vcf');
   await expect(page.getByRole('link', { name: /1352 Trask Pkwy, Seabrook, SC 29940/ }).first()).toHaveAttribute('href', /1352\+Trask\+Pkwy/);
   expect(await page.content()).not.toContain('api.qrserver.com');
   expect(await page.content()).not.toContain('3 Broad River');

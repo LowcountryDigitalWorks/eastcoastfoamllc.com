@@ -433,7 +433,7 @@ html:has(.future-v1)::-webkit-scrollbar-thumb { border:3px solid #edf0eb; border
 .future-v1__reputation-links { margin-top:18px; }
 .future-v1__reputation-link { min-height:129px !important; }
 .future-v1__reputation-link small { color:var(--muted); font-size:12px; line-height:1.45; }
-.future-v1__reputation-link--angi { border-top:3px solid #c66a2c !important; }.future-v1__reputation-link--angi span,.future-v1__reputation-link--angi b { color:#a5501f; }
+.future-v1__reputation-link--angi { border-top:3px solid #b95b22 !important; }.future-v1__reputation-link--angi span,.future-v1__reputation-link--angi b { color:#883b17; }
 .future-v1__reputation-link--bbb { border-top:3px solid #2567a9 !important; }.future-v1__reputation-link--bbb span,.future-v1__reputation-link--bbb b { color:#1f5a96; }
 .future-v1__contact-card-button { gap:9px; min-height:52px; padding:14px 20px; border:1px solid #718475; background:#e8eee7; color:#173d26; box-shadow:inset 0 0 0 1px rgba(255,255,255,.7); }
 .future-v1__contact-card-button:hover { background:#dce8da; }.future-v1__contact-card-button>span { font-size:18px; }
