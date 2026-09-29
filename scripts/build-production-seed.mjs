@@ -366,9 +366,9 @@ The contact email remains \`ecfoam@outlook.com\` until a domain mailbox is separ
 
 ## Form email delivery
 
-- Visible contact email: `ecfoam@outlook.com`.
-- Estimate destination: `ecfoam@outlook.com`.
-- Worker sender: `website@eastcoastfoamllc.com`.
+- Visible contact email: \`ecfoam@outlook.com\`.
+- Estimate destination: \`ecfoam@outlook.com\`.
+- Worker sender: \`website@eastcoastfoamllc.com\`.
 - Cloudflare **Email Sending** may be onboarded for the ECF domain.
 - Do **not** enable Cloudflare Email Routing or replace the current root MX/SPF records.
 - Email attachments are limited to 4 MB total.
