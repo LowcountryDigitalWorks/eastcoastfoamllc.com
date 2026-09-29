@@ -40,7 +40,7 @@ async function copyBinary(source, target) {
 await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 
-for (const file of ['.gitignore', 'package.json', 'playwright.config.ts', 'tsconfig.json', 'src/env.d.ts']) {
+for (const file of ['.gitignore', 'package.json', 'tsconfig.json', 'src/env.d.ts']) {
   await copyText(file, file);
 }
 
@@ -201,6 +201,33 @@ const wrangler = {
   }
 };
 await writeFile(path.join(out, 'wrangler.jsonc'), JSON.stringify(wrangler, null, 2) + '\n', 'utf8');
+
+const playwrightConfig = `import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests',
+  fullyParallel: true,
+  forbidOnly: Boolean(process.env.CI),
+  retries: process.env.CI ? 2 : 0,
+  reporter: process.env.CI ? 'github' : 'list',
+  use: {
+    baseURL: 'http://127.0.0.1:4321',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure'
+  },
+  projects: [
+    { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'mobile-chromium', use: { ...devices['Pixel 7'] } }
+  ],
+  webServer: {
+    command: 'node ./node_modules/astro/astro.js preview --host 127.0.0.1 --port 4321',
+    url: 'http://127.0.0.1:4321/',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000
+  }
+});
+`;
+await writeFile(path.join(out, 'playwright.config.ts'), playwrightConfig, 'utf8');
 
 await mkdir(path.join(out, 'public'), { recursive: true });
 await writeFile(path.join(out, 'public/robots.txt'), 'User-agent: *\nDisallow: /\n', 'utf8');
