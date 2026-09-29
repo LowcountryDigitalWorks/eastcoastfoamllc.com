@@ -270,7 +270,7 @@ const routes = [
 ] as const;
 
 for (const [route, heading] of routes) {
-  test(`production route ${route}`, async ({ page }) => {
+  test('production route ' + route, async ({ page }) => {
     await page.goto(route);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(heading);
     await expect(page.locator('body')).not.toContainText(/SAMPLE STORY|portrait placeholder|Owner Workspace|Project Capture/i);
