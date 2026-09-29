@@ -360,7 +360,7 @@ This repository is the customer-owned production candidate for East Coast Foam L
 The initial seed intentionally remains **noindex/nofollow** and blocks crawling in \`robots.txt\`.
 Those controls are removed only in the final release PR immediately before the approved domain cutover.
 
-The Guided Estimate posts to the same Cloudflare Worker at `/api/estimate`. The Worker sends the request to the fixed verified destination `ecfoam@outlook.com` through a destination-restricted Cloudflare Email Service binding.
+The Guided Estimate posts to the same Cloudflare Worker at /api/estimate. The Worker sends the request to the fixed verified destination ecfoam@outlook.com through a destination-restricted Cloudflare Email Service binding.
 
 The contact email remains \`ecfoam@outlook.com\` until a domain mailbox is separately validated.
 
@@ -393,7 +393,7 @@ Do not route \`eastcoastfoamllc.com\` to this deployment until:
 5. WordPress rollback remains available.
 6. Custom-domain SSL/routing is verified.
 7. No placeholder/demo/concept content is present.
-8. Cloudflare Email Sending is onboarded without replacing the existing root MX; `ecfoam@outlook.com` is verified as the destination; and a real preview estimate reaches Casey's Outlook inbox.
+8. Cloudflare Email Sending is onboarded without replacing the existing root MX; ecfoam@outlook.com is verified as the destination; and a real preview estimate reaches Casey's Outlook inbox.
 9. The release PR removes staging noindex/robots blocking and adds/validates sitemap/indexing controls.
 10. Cutover and rollback evidence are recorded in LDW business-operations #333.
 `;
