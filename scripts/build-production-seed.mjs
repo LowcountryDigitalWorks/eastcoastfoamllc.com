@@ -16,12 +16,15 @@ const routeReplacements = [
   ['/future/about', '/about-us'],
   ['/future/reviews', '/reviews'],
   ['/future/resources', '/resources'],
-  ['/future/', '/'],
-  ['/future', '/']
+  ['/future/', '/']
 ];
 
 function rewriteRoutes(input) {
-  return routeReplacements.reduce((text, [from, to]) => text.split(from).join(to), input);
+  const rewritten = routeReplacements.reduce((text, [from, to]) => text.split(from).join(to), input);
+  return rewritten
+    .replaceAll('"/future"', '"/"')
+    .replaceAll("'\/future'", "'\/'")
+    .replaceAll('`/future`', '`/`');
 }
 
 async function copyText(source, target, transform = (value) => value) {
@@ -154,7 +157,7 @@ const pageMap = new Map([
 
 for (const [source, target] of pageMap) {
   await copyText(source, target, (value) => {
-    let next = rewriteRoutes(value).replaceAll('../../', '../');
+    let next = rewriteRoutes(value).replaceAll('../../', '../').replaceAll('../data/demo-assets.json', '../data/site-assets.json');
     if (target === 'src/pages/about-us.astro') {
       next = next.replace(/\n  <section class="future-v1__founder-sample"[\s\S]*?<\/section>\n/, '\n');
     }
