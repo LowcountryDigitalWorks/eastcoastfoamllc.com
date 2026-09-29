@@ -59,7 +59,6 @@ const components = [
   'FutureFoamTeaser.astro',
   'FutureFooter.astro',
   'FutureGeoMap.astro',
-  'FutureGuidedEstimate.astro',
   'FutureHeader.astro',
   'FutureHero.astro',
   'FutureMobileActions.astro',
@@ -83,6 +82,10 @@ for (const name of components) {
     rewriteRoutes(value).replaceAll("../data/demo-assets.json", "../data/site-assets.json")
   );
 }
+
+await copyText('production-template/FutureGuidedEstimate.astro', 'src/components/FutureGuidedEstimate.astro', (value) =>
+  rewriteRoutes(value).replaceAll("../data/demo-assets.json", "../data/site-assets.json")
+);
 
 for (const file of ['future-lead-model.ts', 'future-projects.ts', 'services.json']) {
   await copyText(`src/data/${file}`, `src/data/${file}`);
@@ -197,14 +200,24 @@ await writeFile(path.join(out, 'astro.config.mjs'), astroConfig, 'utf8');
 const wrangler = {
   '$schema': 'node_modules/wrangler/config-schema.json',
   name: 'eastcoastfoamllc',
+  main: 'src/worker.js',
   compatibility_date: '2026-09-29',
   assets: {
     directory: './dist',
+    binding: 'ASSETS',
+    run_worker_first: ['/api/*'],
     not_found_handling: '404-page',
     html_handling: 'drop-trailing-slash'
-  }
+  },
+  send_email: [
+    {
+      name: 'ECF_INBOX',
+      destination_address: 'ecfoam@outlook.com'
+    }
+  ]
 };
 await writeFile(path.join(out, 'wrangler.jsonc'), JSON.stringify(wrangler, null, 2) + '\n', 'utf8');
+await copyText('production-template/worker.js', 'src/worker.js');
 
 const playwrightConfig = `import { defineConfig, devices } from '@playwright/test';
 
@@ -330,6 +343,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run build
+      - run: npx wrangler deploy --dry-run
       - run: npx playwright install --with-deps chromium
       - run: npm run test:qa
 `;
@@ -345,9 +359,19 @@ This repository is the customer-owned production candidate for East Coast Foam L
 The initial seed intentionally remains **noindex/nofollow** and blocks crawling in \`robots.txt\`.
 Those controls are removed only in the final release PR immediately before the approved domain cutover.
 
-The Guided Estimate remains client-side/non-transmitting until a separately validated production intake endpoint and notification path exist.
+The Guided Estimate posts to the same Cloudflare Worker at `/api/estimate`. The Worker sends the request to the fixed verified destination `ecfoam@outlook.com` through a destination-restricted Cloudflare Email Service binding.
 
 The contact email remains \`ecfoam@outlook.com\` until a domain mailbox is separately validated.
+
+## Form email delivery
+
+- Visible contact email: `ecfoam@outlook.com`.
+- Estimate destination: `ecfoam@outlook.com`.
+- Worker sender: `website@eastcoastfoamllc.com`.
+- Cloudflare **Email Sending** may be onboarded for the ECF domain.
+- Do **not** enable Cloudflare Email Routing or replace the current root MX/SPF records.
+- Email attachments are limited to 4 MB total.
+- Production release remains blocked until a real preview submission is received successfully.
 
 ## Legacy media dependency
 
@@ -368,7 +392,7 @@ Do not route \`eastcoastfoamllc.com\` to this deployment until:
 5. WordPress rollback remains available.
 6. Custom-domain SSL/routing is verified.
 7. No placeholder/demo/concept content is present.
-8. Final public contact/form behavior is verified.
+8. Cloudflare Email Sending is onboarded without replacing the existing root MX; `ecfoam@outlook.com` is verified as the destination; and a real preview estimate reaches Casey's Outlook inbox.
 9. The release PR removes staging noindex/robots blocking and adds/validates sitemap/indexing controls.
 10. Cutover and rollback evidence are recorded in LDW business-operations #333.
 `;
