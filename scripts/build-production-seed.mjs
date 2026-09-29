@@ -307,11 +307,12 @@ test('current proven public email is used until domain email is separately valid
   await expect(page.locator('body')).not.toContainText('hello@eastcoastfoamllc.com');
 });
 
-test('guided estimate remains non-transmitting during staging', async ({ page }) => {
+test('guided estimate presents the production send flow', async ({ page }) => {
   await page.goto('/get-a-quote');
   const form = page.locator('[data-estimate-form]');
   await expect(form).toHaveCount(1);
-  await expect(form).not.toHaveAttribute('action', /.+/);
+  await expect(page.locator('body')).toContainText('Your request will be sent to East Coast Foam');
+  await expect(page.locator('body')).not.toContainText('Interactive preview — nothing entered here is sent yet.');
 });
 
 test('legacy article redirect declarations are shipped in the static asset bundle', async ({ request }) => {
