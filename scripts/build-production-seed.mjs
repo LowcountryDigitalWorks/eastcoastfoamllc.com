@@ -130,6 +130,7 @@ const { title, description } = Astro.props;
   </body>
 </html>
 `;
+await mkdir(path.join(out, 'src/layouts'), { recursive: true });
 await writeFile(path.join(out, 'src/layouts/BaseLayout.astro'), baseLayout, 'utf8');
 
 await copyText('src/layouts/FutureLayout.astro', 'src/layouts/FutureLayout.astro', (value) =>
