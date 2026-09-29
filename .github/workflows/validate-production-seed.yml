@@ -26,6 +26,9 @@ jobs:
       - name: Build
         working-directory: production-seed
         run: npm run build
+      - name: Wrangler dry run
+        working-directory: production-seed
+        run: npx wrangler deploy --dry-run
       - name: Install Chromium
         working-directory: production-seed
         run: npx playwright install --with-deps chromium
