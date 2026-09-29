@@ -1,0 +1,41 @@
+name: validate production seed
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  production-seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Generate clean production seed
+        run: node scripts/build-production-seed.mjs
+      - name: Install production dependencies
+        working-directory: production-seed
+        run: npm install
+      - name: Astro check
+        working-directory: production-seed
+        run: npm run check
+      - name: Build
+        working-directory: production-seed
+        run: npm run build
+      - name: Install Chromium
+        working-directory: production-seed
+        run: npx playwright install --with-deps chromium
+      - name: Browser QA
+        working-directory: production-seed
+        run: npm run test:qa
+      - name: Upload clean seed artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eastcoastfoam-production-seed
+          path: production-seed
+          if-no-files-found: error
+          retention-days: 14
