@@ -36,6 +36,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: eastcoastfoam-production-seed
-          path: production-seed
+          path: |
+            production-seed
+            !production-seed/node_modules
+            !production-seed/dist
+            !production-seed/test-results
+            !production-seed/playwright-report
           if-no-files-found: error
           retention-days: 14
